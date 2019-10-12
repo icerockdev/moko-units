@@ -1,5 +1,5 @@
 ![moko-units](img/logo.png)  
-[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/icerockdev/moko/moko-units/images/download.svg) ](https://bintray.com/icerockdev/moko/moko-units/_latestVersion)
+[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/icerockdev/moko/moko-units/images/download.svg) ](https://bintray.com/icerockdev/moko/moko-units/_latestVersion) ![kotlin-version](https://img.shields.io/badge/kotlin-1.3.50-orange)
 
 # Mobile Kotlin units
 This is a Kotlin MultiPlatform library that provides RecyclerView/UITableView/UICollectionView filling from common code.
