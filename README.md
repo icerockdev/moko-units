@@ -17,41 +17,7 @@ This is a Kotlin MultiPlatform library that provides RecyclerView/UITableView/UI
 
 ## Features
 - **** .
-
-Для Android `BinderAdapter` это `RecyclerView.Adapter` не требующий наследования и написания специфичного
- кода для отображения новых типов элементов. Плагин `binderadapter-plugin` генерирует нужные для работы
- `BinderAdapter` классы автоматически, из файлов лейаутов с `DataBinding`.
-
-Для iOS используется только абстракция `BindingClass` - это класс элемента списка. Используется `BindingClass`
- в связке с `FlatUnitTableViewDataSource` или `FlatUnitCollectionViewDataSource`.
-
-Общий адаптер, который работает через DataBinding. Должен ускорить процесс написания кода (Теперь не надо каждый раз писать адаптер)
-
-# Integration
-- Интегрируйте пакеты binderadapter(Включая внутренние пакеты) через скрипт integration-master.sh
-  
-# Usage
-
-- Сбилдите проект (**Build -> Make Project**)
-- После получения данных создайте список из сгенерированных файлов. **Пример** :
-
-  ```
-   List<BindingClass> models = new ArrayList<>();
-   models.add(new ItemOne().setUnit(new ModelOne("1")));
-   models.add(new ItemTwo().setUnit(new ModelTwo("a", "21")).setClicker(this));
-   models.add(new ItemTwo().setUnit(new ModelTwo("b", "22")).setClicker(this));
-   BinderAdapter adapter = new BinderAdapter();
-   recyclerView.setAdapter(adapter);
-   adapter.setList(models);
-  ```
-  
-  
-  Где `ItemOne` и `ItemTwo` сгенерированные модели по xml'кам `item_one.xml` , и `item_two.xml` , а `ModelOne`, и `ModelTwo` это мои модели(которые например приходят с сервера), а методы `setUnit` и `setClicker` это обычные сеттеры Variable'ов для вашего элемента.
-
-**Так же** у Сгенерированных классов есть метод `setItemId(long itemId)` ,предназначенный для правильной анимации адаптера(Адаптер использует Stable Id's), Дефолтное значение - HashCode вашего объекта.
-
-Если хотите посмотреть полный пример, смотрите в [Demo project](https://gitlab.icerockdev.com/scl/scl-android-samples/binder-adapter)
-
+TODO
 
 ## Requirements
 - Gradle version 5.4.1+
@@ -63,64 +29,6 @@ This is a Kotlin MultiPlatform library that provides RecyclerView/UITableView/UI
   - 0.1.0
 
 ## Installation
-### Plugin
-add to `settings.gradle`: 
-``` 
-includeBuild "scl/binderadapter/binderadapter-plugin" 
-```
-add in root `build.gradle`:
-```
-buildscript {
-    dependencies {
-        classpath module("com.icerockdev:binderadapter-plugin:0.1.0")
-    }
-}
-``` 
-add in `build.gradle` of project where layout files must be processed:
-```
-apply plugin: 'binderadapter-plugin'
-
-android {
-    sourceSets.main.java.srcDirs += project.buildDir.path + "/generated/source/binderadapter/src/main/java"
-}
-
-binderAdapter {
-    classesPackage "<package_for_binder_adapter_generated_classes>"
-    dataBindingPackage "<package_of_databinding_generated_classes>"
-}
-
-dependencies {
-    implementation project(':scl:binderadapter')
-}
-```
-
-### Runtime
-## Android
-К проекту подключаем модуль `binderadapter` (в бойлерплейте сразу настроено подключение через `mpp-library/projects.gradle`);  
-Для генерации из лейаутов готовых классов биндинга подключаем плагин:  
-* В `settings.gradle`: `includeBuild("mpp-library/scl/binderadapter/binderadapter-plugin")`
-* В проекте, где лежат лейауты, из которых нужно генерировать классы:
-```groovy
-plugins {
-    id 'binderadapter-plugin'
-}
-
-android {
-    sourceSets.main.java.srcDirs += project.buildDir.path + "/generated/source/binderadapter/src/main/java"
-}
-
-binderAdapter {
-    classesPackage "<пакет для новых сгенерированных классов айтемов>"
-    dataBindingPackage "<пакет куда генерирует DataBinding классы свои (соответсвует appId)>"
-}
-```
-
-## iOS
-В котлине подключаем модуль `binderAdapter`;
-А дальше все в нативной части в свифте:
-* Подключаем к проекту содержимое `mpp-library/binderadapter/src/iosMain/swift`;
-* Подключаем содержимое `ios-app/scl/ui/UnitTableViewDataSource` (для таблиц) и/или `ios-app/scl/ui/UnitCollectionViewDataSource` (для коллекций). 
-
 root build.gradle  
 ```groovy
 buildscript {
@@ -129,7 +37,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "dev.icerock.moko:resources-generator:0.3.0"
+        classpath "dev.icerock.moko:units-generator:0.1.0"
     }
 }
 
@@ -143,10 +51,16 @@ allprojects {
 
 project build.gradle
 ```groovy
-apply plugin: "dev.icerock.mobile.multiplatform-resources"
+apply plugin: "dev.icerock.mobile.multiplatform-units"
 
 dependencies {
-    commonMainApi("dev.icerock.moko:resources:0.3.0")
+    commonMainApi("dev.icerock.moko:units:0.1.0")
+}
+
+multiplatformUnits {
+    classesPackage = "org.example.library.units"
+    dataBindingPackage = "org.example.library"
+    layoutsSourceSet = "androidMain"
 }
 ```
 
@@ -157,20 +71,20 @@ enableFeaturePreview("GRADLE_METADATA")
 
 On iOS, in addition to the Kotlin library add Pod in the Podfile.
 ```ruby
-pod 'MultiPlatformLibraryResources', :git => 'https://github.com/icerockdev/moko-resources.git', :tag => 'release/0.2.0'
+pod 'MultiPlatformLibraryUnits', :git => 'https://github.com/icerockdev/moko-units.git', :tag => 'release/0.1.0'
 ```
-**`MultiPlatformLibraryResources` CocoaPod requires that the framework compiled from Kotlin be named 
+**`MultiPlatformLibraryUnits` CocoaPod requires that the framework compiled from Kotlin be named 
 `MultiPlatformLibrary` and be connected as a CocoaPod `MultiPlatformLibrary`. 
 [Here](sample/ios-app/Podfile)'s an example.
 To simplify integration with MultiPlatformFramework you can use [mobile-multiplatform-plugin](https://github.com/icerockdev/mobile-multiplatform-gradle-plugin)**.  
-`MultiPlatformLibraryResources` CocoaPod contains an extension `localized` for `StringDesc`.
+`MultiPlatformLibraryUnits` CocoaPod contains an `DataSource`s for `UITableView`/`UICollectionView`.
 
 ## Usage
 common:
 ```kotlin
 interface UnitFactory {
-    fun createHeader(text: String): BindingClass
-    fun createProfileTile(profileId: Long, avatarUrl: String, username: String): BindingClass
+    fun createHeader(text: String): UnitItem
+    fun createProfileTile(profileId: Long, avatarUrl: String, username: String): UnitItem
 }
 
 class ViewModel(unitFactory: UnitFactory) {
@@ -190,19 +104,19 @@ android:
 <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:items="@{viewModel.items}"
-            app:adapter="@{`com.icerockdev.mpp.binderadapter.adapter.BinderAdapter`}"
+            app:bindValue="@{viewModel.items}"
+            app:adapter="@{`dev.icerock.moko.units.adapter.UnitsRecyclerViewAdapter`}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 ```
 ```kotlin
 object UnitFactoryImpl: UnitFactory {
-    fun createHeader(text: String): BindingClass {
+    fun createHeader(text: String): UnitItem {
         return LayoutHeader()
             .setText(text)
             .setItemId(text.hashCode())
     }
     
-    fun createProfileTile(profileId: Long, avatarUrl: String, username: String): BindingClass {
+    fun createProfileTile(profileId: Long, avatarUrl: String, username: String): UnitItem {
         return LayoutProfileTile()
             .setAvatarUrl(avatarUrl)
             .setUserName(username)
@@ -218,7 +132,7 @@ iOS:
 ```swift
 class UnitFactoryImpl: NSObject, UnitFactory {
 
-  func createHeader(text: String) -> BindingClass {
+  func createHeader(text: String) -> UnitItem {
     let data = HeaderTableViewCell.CellModel(text: text)
     return UIBindingTableViewCellUnit<HeaderTableViewCell>(
       data: data,
@@ -227,7 +141,7 @@ class UnitFactoryImpl: NSObject, UnitFactory {
       height: 48)
   }
   
-  func createProfileTile(profileId: Long, avatarUrl: String, username: String): BindingClass {
+  func createProfileTile(profileId: Long, avatarUrl: String, username: String) -> UnitItem {
     let data = ProfileTableViewCell.CellModel(avatarUrl: avatarUrl, username: username)
     return UIBindingTableViewCellUnit<ProfileTableViewCell>(
       data: data,
@@ -240,9 +154,6 @@ class UnitFactoryImpl: NSObject, UnitFactory {
 ```swift
 let viewModel = ViewModel(unitFactory: UnitFactoryImpl())
 let tableDataSource = FlatUnitTableViewDataSource()
-
-tableView.register(reusable: R.nib.headerTableViewCell)
-tableView.register(reusable: R.nib.profileTableViewCell)
 unitTableViewDelegate = tableDataSource.setup(for: tableView)
 
 tableDataSource.units = viewModel.items
@@ -253,10 +164,10 @@ tableView.reloadTable()
 Please see more examples in the [sample directory](sample).
 
 ## Set Up Locally 
-- The [resources directory](resources) contains the `resources` library;
+- The [units directory](units) contains the `units` library;
 - The [gradle-plugin directory](gradle-plugin) contains a gradle plugin with a `MR` class generator;
 - The [sample directory](sample) contains sample apps for Android and iOS; plus the mpp-library connected to the apps;
-- For local testing a library use the `:resources:publishToMavenLocal` gradle task - so that sample apps use the locally published version.
+- For local testing a library use the `:units:publishToMavenLocal` gradle task - so that sample apps use the locally published version.
 - For local testing a plugin use the `:gradle-plugin:publishToMavenLocal` gradle task so that sample apps will use the locally published version.
 
 ## Contributing
