@@ -27,6 +27,7 @@ TODO
 ## Versions
 - kotlin 1.3.50
   - 0.1.0
+  - 0.1.1
 
 ## Installation
 root build.gradle  
@@ -37,7 +38,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "dev.icerock.moko:units-generator:0.1.0"
+        classpath "dev.icerock.moko:units-generator:0.1.1"
     }
 }
 
@@ -54,7 +55,7 @@ project build.gradle
 apply plugin: "dev.icerock.mobile.multiplatform-units"
 
 dependencies {
-    commonMainApi("dev.icerock.moko:units:0.1.0")
+    commonMainApi("dev.icerock.moko:units:0.1.1")
 }
 
 multiplatformUnits {
@@ -71,7 +72,7 @@ enableFeaturePreview("GRADLE_METADATA")
 
 On iOS, in addition to the Kotlin library add Pod in the Podfile.
 ```ruby
-pod 'MultiPlatformLibraryUnits', :git => 'https://github.com/icerockdev/moko-units.git', :tag => 'release/0.1.0'
+pod 'MultiPlatformLibraryUnits', :git => 'https://github.com/icerockdev/moko-units.git', :tag => 'release/0.1.1'
 ```
 **`MultiPlatformLibraryUnits` CocoaPod requires that the framework compiled from Kotlin be named 
 `MultiPlatformLibrary` and be connected as a CocoaPod `MultiPlatformLibrary`. 
