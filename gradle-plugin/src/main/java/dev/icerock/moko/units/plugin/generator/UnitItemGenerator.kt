@@ -5,6 +5,7 @@
 package dev.icerock.moko.units.plugin.generator
 
 import com.squareup.kotlinpoet.*
+import com.squareup.kotlinpoet.ParameterizedTypeName.Companion.parameterizedBy
 import java.io.File
 
 open class UnitItemGenerator(
@@ -35,11 +36,37 @@ open class UnitItemGenerator(
         variables.toSortedMap().forEach { (variableKey, variableType) ->
             val propertyName = getVariablePropertyName(variableKey)
 
-            val className = variableType.takeIf { it.contains(".") }
-                ?: imports.firstOrNull { it.endsWith(".$variableType") }
-                ?: "kotlin.${variableType.capitalize()}"
+            val openGenericIdx = variableType.indexOf('<')
+            val closeGenericIdx = variableType.indexOf('>')
 
-            val classType = ClassName.bestGuess(className).copy(nullable = true)
+            val (type, genericTypes) = if(openGenericIdx != -1 && closeGenericIdx != -1) {
+                val type = variableType.subSequence(0, openGenericIdx).toString()
+                val genericTypes = variableType.subSequence(openGenericIdx + 1, closeGenericIdx).toString()
+
+                type to genericTypes
+            } else {
+                variableType to null
+            }
+
+            val className = typeStringToClassName(type)
+
+            val classType = ClassName.bestGuess(className).run {
+                if(genericTypes != null) {
+                    val typesString = genericTypes
+                        .replace(" ", "")
+                        .replace("\t", "")
+
+                    val typeNames = typesString
+                        .split(",")
+                        .map { typeStringToClassName(it) }
+                        .map { ClassName.bestGuess(it) }
+                        .toTypedArray()
+
+                    this.parameterizedBy(*typeNames)
+                } else {
+                    this
+                }
+            }.copy(nullable = true)
 
             val property = PropertySpec.builder(
                 propertyName,
@@ -47,6 +74,7 @@ open class UnitItemGenerator(
             ).initializer("null")
                 .mutable(true)
                 .build()
+
             unitClass.addProperty(property)
         }
 
@@ -78,6 +106,12 @@ open class UnitItemGenerator(
         }.build()
 
         fileSpec.writeTo(generationDir)
+    }
+
+    private fun typeStringToClassName(type: String): String {
+        return type.takeIf { it.contains(".") }
+            ?: imports.firstOrNull { it.endsWith(".$type") }
+            ?: "kotlin.${type.capitalize()}"
     }
 
     protected fun buildBindCode(): CodeBlock {
