@@ -43,11 +43,11 @@ class MainActivity : AppCompatActivity() {
         val spinner: AppCompatSpinner = findViewById(R.id.spinner)
 
         recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        recyclerView.adapter = UnitsRecyclerViewAdapter().apply {
+        recyclerView.adapter = UnitsRecyclerViewAdapter(this).apply {
             units = test.getUnits()
         }
 
-        spinner.adapter = UnitsAdapter().apply {
+        spinner.adapter = UnitsAdapter(this).apply {
             units = test.getUnits()
         }
     }

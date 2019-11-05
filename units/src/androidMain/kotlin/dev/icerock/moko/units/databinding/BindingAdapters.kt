@@ -47,7 +47,7 @@ fun RecyclerView.setAdapter(adapterClassName: String) {
     val adapterClass = this.javaClass.classLoader?.loadClass(adapterClassName)
 
     if (adapterClass == UnitsRecyclerViewAdapter::class.java) {
-        adapter = UnitsRecyclerViewAdapter(context as? LifecycleOwner)
+        adapter = UnitsRecyclerViewAdapter(context as LifecycleOwner)
         return
     }
 

@@ -2,7 +2,7 @@
  * Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
-package dev.icerock.moko.units.adapter
+package dev.icerock.moko.units.databinding
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,7 +12,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
-class UnitViewHolder<T : ViewDataBinding>(
+class DataBindingUnitViewHolder<T : ViewDataBinding>(
     val binding: T
 ) : RecyclerView.ViewHolder(binding.root) {
 

@@ -20,7 +20,7 @@ open class UnitItemGenerator(
         val unitClass = TypeSpec.classBuilder(className)
 
         unitClass.addModifiers(KModifier.OPEN)
-        unitClass.addSuperinterface(ClassName.bestGuess("dev.icerock.moko.units.UnitItem"))
+        unitClass.addSuperinterface(ClassName.bestGuess("dev.icerock.moko.units.databinding.DataBindingUnitItem"))
         unitClass.addProperty(
             PropertySpec.builder("itemId", Long::class, KModifier.OVERRIDE)
                 .mutable(true)

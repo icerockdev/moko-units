@@ -4,10 +4,15 @@
 
 package dev.icerock.moko.units
 
-import androidx.databinding.ViewDataBinding
+import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
+import androidx.recyclerview.widget.RecyclerView
 
 interface DropDownUnitItem {
-    val dropDownLayoutId: Int
+    fun createDropDownViewHolder(
+        parent: ViewGroup,
+        lifecycleOwner: LifecycleOwner
+    ): RecyclerView.ViewHolder
 
-    fun bindDropDown(viewDataBinding: ViewDataBinding)
+    fun bindDropDownViewHolder(viewHolder: RecyclerView.ViewHolder)
 }
