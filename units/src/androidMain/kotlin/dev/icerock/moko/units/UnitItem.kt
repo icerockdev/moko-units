@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 
-actual interface UnitItem {
+interface UnitItem {
     val itemId: Long
     val viewType: Int
 

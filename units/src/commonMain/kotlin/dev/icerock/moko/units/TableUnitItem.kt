@@ -4,4 +4,4 @@
 
 package dev.icerock.moko.units
 
-expect interface CollectionUnitItem
+expect interface TableUnitItem
