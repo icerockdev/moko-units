@@ -4,13 +4,14 @@
 
 import Foundation
 import UIKit
+import MultiPlatformLibrary
 
 @objc public protocol UITableViewCellUnitProtocol: UIAnyCellUnitProtocol {
   var height: NSNumber? { get }
   var estimatedHeight: NSNumber? { get }
 }
 
-open class UITableViewCellUnit<Cell: Fillable>: UIAnyCellUnit<Cell>, UITableViewCellUnitProtocol {
+open class UITableViewCellUnit<Cell: Fillable>: UIAnyCellUnit<Cell>, UITableViewCellUnitProtocol, TableUnitItem {
   public typealias ConfiguratorType = ((_ cell: Cell) -> Void)
   
   open var height: NSNumber? //Если требуется - высота ячейки
@@ -34,6 +35,32 @@ open class UITableViewCellUnit<Cell: Fillable>: UIAnyCellUnit<Cell>, UITableView
     )
     self.height = height
     self.estimatedHeight = estimatedHeight
+  }
+  
+  public func bind(cell_ cell: UITableViewCell) {
+    self.fill(cell: cell)
+  }
+  
+  public var itemId: Int64 {
+    get {
+      // FIXME pass real itemId and calculate diff by it
+      return -1
+    }
+  }
+  
+  public var reusableIdentifier: String {
+    get {
+      return self.reuseId
+    }
+  }
+  
+  public func register(intoView: Any?) {
+    guard let tableView = intoView as? UITableView else { return }
+    
+    tableView.register(
+      UINib(nibName: self.nibName, bundle: self.bundle),
+      forCellReuseIdentifier: self.reusableIdentifier
+    )
   }
 }
 

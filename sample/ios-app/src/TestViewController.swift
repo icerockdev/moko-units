@@ -28,7 +28,7 @@ class TestViewController: UIViewController {
 }
 
 extension TestViewController: TestingUnitFactory {
-    func createSimpleUnit(id: Int64, title: String, itemData: ItemData?) -> UnitItem {
+    func createSimpleUnit(id: Int64, title: String, itemData: ItemData?) -> TableUnitItem {
         // without R.swift
 //        return UITableViewCellUnit<SimpleCell>(
 //            data: SimpleCell.CellModel(id: id, title: title),

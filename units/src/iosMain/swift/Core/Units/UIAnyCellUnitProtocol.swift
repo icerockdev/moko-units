@@ -3,9 +3,8 @@
  */
 
 import Foundation
-import MultiPlatformLibrary
 
-@objc public protocol UIAnyCellUnitProtocol: UnitItem {
+@objc public protocol UIAnyCellUnitProtocol {
   var reuseId: String { get }
   var nibName: String { get }
   var bundle: Bundle { get }
