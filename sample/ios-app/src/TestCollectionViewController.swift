@@ -26,18 +26,25 @@ class TestCollectionViewController: UIViewController {
     }
 }
 
+extension UICollectionViewCell: Reusable {
+    public static func xibName() -> String { return String(describing: self) }
+    public static func reusableIdentifier() -> String { return String(describing: self) }
+}
+
 extension TestCollectionViewController: TestingCollectionCollectionUnitFactory {
     func createSimpleUnit(id: Int64, title: String, itemData: ItemData?) -> CollectionUnitItem {
         // without R.swift
-//        return UITableViewCellUnit<SimpleCell>(
-//            data: SimpleCell.CellModel(id: id, title: title),
-//            configurator: nil
-//        )
-        // with R.swift
         return UICollectionViewCellUnit<SimpleCollectionCell>(
             data: SimpleCollectionCell.CellModel(id: id, title: title),
-            reusable: R.nib.simpleCollectionCell,
+            reuseId: SimpleCollectionCell.reusableIdentifier(),
+            nibName: SimpleCollectionCell.xibName(),
             configurator: nil
         )
+        // with R.swift
+//        return UICollectionViewCellUnit<SimpleCollectionCell>(
+//            data: SimpleCollectionCell.CellModel(id: id, title: title),
+//            reusable: R.nib.simpleCollectionCell,
+//            configurator: nil
+//        )
     }
 }

@@ -1,10 +1,6 @@
-//
-//  SimpleCollectionCell.swift
-//  TestProj
-//
-//  Created by Andrew Kovalev on 09.01.2020.
-//  Copyright © 2020 IceRock Development. All rights reserved.
-//
+/*
+* Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
+*/
 
 import Foundation
 import MultiPlatformLibraryUnits
