@@ -1,3 +1,7 @@
+/*
+* Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
+*/
+
 import Foundation
 import MultiPlatformLibrary
 import MultiPlatformLibraryUnits
@@ -35,8 +39,8 @@ open class UICollectionViewCellUnit<Cell: Fillable>: CollectionUnitItem, UIAnyCe
 
   public typealias ConfiguratorType = ((_ cell: Cell) -> Void)
 
-  public var data: Cell.DataType //Собственно данные которые попадут в FillableProtocol.fill и .update
-  public var reuseId: String //обязательно указываем обычный reusable identifier
+  public var data: Cell.DataType // Data for cell content. Used in FillableProtocol.fill and .update
+  public var reuseId: String // cell reusable identifier
   public var nibName: String
   public var configurator: ConfiguratorType?
   public var onSelected: (() -> Void)?
