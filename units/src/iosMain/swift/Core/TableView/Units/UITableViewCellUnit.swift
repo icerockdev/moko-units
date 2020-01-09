@@ -14,7 +14,7 @@ import MultiPlatformLibrary
 open class UITableViewCellUnit<Cell: Fillable>: UIAnyCellUnit<Cell>, UITableViewCellUnitProtocol, TableUnitItem {
   public typealias ConfiguratorType = ((_ cell: Cell) -> Void)
   
-  open var height: NSNumber? //Если требуется - высота ячейки
+  open var height: NSNumber? // Cell height
   open var estimatedHeight: NSNumber?
   
   public init(

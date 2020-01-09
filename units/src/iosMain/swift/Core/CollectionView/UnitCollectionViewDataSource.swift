@@ -5,7 +5,7 @@
 import Foundation
 import UIKit
 
-// FIXME add UICollectionCellUnit with CollectionUnitItem realization
+
 open class UnitCollectionViewDataSource: NSObject, UICollectionViewDelegate, UICollectionViewDataSource {
   
   private var registeredIds: Set<String> = Set()
