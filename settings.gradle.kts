@@ -25,8 +25,7 @@ enableFeaturePreview("GRADLE_METADATA")
 
 val properties = startParameter.projectProperties
 
-// ./gradlew -PpluginPublish publishPluginPublicationToMavenLocal
-// ./gradlew -PlibraryPublish publishToMavenLocal
+// ./gradlew -PlibraryPublish :units:publishToMavenLocal :gradle-plugin:publishPluginPublicationToMavenLocal
 val libraryPublish: Boolean = properties.containsKey("libraryPublish")
 
 include(":gradle-plugin")
