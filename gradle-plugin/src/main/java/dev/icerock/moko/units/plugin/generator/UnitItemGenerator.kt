@@ -35,38 +35,7 @@ open class UnitItemGenerator(
 
         variables.toSortedMap().forEach { (variableKey, variableType) ->
             val propertyName = getVariablePropertyName(variableKey)
-
-            val openGenericIdx = variableType.indexOf('<')
-            val closeGenericIdx = variableType.indexOf('>')
-
-            val (type, genericTypes) = if(openGenericIdx != -1 && closeGenericIdx != -1) {
-                val type = variableType.subSequence(0, openGenericIdx).toString()
-                val genericTypes = variableType.subSequence(openGenericIdx + 1, closeGenericIdx).toString()
-
-                type to genericTypes
-            } else {
-                variableType to null
-            }
-
-            val className = typeStringToClassName(type)
-
-            val classType = ClassName.bestGuess(className).run {
-                if(genericTypes != null) {
-                    val typesString = genericTypes
-                        .replace(" ", "")
-                        .replace("\t", "")
-
-                    val typeNames = typesString
-                        .split(",")
-                        .map { typeStringToClassName(it) }
-                        .map { ClassName.bestGuess(it) }
-                        .toTypedArray()
-
-                    this.parameterizedBy(*typeNames)
-                } else {
-                    this
-                }
-            }.copy(nullable = true)
+            val classType = getClassType(variableType).copy(nullable = true)
 
             val property = PropertySpec.builder(
                 propertyName,
@@ -109,9 +78,18 @@ open class UnitItemGenerator(
     }
 
     private fun typeStringToClassName(type: String): String {
-        return type.takeIf { it.contains(".") }
+        val result = type.takeIf { it.contains(".") }
             ?: imports.firstOrNull { it.endsWith(".$type") }
-            ?: "kotlin.${type.capitalize()}"
+
+        if (result != null) return result
+
+        // Check for Java -> Kotlin types compatibility
+
+        val newType = when(type) {
+            "Integer" -> "Int"
+            else -> type
+        }
+        return "kotlin.${newType.capitalize()}"
     }
 
     protected fun buildBindCode(): CodeBlock {
@@ -131,5 +109,38 @@ open class UnitItemGenerator(
 
     private fun getVariableBindingKey(variableKey: String): String {
         return "BR.$variableKey"
+    }
+
+    private fun getClassType(variableType: String): TypeName {
+        val openGenericIdx = variableType.indexOf('<')
+        val closeGenericIdx = variableType.lastIndexOf('>')
+
+        val (type, genericTypes) = if (openGenericIdx != -1 && closeGenericIdx != -1) {
+            val type = variableType.subSequence(0, openGenericIdx).toString()
+            val genericTypes = variableType.subSequence(openGenericIdx + 1, closeGenericIdx).toString()
+
+            type to genericTypes
+        } else {
+            variableType to null
+        }
+
+        val className = typeStringToClassName(type)
+
+        return ClassName.bestGuess(className).run {
+            if (genericTypes != null) {
+                val typesString = genericTypes
+                    .replace(" ", "")
+                    .replace("\t", "")
+
+                val typeNames = typesString
+                    .split(",")
+                    .map { getClassType(it) }
+                    .toTypedArray()
+
+                this.parameterizedBy(*typeNames)
+            } else {
+                this
+            }
+        }
     }
 }
