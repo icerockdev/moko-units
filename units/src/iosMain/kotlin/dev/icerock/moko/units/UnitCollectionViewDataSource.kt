@@ -13,17 +13,17 @@ import platform.UIKit.row
 import platform.darwin.NSInteger
 import platform.darwin.NSObject
 
-@ExportObjCClass
-class UnitCollectionViewDataSource(
-    private val collectionView: UICollectionView
-) : NSObject(), UICollectionViewDataSourceProtocol {
+internal class UnitCollectionViewDataSource private constructor(collectionView: UICollectionView): NSObject(), UICollectionViewDataSourceProtocol {
     private val unitsRegistry = UnitsRegistry<UICollectionView, CollectionUnitItem>(collectionView)
     var unitItems: List<CollectionUnitItem>? = null
         set(value) {
             field = value
             if (value != null) unitsRegistry.registerIfNeeded(value)
-            collectionView.reloadData()
         }
+
+    init {
+        collectionView.dataSource = this
+    }
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun collectionView(
@@ -53,4 +53,14 @@ class UnitCollectionViewDataSource(
     override fun numberOfSectionsInCollectionView(collectionView: UICollectionView): NSInteger {
         return 1
     }
+
+    companion object Factory {
+        fun create(forCollectionView: UICollectionView): CollectionUnitsSource {
+            val source = UnitCollectionViewDataSource(forCollectionView)
+            return object: CollectionUnitsSource {
+                override var unitItems = source.unitItems
+            }
+        }
+    }
 }
+

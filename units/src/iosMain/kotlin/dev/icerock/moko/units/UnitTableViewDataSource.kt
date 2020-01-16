@@ -13,17 +13,17 @@ import platform.UIKit.row
 import platform.darwin.NSInteger
 import platform.darwin.NSObject
 
-@ExportObjCClass
-class UnitTableViewDataSource(
-    private val tableView: UITableView
-) : NSObject(), UITableViewDataSourceProtocol {
+class UnitTableViewDataSource private constructor(tableView: UITableView): NSObject(), UITableViewDataSourceProtocol {
     private val unitsRegistry = UnitsRegistry<UITableView, TableUnitItem>(tableView)
     var unitItems: List<TableUnitItem>? = null
         set(value) {
             field = value
             if (value != null) unitsRegistry.registerIfNeeded(value)
-            tableView.reloadData()
         }
+
+    init {
+        tableView.dataSource = this
+    }
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun tableView(
@@ -50,5 +50,14 @@ class UnitTableViewDataSource(
 
     override fun numberOfSectionsInTableView(tableView: UITableView): NSInteger {
         return 1
+    }
+
+    companion object Factory {
+        fun create(forTableView: UITableView): TableUnitsSource {
+            val source = UnitTableViewDataSource(forTableView)
+            return object: TableUnitsSource {
+                override var unitItems = source.unitItems
+            }
+        }
     }
 }
