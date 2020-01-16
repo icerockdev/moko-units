@@ -13,7 +13,7 @@ import platform.UIKit.row
 import platform.darwin.NSInteger
 import platform.darwin.NSObject
 
-internal class UnitCollectionViewDataSource private constructor(collectionView: UICollectionView): NSObject(), UICollectionViewDataSourceProtocol {
+class UnitCollectionViewDataSource private constructor(collectionView: UICollectionView): NSObject(), UICollectionViewDataSourceProtocol {
     private val unitsRegistry = UnitsRegistry<UICollectionView, CollectionUnitItem>(collectionView)
     var unitItems: List<CollectionUnitItem>? = null
         set(value) {
