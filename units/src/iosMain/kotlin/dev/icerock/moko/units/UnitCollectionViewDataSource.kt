@@ -13,7 +13,7 @@ import platform.UIKit.row
 import platform.darwin.NSInteger
 import platform.darwin.NSObject
 
-class UnitCollectionViewDataSource private constructor(collectionView: UICollectionView): NSObject(), UICollectionViewDataSourceProtocol {
+class UnitCollectionViewDataSource internal constructor(collectionView: UICollectionView): NSObject(), UICollectionViewDataSourceProtocol {
     private val unitsRegistry = UnitsRegistry<UICollectionView, CollectionUnitItem>(collectionView)
     var unitItems: List<CollectionUnitItem>? = null
         set(value) {
@@ -54,13 +54,5 @@ class UnitCollectionViewDataSource private constructor(collectionView: UICollect
         return 1
     }
 
-    companion object Factory {
-        fun create(forCollectionView: UICollectionView): CollectionUnitsSource {
-            val source = UnitCollectionViewDataSource(forCollectionView)
-            return object: CollectionUnitsSource {
-                override var unitItems = source.unitItems
-            }
-        }
-    }
 }
 

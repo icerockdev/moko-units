@@ -1,0 +1,38 @@
+/*
+ * Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
+ */
+
+import Foundation
+import UIKit
+import MultiPlatformLibrary
+
+import Foundation
+import MultiPlatformLibrary
+
+open class UITableViewCellUnit<Cell: Fillable & UITableViewCell>: UICellUnit<Cell>, TableUnitItem {
+  
+  public var reusableIdentifier: String {
+    get {
+      return reuseId
+    }
+  }
+  
+  public func register(intoView: Any?) {
+    guard let tableView = intoView as? UITableView else { return }
+    
+    tableView.register(
+      UINib(nibName: self.nibName, bundle: self.bundle),
+      forCellReuseIdentifier: self.reusableIdentifier
+    )
+  }
+  
+  public func bind(cell_ cell: UITableViewCell) {
+    guard let cell = cell as? Cell else { return }
+    configurator?(cell)
+    cell.fill(data)
+  }
+}
+
+
+
+

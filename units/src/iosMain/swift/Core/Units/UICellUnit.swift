@@ -3,11 +3,14 @@
  */
 
 import UIKit
+import MultiPlatformLibrary
 
-open class UIAnyCellUnit<Cell: Fillable>: NSObject, UIAnyCellUnitProtocol {
+open class UICellUnit<Cell: Fillable> {
+  
   public typealias ConfiguratorType = ((_ cell: Cell) -> Void)
   
   public var data: Cell.DataType
+  @objc public var itemId: Int64
   public var reuseId: String
   public var nibName: String
   public var bundle: Bundle
@@ -15,33 +18,36 @@ open class UIAnyCellUnit<Cell: Fillable>: NSObject, UIAnyCellUnitProtocol {
   public var onSelected: (() -> Void)?
   
   init(data: Cell.DataType,
+       itemId: Int64,
        reuseId: String,
        nibName: String,
        bundle: Bundle = Bundle.main,
        configurator: ConfiguratorType?) {
     self.data = data
+    self.itemId = itemId
     self.reuseId = reuseId
     self.nibName = nibName
     self.bundle = bundle
     self.configurator = configurator
   }
   
-  public func fill(cell: Any) {
-    guard let cell = cell as? Cell else { return }
-    
-    configurator?(cell)
-    
-    cell.fill(data)
-  }
-  
-  public func update(cell: Any) {
-    guard let cell = cell as? Cell else { return }
-    
-    cell.update(data)
-  }
-  
   public func itemData() -> Any {
     return data
   }
 }
+
+public extension UICellUnit where Cell: Reusable {
+  convenience init(data: Cell.DataType,
+  itemId: Int64,
+  configurator: ConfiguratorType?) {
+    self.init(data: data,
+              itemId: itemId,
+              reuseId: Cell.reusableIdentifier(),
+              nibName: Cell.self.xibName?() ?? Cell.reusableIdentifier(),
+              bundle: Cell.self.bundle?() ?? Bundle.main,
+              configurator: configurator)
+  }
+}
+
+
 

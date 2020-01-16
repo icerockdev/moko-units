@@ -8,5 +8,4 @@ public protocol Fillable {
   associatedtype DataType
   
   func fill(_ data: DataType)
-  func update(_ data: DataType)
 }
