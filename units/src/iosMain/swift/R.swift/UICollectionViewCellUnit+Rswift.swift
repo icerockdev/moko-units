@@ -6,10 +6,11 @@ import Foundation
 import Rswift
 
 public extension UICollectionViewCellUnit {
-  public convenience init<Reusable: Rswift.ReuseIdentifierType & Rswift.NibResourceType>(
+  public convenience init<ResourceType: Rswift.ReuseIdentifierType & Rswift.NibResourceType>(
     data: Cell.DataType,
-    reusable: Reusable,
-    configurator: ConfiguratorType?) where Reusable.ReusableType == Cell {
-    self.init(data: data, reuseId: reusable.identifier, nibName: reusable.name, configurator: configurator)
+    itemId: Int64,
+    reusable: ResourceType,
+    configurator: ConfiguratorType?) where ResourceType.ReusableType == Cell {
+    self.init(data: data, itemId: itemId, reuseId: reusable.identifier, nibName: reusable.name, bundle: reusable.bundle, configurator: configurator)
   }
 }
