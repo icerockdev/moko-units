@@ -7,12 +7,13 @@ package dev.icerock.moko.units
 import kotlinx.cinterop.ExportObjCClass
 import platform.Foundation.NSIndexPath
 import platform.UIKit.UICollectionView
-import platform.UIKit.UICollectionViewCell
 import platform.UIKit.UICollectionViewDataSourceProtocol
 import platform.UIKit.row
 import platform.darwin.NSInteger
 import platform.darwin.NSObject
+import platform.UIKit.UICollectionViewCell as UICollectionViewCell
 
+@ExportObjCClass
 class UnitCollectionViewDataSource internal constructor(collectionView: UICollectionView): NSObject(), UICollectionViewDataSourceProtocol {
     private val unitsRegistry = UnitsRegistry<UICollectionView, CollectionUnitItem>(collectionView)
     var unitItems: List<CollectionUnitItem>? = null

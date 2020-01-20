@@ -13,9 +13,10 @@ class TestViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.tableFooterView = UIView()
         dataSource = UnitsDataSource.Factory().create(forTableView: tableView)
         dataSource.unitItems = Testing(unitFactory: self).getUnits()
-        tableView.tableFooterView = UIView()
+        tableView.reloadData()
     }
 }
 
@@ -34,6 +35,7 @@ extension TestViewController: TestingUnitFactory {
         // with R.swift
 //        return UITableViewCellUnit<SimpleCell>(
 //            data: SimpleCell.CellModel(id: id, title: title),
+//            itemId: id,
 //            reusable: R.nib.simpleCell,
 //            configurator: nil
 //        )

@@ -15,6 +15,7 @@ class TestCollectionViewController: UIViewController {
         super.viewDidLoad()
         dataSource = UnitsDataSource.Factory().create(forCollectionView: collectionView)
         dataSource.unitItems = TestingCollection(unitFactory: self).getUnits()
+        collectionView.reloadData()
     }
 }
 

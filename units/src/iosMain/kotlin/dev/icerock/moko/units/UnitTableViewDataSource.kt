@@ -13,6 +13,7 @@ import platform.UIKit.row
 import platform.darwin.NSInteger
 import platform.darwin.NSObject
 
+@ExportObjCClass
 class UnitTableViewDataSource internal constructor(tableView: UITableView): NSObject(), UITableViewDataSourceProtocol {
     private val unitsRegistry = UnitsRegistry<UITableView, TableUnitItem>(tableView)
     var unitItems: List<TableUnitItem>? = null
