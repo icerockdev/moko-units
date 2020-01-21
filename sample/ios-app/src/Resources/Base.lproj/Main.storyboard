@@ -120,11 +120,24 @@
                                 </collectionViewFlowLayout>
                                 <cells/>
                             </collectionView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="182-RA-y5J">
+                                <rect key="frame" x="120" y="522" width="80" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="2RS-pc-JbA"/>
+                                    <constraint firstAttribute="height" constant="30" id="Ltg-HF-z0g"/>
+                                </constraints>
+                                <state key="normal" title="Shuffle"/>
+                                <connections>
+                                    <action selector="onShuffleTouched:" destination="Pc8-wE-oD4" eventType="touchUpInside" id="t8i-HO-N0C"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="afH-R9-fwF" secondAttribute="trailing" id="Liu-Bg-CKg"/>
+                            <constraint firstItem="182-RA-y5J" firstAttribute="centerX" secondItem="xFW-Sf-Y8m" secondAttribute="centerX" id="fba-1X-gKv"/>
                             <constraint firstItem="afH-R9-fwF" firstAttribute="top" secondItem="Qeb-r1-CTt" secondAttribute="bottom" id="i67-hh-aue"/>
+                            <constraint firstItem="aJS-WQ-Lcq" firstAttribute="top" secondItem="182-RA-y5J" secondAttribute="bottom" constant="16" id="kXt-go-wNO"/>
                             <constraint firstItem="afH-R9-fwF" firstAttribute="leading" secondItem="xFW-Sf-Y8m" secondAttribute="leading" id="ko3-cJ-XEu"/>
                             <constraint firstItem="aJS-WQ-Lcq" firstAttribute="top" secondItem="afH-R9-fwF" secondAttribute="bottom" id="zAO-kE-4Zp"/>
                         </constraints>

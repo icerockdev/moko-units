@@ -16,6 +16,10 @@ class TestCollectionViewController: UIViewController {
         dataSource = UnitsDataSource.Factory().create(forCollectionView: collectionView)
         dataSource.reloadItemsAnimated(TestingCollection(unitFactory: self).getUnits())
     }
+    
+    @IBAction private func onShuffleTouched(_ sender: UIButton!) {
+        dataSource.reloadItemsAnimated(TestingCollection(unitFactory: self).getUnits().shuffled())
+    }
 }
 
 extension UICollectionViewCell: Reusable {
