@@ -19,33 +19,30 @@ interface CollectionUnitsSource  {
     val collectionView: UICollectionView?
 }
 
-class UnitsDataSource private constructor() {
-    companion object Factory {
-        fun create(forCollectionView: UICollectionView): CollectionUnitsSource {
-            return object: CollectionUnitsSource {
-                private val unitsSource = UnitCollectionViewDataSource(forCollectionView)
-                override var unitItems: List<CollectionUnitItem>?
-                    get() {
-                        return unitsSource.unitItems
-                    }
-                    set(value) {
-                        unitsSource.unitItems = value
-                    }
-                override val collectionView: UICollectionView? = forCollectionView
+fun create(forTableView: UITableView): TableUnitsSource {
+    return object: TableUnitsSource {
+        private val unitsSource = UnitTableViewDataSource(forTableView)
+        override var unitItems: List<TableUnitItem>?
+            get() {
+                return unitsSource.unitItems
             }
-        }
-        fun create(forTableView: UITableView): TableUnitsSource {
-            return object: TableUnitsSource {
-                private val unitsSource = UnitTableViewDataSource(forTableView)
-                override var unitItems: List<TableUnitItem>?
-                    get() {
-                        return unitsSource.unitItems
-                    }
-                    set(value) {
-                        unitsSource.unitItems = value
-                    }
-                override val tableView: UITableView? = forTableView
+            set(value) {
+                unitsSource.unitItems = value
             }
-        }
+        override val tableView: UITableView? = forTableView
+    }
+}
+
+fun create(forCollectionView: UICollectionView): CollectionUnitsSource {
+    return object: CollectionUnitsSource {
+        private val unitsSource = UnitCollectionViewDataSource(forCollectionView)
+        override var unitItems: List<CollectionUnitItem>?
+            get() {
+                return unitsSource.unitItems
+            }
+            set(value) {
+                unitsSource.unitItems = value
+            }
+        override val collectionView: UICollectionView? = forCollectionView
     }
 }

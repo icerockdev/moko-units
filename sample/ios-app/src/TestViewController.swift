@@ -14,7 +14,7 @@ class TestViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
-        dataSource = UnitsDataSource.Factory().create(forTableView: tableView)
+        dataSource = UnitsSourceKt.create(forTableView: tableView)
         dataSource.reloadItemsAnimated(Testing(unitFactory: self).getUnits())
     }
 }
