@@ -1,6 +1,10 @@
 PODS:
+  - Differ (1.4.4)
   - MultiPlatformLibrary (0.1.0)
   - MultiPlatformLibraryUnits/Core (0.1.0):
+    - MultiPlatformLibrary
+  - MultiPlatformLibraryUnits/Differ (0.1.0):
+    - Differ
     - MultiPlatformLibrary
   - MultiPlatformLibraryUnits/R.swift (0.1.0):
     - MultiPlatformLibrary
@@ -11,12 +15,14 @@ PODS:
 
 DEPENDENCIES:
   - MultiPlatformLibrary (from `../mpp-library`)
-  - MultiPlatformLibraryUnits/Core (from `https://github.com/icerockdev/moko-units.git`, tag `release/0.2.0-dev-2`)
-  - MultiPlatformLibraryUnits/R.swift (from `https://github.com/icerockdev/moko-units.git`, tag `release/0.2.0-dev-2`)
+  - MultiPlatformLibraryUnits/Core (from `../../`)
+  - MultiPlatformLibraryUnits/Differ (from `../../`)
+  - MultiPlatformLibraryUnits/R.swift (from `../../`)
   - R.swift (= 5.1.0)
 
 SPEC REPOS:
   https://github.com/CocoaPods/Specs.git:
+    - Differ
     - R.swift
     - R.swift.Library
 
@@ -24,20 +30,15 @@ EXTERNAL SOURCES:
   MultiPlatformLibrary:
     :path: "../mpp-library"
   MultiPlatformLibraryUnits:
-    :git: https://github.com/icerockdev/moko-units.git
-    :tag: release/0.2.0-dev-2
-
-CHECKOUT OPTIONS:
-  MultiPlatformLibraryUnits:
-    :git: https://github.com/icerockdev/moko-units.git
-    :tag: release/0.2.0-dev-2
+    :path: "../../"
 
 SPEC CHECKSUMS:
+  Differ: 5cd747e2f29c11ea9605eba7cb369df17e2b1ee2
   MultiPlatformLibrary: 176fb8ade516666cd47e93de1b71ba0441a541bb
-  MultiPlatformLibraryUnits: 44eda0f9372f8a095225fae2579916208ca2c8d3
+  MultiPlatformLibraryUnits: f4fe5d26427bb3c996a6d786d9cc7552bc4ae8cb
   R.swift: 8cbc4fc69b740305b6a17c8a8ed968eb788962d9
   R.swift.Library: fa85ce1e0d0b7e818cd9e080df910ba54d2776cc
 
-PODFILE CHECKSUM: f5cde022c9070fe5e2563de90604d7adf8d1f3f2
+PODFILE CHECKSUM: 81b31c84dea717e147eb40d189739fadc53b9fad
 
-COCOAPODS: 1.8.3
+COCOAPODS: 1.8.4
