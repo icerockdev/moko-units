@@ -14,8 +14,7 @@ class TestCollectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource = UnitsDataSource.Factory().create(forCollectionView: collectionView)
-        dataSource.unitItems = TestingCollection(unitFactory: self).getUnits()
-        collectionView.reloadData()
+        dataSource.reloadItemsAnimated(TestingCollection(unitFactory: self).getUnits())
     }
 }
 

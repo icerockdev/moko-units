@@ -15,8 +15,7 @@ class TestViewController: UIViewController {
         super.viewDidLoad()
         tableView.tableFooterView = UIView()
         dataSource = UnitsDataSource.Factory().create(forTableView: tableView)
-        dataSource.unitItems = Testing(unitFactory: self).getUnits()
-        tableView.reloadData()
+        dataSource.reloadItemsAnimated(Testing(unitFactory: self).getUnits())
     }
 }
 
@@ -29,7 +28,7 @@ extension TestViewController: TestingUnitFactory {
     func createSimpleUnit(id: Int64, title: String, itemData: ItemData?) -> TableUnitItem {
         // without R.swift
         return UITableViewCellUnit<SimpleCell>(
-            data: SimpleCell.CellModel(id: id, title: itemData?.data ?? ""),
+            data: SimpleCell.CellModel(id: id, title: title),
             itemId: id,
             configurator: nil)
         // with R.swift

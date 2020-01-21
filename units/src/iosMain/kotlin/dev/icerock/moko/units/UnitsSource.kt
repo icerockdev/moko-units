@@ -11,10 +11,12 @@ import platform.UIKit.UICollectionViewDataSourceProtocol
 
 interface TableUnitsSource {
     var unitItems: List<TableUnitItem>?
+    val tableView: UITableView?
 }
 
 interface CollectionUnitsSource  {
     var unitItems: List<CollectionUnitItem>?
+    val collectionView: UICollectionView?
 }
 
 class UnitsDataSource private constructor() {
@@ -29,6 +31,7 @@ class UnitsDataSource private constructor() {
                     set(value) {
                         unitsSource.unitItems = value
                     }
+                override val collectionView: UICollectionView? = forCollectionView
             }
         }
         fun create(forTableView: UITableView): TableUnitsSource {
@@ -41,6 +44,7 @@ class UnitsDataSource private constructor() {
                     set(value) {
                         unitsSource.unitItems = value
                     }
+                override val tableView: UITableView? = forTableView
             }
         }
     }
