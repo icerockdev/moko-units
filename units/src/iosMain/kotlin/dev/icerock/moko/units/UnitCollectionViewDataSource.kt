@@ -14,7 +14,9 @@ import platform.darwin.NSInteger
 import platform.darwin.NSObject
 
 @ExportObjCClass
-class UnitCollectionViewDataSource internal constructor(val collectionView: UICollectionView): NSObject(), UICollectionViewDataSourceProtocol {
+class UnitCollectionViewDataSource internal constructor(
+    val collectionView: UICollectionView
+): NSObject(), UICollectionViewDataSourceProtocol {
     private val unitsRegistry = UnitsRegistry<UICollectionView, CollectionUnitItem>(collectionView)
     var unitItems: List<CollectionUnitItem>? = null
         set(value) {

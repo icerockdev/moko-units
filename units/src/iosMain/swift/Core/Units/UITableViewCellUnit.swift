@@ -6,9 +6,6 @@ import Foundation
 import UIKit
 import MultiPlatformLibrary
 
-import Foundation
-import MultiPlatformLibrary
-
 open class UITableViewCellUnit<Cell: Fillable & UITableViewCell>: UICellUnit<Cell>, TableUnitItem {
   
   public var reusableIdentifier: String {
