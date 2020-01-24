@@ -13,13 +13,12 @@ class TestCollectionViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        dataSource = UnitsSourceKt.create(forCollectionView: collectionView)
-        dataSource.reloadItemsAnimated(TestingCollection(unitFactory: self).getUnits())
+        dataSource = CollectionUnitsSourceKt.diffable(for: collectionView)
+        dataSource.unitItems = TestingCollection(unitFactory: self).getUnits()
     }
     
     @IBAction private func onShuffleTouched(_ sender: UIButton!) {
-        dataSource.reloadItemsAnimated(TestingCollection(unitFactory: self).getUnits().shuffled())
+        dataSource.unitItems = TestingCollection(unitFactory: self).getUnits().shuffled()
     }
 }
 
@@ -32,16 +31,16 @@ extension UICollectionViewCell: Reusable {
 extension TestCollectionViewController: TestingCollectionCollectionUnitFactory {
     func createSimpleUnit(id: Int64, title: String, itemData: ItemData?) -> CollectionUnitItem {
         // without R.swift
-        return UICollectionViewCellUnit<SimpleCollectionCell>(
-            data: SimpleCollectionCell.CellModel(id: id, title: title),
-            itemId: id,
-            configurator: nil
-        )
-        // with R.swift
 //        return UICollectionViewCellUnit<SimpleCollectionCell>(
 //            data: SimpleCollectionCell.CellModel(id: id, title: title),
-//            reusable: R.nib.simpleCollectionCell,
+//            itemId: id,
 //            configurator: nil
 //        )
+        // with R.swift
+        return UICollectionViewCellUnit<SimpleCollectionCell>(
+            data: SimpleCollectionCell.CellModel(id: id, title: title),
+            reusable: R.nib.simpleCollectionCell,
+            configurator: nil
+        )
     }
 }

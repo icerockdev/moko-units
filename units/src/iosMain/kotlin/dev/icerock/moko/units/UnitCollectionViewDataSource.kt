@@ -13,15 +13,21 @@ import platform.UIKit.row
 import platform.darwin.NSInteger
 import platform.darwin.NSObject
 
+typealias UICollectionViewReloadHandler = (UICollectionView, oldData: List<CollectionUnitItem>?, newData: List<CollectionUnitItem>?) -> Unit
+
 @ExportObjCClass
 class UnitCollectionViewDataSource internal constructor(
-    val collectionView: UICollectionView
+    private val collectionView: UICollectionView,
+    private val reloadDataHandler: UICollectionViewReloadHandler
 ): NSObject(), UICollectionViewDataSourceProtocol {
+
     private val unitsRegistry = UnitsRegistry<UICollectionView, CollectionUnitItem>(collectionView)
     var unitItems: List<CollectionUnitItem>? = null
         set(value) {
+            val old = field
             field = value
             if (value != null) unitsRegistry.registerIfNeeded(value)
+            reloadDataHandler(collectionView, old, value)
         }
 
     init {

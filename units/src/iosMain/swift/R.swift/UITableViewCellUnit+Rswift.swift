@@ -14,6 +14,3 @@ public extension UITableViewCellUnit {
     self.init(data: data, itemId: itemId, reuseId: reusable.identifier, nibName: reusable.name, bundle: reusable.bundle, configurator: configurator)
   }
 }
-
-
-

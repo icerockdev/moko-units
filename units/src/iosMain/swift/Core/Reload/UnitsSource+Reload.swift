@@ -6,16 +6,18 @@
 import UIKit
 import MultiPlatformLibrary
 
-extension TableUnitsSource {
-  public func reloadItems(_ items: [TableUnitItem]) {
-    self.unitItems = items
-    self.tableView?.reloadData()
+public extension TableUnitsSourceKt {
+  public static func `default`(for tableView: UITableView) -> TableUnitsSource {
+    return TableUnitsSourceKt.create(forTableView: tableView) { (view, _, _) in
+      view.reloadData()
+    }
   }
 }
 
-extension CollectionUnitsSource {
-  public func reloadItems(_ items: [CollectionUnitItem]) {
-    self.unitItems = items
-    self.collectionView?.reloadData()
+public extension CollectionUnitsSourceKt {
+  public static func `default`(for collectionView: UICollectionView) -> CollectionUnitsSource {
+    return CollectionUnitsSourceKt.create(forCollectionView: collectionView) { (view, _, _) in
+      view.reloadData()
+    }
   }
 }
