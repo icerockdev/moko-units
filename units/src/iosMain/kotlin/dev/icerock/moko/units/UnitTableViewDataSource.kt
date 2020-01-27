@@ -13,17 +13,25 @@ import platform.UIKit.row
 import platform.darwin.NSInteger
 import platform.darwin.NSObject
 
+public typealias UITableViewReloadHandler = (UITableView, oldData: List<TableUnitItem>?, newData: List<TableUnitItem>?) -> Unit
+
 @ExportObjCClass
-class UnitTableViewDataSource(
-    private val tableView: UITableView
-) : NSObject(), UITableViewDataSourceProtocol {
+class UnitTableViewDataSource internal constructor(
+    private val tableView: UITableView,
+    private val reloadDataHandler: UITableViewReloadHandler = { _tableView, _, _ -> _tableView.reloadData() }
+): NSObject(), UITableViewDataSourceProtocol {
     private val unitsRegistry = UnitsRegistry<UITableView, TableUnitItem>(tableView)
     var unitItems: List<TableUnitItem>? = null
         set(value) {
+            val old = field
             field = value
             if (value != null) unitsRegistry.registerIfNeeded(value)
-            tableView.reloadData()
+            reloadDataHandler(tableView, old, value)
         }
+
+    init {
+        tableView.dataSource = this
+    }
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun tableView(

@@ -154,9 +154,7 @@ class UnitFactoryImpl: NSObject, UnitFactory {
 ```
 ```swift
 let viewModel = ViewModel(unitFactory: UnitFactoryImpl())
-let tableDataSource = FlatUnitTableViewDataSource()
-unitTableViewDelegate = tableDataSource.setup(for: tableView)
-
+let tableDataSource = TableUnitsSourceKt.default(for: tableView)
 tableDataSource.units = viewModel.items
 tableView.reloadTable()
 ```

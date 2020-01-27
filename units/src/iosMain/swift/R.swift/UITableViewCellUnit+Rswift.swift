@@ -5,24 +5,12 @@
 import Foundation
 import Rswift
 
-public extension UIAnyCellUnit {
-  public convenience init<Reusable: Rswift.ReuseIdentifierType & Rswift.NibResourceType>(
-    data: Cell.DataType,
-    reusable: Reusable,
-    configurator: ConfiguratorType?) where Reusable.ReusableType == Cell {
-    self.init(data: data, reuseId: reusable.identifier, nibName: reusable.name, configurator: configurator)
-  }
-}
-
 public extension UITableViewCellUnit {
-  public convenience init<Reusable: Rswift.ReuseIdentifierType & Rswift.NibResourceType>(
+  public convenience init<ResourceType: Rswift.ReuseIdentifierType & Rswift.NibResourceType>(
     data: Cell.DataType,
-    reusable: Reusable,
-    configurator: ConfiguratorType?,
-    height: NSNumber? = nil) where Reusable.ReusableType == Cell {
-    self.init(data: data, reuseId: reusable.identifier, nibName: reusable.name, configurator: configurator, height: height)
+    itemId: Int64,
+    reusable: ResourceType,
+    configurator: ConfiguratorType?) where ResourceType.ReusableType == Cell {
+    self.init(data: data, itemId: itemId, reuseId: reusable.identifier, nibName: reusable.name, bundle: reusable.bundle, configurator: configurator)
   }
 }
-
-
-

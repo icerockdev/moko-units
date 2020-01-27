@@ -13,17 +13,26 @@ import platform.UIKit.row
 import platform.darwin.NSInteger
 import platform.darwin.NSObject
 
+typealias UICollectionViewReloadHandler = (UICollectionView, oldData: List<CollectionUnitItem>?, newData: List<CollectionUnitItem>?) -> Unit
+
 @ExportObjCClass
-class UnitCollectionViewDataSource(
-    private val collectionView: UICollectionView
-) : NSObject(), UICollectionViewDataSourceProtocol {
+class UnitCollectionViewDataSource internal constructor(
+    private val collectionView: UICollectionView,
+    private val reloadDataHandler: UICollectionViewReloadHandler = { _collectionView, _, _ -> _collectionView.reloadData() }
+): NSObject(), UICollectionViewDataSourceProtocol {
+
     private val unitsRegistry = UnitsRegistry<UICollectionView, CollectionUnitItem>(collectionView)
     var unitItems: List<CollectionUnitItem>? = null
         set(value) {
+            val old = field
             field = value
             if (value != null) unitsRegistry.registerIfNeeded(value)
-            collectionView.reloadData()
+            reloadDataHandler(collectionView, old, value)
         }
+
+    init {
+        collectionView.dataSource = this
+    }
 
     @Suppress("PARAMETER_NAME_CHANGED_ON_OVERRIDE")
     override fun collectionView(
@@ -53,4 +62,6 @@ class UnitCollectionViewDataSource(
     override fun numberOfSectionsInCollectionView(collectionView: UICollectionView): NSInteger {
         return 1
     }
+
 }
+
