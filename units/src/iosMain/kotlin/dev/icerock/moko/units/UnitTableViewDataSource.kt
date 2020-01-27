@@ -18,7 +18,7 @@ public typealias UITableViewReloadHandler = (UITableView, oldData: List<TableUni
 @ExportObjCClass
 class UnitTableViewDataSource internal constructor(
     private val tableView: UITableView,
-    private val reloadDataHandler: UITableViewReloadHandler
+    private val reloadDataHandler: UITableViewReloadHandler = { _tableView, _, _ -> _tableView.reloadData() }
 ): NSObject(), UITableViewDataSourceProtocol {
     private val unitsRegistry = UnitsRegistry<UITableView, TableUnitItem>(tableView)
     var unitItems: List<TableUnitItem>? = null

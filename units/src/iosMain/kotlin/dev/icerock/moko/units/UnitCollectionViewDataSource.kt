@@ -18,7 +18,7 @@ typealias UICollectionViewReloadHandler = (UICollectionView, oldData: List<Colle
 @ExportObjCClass
 class UnitCollectionViewDataSource internal constructor(
     private val collectionView: UICollectionView,
-    private val reloadDataHandler: UICollectionViewReloadHandler
+    private val reloadDataHandler: UICollectionViewReloadHandler = { _collectionView, _, _ -> _collectionView.reloadData() }
 ): NSObject(), UICollectionViewDataSourceProtocol {
 
     private val unitsRegistry = UnitsRegistry<UICollectionView, CollectionUnitItem>(collectionView)
