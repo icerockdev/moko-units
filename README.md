@@ -21,7 +21,7 @@ TODO
 
 ## Requirements
 - Gradle version 5.4.1+
-- Android API 21+
+- Android API 16+
 - iOS version 9.0+
 
 ## Versions
