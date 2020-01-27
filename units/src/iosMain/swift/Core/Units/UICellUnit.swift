@@ -3,7 +3,6 @@
  */
 
 import UIKit
-import MultiPlatformLibrary
 
 open class UICellUnit<Cell: Fillable> {
   
