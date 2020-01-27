@@ -1,5 +1,5 @@
 ![moko-units](img/logo.png)  
-[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/icerockdev/moko/moko-units/images/download.svg) ](https://bintray.com/icerockdev/moko/moko-units/_latestVersion) ![kotlin-version](https://img.shields.io/badge/kotlin-1.3.50-orange)
+[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/icerockdev/moko/moko-units/images/download.svg) ](https://bintray.com/icerockdev/moko/moko-units/_latestVersion) ![kotlin-version](https://img.shields.io/badge/kotlin-1.3.61-orange)
 
 # Mobile Kotlin units
 This is a Kotlin MultiPlatform library that provides RecyclerView/UITableView/UICollectionView filling from common code.
@@ -21,13 +21,15 @@ TODO
 
 ## Requirements
 - Gradle version 5.4.1+
-- Android API 21+
+- Android API 16+
 - iOS version 9.0+
 
 ## Versions
 - kotlin 1.3.50
   - 0.1.0
   - 0.1.1
+- kotlin 1.3.61
+  - 0.2.0
 
 ## Installation
 root build.gradle  
@@ -38,7 +40,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "dev.icerock.moko:units-generator:0.1.1"
+        classpath "dev.icerock.moko:units-generator:0.2.0"
     }
 }
 
@@ -55,7 +57,7 @@ project build.gradle
 apply plugin: "dev.icerock.mobile.multiplatform-units"
 
 dependencies {
-    commonMainApi("dev.icerock.moko:units:0.1.1")
+    commonMainApi("dev.icerock.moko:units:0.2.0")
 }
 
 multiplatformUnits {
@@ -78,14 +80,14 @@ pod 'MultiPlatformLibraryUnits', :git => 'https://github.com/icerockdev/moko-uni
 `MultiPlatformLibrary` and be connected as a CocoaPod `MultiPlatformLibrary`. 
 [Here](sample/ios-app/Podfile)'s an example.
 To simplify integration with MultiPlatformFramework you can use [mobile-multiplatform-plugin](https://github.com/icerockdev/mobile-multiplatform-gradle-plugin)**.  
-`MultiPlatformLibraryUnits` CocoaPod contains an `DataSource`s for `UITableView`/`UICollectionView`.
+`MultiPlatformLibraryUnits` CocoaPod contains an swift additions for `UnitDataSource`s of `UITableView`/`UICollectionView`.
 
 ## Usage
 common:
 ```kotlin
 interface UnitFactory {
-    fun createHeader(text: String): UnitItem
-    fun createProfileTile(profileId: Long, avatarUrl: String, username: String): UnitItem
+    fun createHeader(text: String): TableUnitItem
+    fun createProfileTile(profileId: Long, avatarUrl: String, username: String): TableUnitItem
 }
 
 class ViewModel(unitFactory: UnitFactory) {
@@ -111,13 +113,13 @@ android:
 ```
 ```kotlin
 object UnitFactoryImpl: UnitFactory {
-    fun createHeader(text: String): UnitItem {
+    fun createHeader(text: String): TableUnitItem {
         return LayoutHeader()
             .setText(text)
             .setItemId(text.hashCode())
     }
     
-    fun createProfileTile(profileId: Long, avatarUrl: String, username: String): UnitItem {
+    fun createProfileTile(profileId: Long, avatarUrl: String, username: String): TableUnitItem {
         return LayoutProfileTile()
             .setAvatarUrl(avatarUrl)
             .setUserName(username)
@@ -133,30 +135,26 @@ iOS:
 ```swift
 class UnitFactoryImpl: NSObject, UnitFactory {
 
-  func createHeader(text: String) -> UnitItem {
+  func createHeader(text: String) -> TableUnitItem {
     let data = HeaderTableViewCell.CellModel(text: text)
-    return UIBindingTableViewCellUnit<HeaderTableViewCell>(
+    return UITableViewCellUnit<HeaderTableViewCell>(
       data: data,
-      reusable: R.nib.headerTableViewCell,
-      configurator: nil,
-      height: 48)
+      itemId: text.hashCode(),
+      configurator: nil)
   }
   
-  func createProfileTile(profileId: Long, avatarUrl: String, username: String) -> UnitItem {
+  func createProfileTile(profileId: Long, avatarUrl: String, username: String) -> TableUnitItem {
     let data = ProfileTableViewCell.CellModel(avatarUrl: avatarUrl, username: username)
-    return UIBindingTableViewCellUnit<ProfileTableViewCell>(
+    return UITableViewCellUnit<ProfileTableViewCell>(
       data: data,
-      reusable: R.nib.profileTableViewCell,
-      configurator: nil,
-      height: 56)
+      itemId: profileId,
+      configurator: nil)
   }
 }
 ```
 ```swift
 let viewModel = ViewModel(unitFactory: UnitFactoryImpl())
-let tableDataSource = FlatUnitTableViewDataSource()
-unitTableViewDelegate = tableDataSource.setup(for: tableView)
-
+let tableDataSource = TableUnitsSourceKt.default(for: tableView)
 tableDataSource.units = viewModel.items
 tableView.reloadTable()
 ```

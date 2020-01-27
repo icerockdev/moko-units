@@ -9,36 +9,34 @@ import MultiPlatformLibraryUnits
 class TestViewController: UIViewController {
     
     @IBOutlet private var tableView: UITableView!
-    private var dataSource: UITableViewDataSource!
+    private var dataSource: TableUnitsSource!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let testing = Testing(unitFactory: self)
-        
-        let dataSource = FlatUnitTableViewDataSource()
-        dataSource.setup(for: tableView)
-        
-        let units = testing.getUnits() as! [UITableViewCellUnitProtocol]
-        dataSource.units = units
-        
         tableView.tableFooterView = UIView()
-        self.dataSource = dataSource
+        dataSource = TableUnitsSourceKt.default(for: tableView)
+        dataSource.unitItems = Testing(unitFactory: self).getUnits()
     }
 }
 
+extension UITableViewCell: Reusable {
+    public static func xibName() -> String { return String(describing: self) }
+    public static func reusableIdentifier() -> String { return String(describing: self) }
+}
+
 extension TestViewController: TestingUnitFactory {
-    func createSimpleUnit(id: Int64, title: String, itemData: ItemData?) -> UnitItem {
+    func createSimpleUnit(id: Int64, title: String, itemData: ItemData?) -> TableUnitItem {
         // without R.swift
-//        return UITableViewCellUnit<SimpleCell>(
-//            data: SimpleCell.CellModel(id: id, title: title),
-//            configurator: nil
-//        )
-        // with R.swift
         return UITableViewCellUnit<SimpleCell>(
             data: SimpleCell.CellModel(id: id, title: title),
-            reusable: R.nib.simpleCell,
-            configurator: nil
-        )
+            itemId: id,
+            configurator: nil)
+        // with R.swift
+//        return UITableViewCellUnit<SimpleCell>(
+//            data: SimpleCell.CellModel(id: id, title: title),
+//            itemId: id,
+//            reusable: R.nib.simpleCell,
+//            configurator: nil
+//        )
     }
 }

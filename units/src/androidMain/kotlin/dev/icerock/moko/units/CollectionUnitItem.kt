@@ -4,4 +4,4 @@
 
 package dev.icerock.moko.units
 
-expect interface UnitItem
+actual typealias CollectionUnitItem = UnitItem

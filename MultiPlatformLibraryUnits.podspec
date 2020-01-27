@@ -24,6 +24,12 @@ Pod::Spec.new do |spec|
       sp.dependency 'R.swift'
     end
 
+    spec.subspec 'Differ' do |sp|
+      sp.source_files = "units/src/iosMain/swift/Differ/**/*.{h,m,swift}"
+      sp.dependency 'Differ'
+    end
+
+
     spec.pod_target_xcconfig = {
         'VALID_ARCHS' => '$(ARCHS_STANDARD_64_BIT)'
     }

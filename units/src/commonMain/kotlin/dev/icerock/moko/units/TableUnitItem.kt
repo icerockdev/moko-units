@@ -2,10 +2,6 @@
  * Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
-import Foundation
+package dev.icerock.moko.units
 
-public protocol Fillable {
-  associatedtype DataType
-  
-  func fill(_ data: DataType)
-}
+expect interface TableUnitItem

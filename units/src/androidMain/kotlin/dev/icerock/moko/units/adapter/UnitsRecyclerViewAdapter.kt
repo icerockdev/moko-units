@@ -5,20 +5,26 @@
 package dev.icerock.moko.units.adapter
 
 import android.view.ViewGroup
-import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import dev.icerock.moko.units.UnitItem
 
+private typealias ViewHolderFactory = (
+    parent: ViewGroup,
+    lifecycleOwner: LifecycleOwner
+) -> RecyclerView.ViewHolder
+
 class UnitsRecyclerViewAdapter(
-    private val mLifecycleOwner: LifecycleOwner? = null
-) : RecyclerView.Adapter<UnitViewHolder<ViewDataBinding>>(), Settable {
+    private val lifecycleOwner: LifecycleOwner
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), Settable {
 
     var units: List<UnitItem> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
         }
+
+    private val viewHolderFactory = mutableMapOf<Int, ViewHolderFactory>()
 
     init {
         setHasStableIds(true)
@@ -33,7 +39,11 @@ class UnitsRecyclerViewAdapter(
     }
 
     override fun getItemViewType(position: Int): Int {
-        return units[position].layoutId
+        val viewType = units[position].viewType
+        if (!viewHolderFactory.containsKey(viewType)) {
+            viewHolderFactory[viewType] = units[position]::createViewHolder
+        }
+        return viewType
     }
 
     override fun getItemId(position: Int): Long {
@@ -43,22 +53,16 @@ class UnitsRecyclerViewAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): UnitViewHolder<ViewDataBinding> {
-        val viewHolder = UnitViewHolder<ViewDataBinding>(parent, viewType)
-
-        if (mLifecycleOwner != null) {
-            viewHolder.binding.lifecycleOwner = mLifecycleOwner
+    ): RecyclerView.ViewHolder {
+        val factory = requireNotNull(viewHolderFactory[viewType]) {
+            "viewHolderFactory must be set at getItemViewType"
         }
 
-        return viewHolder
+        return factory(parent, lifecycleOwner)
     }
 
-    override fun onBindViewHolder(holder: UnitViewHolder<ViewDataBinding>, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val unit = units[position]
-
-        with(holder.binding) {
-            unit.bind(this)
-            executePendingBindings()
-        }
+        unit.bindViewHolder(holder)
     }
 }

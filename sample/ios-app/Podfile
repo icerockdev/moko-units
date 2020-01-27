@@ -11,8 +11,11 @@ platform :ios, '11.0'
 install! 'cocoapods', :disable_input_output_paths => true
 
 target 'TestProj' do
+  pod 'R.swift', '5.1.0'
   # MultiPlatformLibrary
   pod 'MultiPlatformLibrary', :path => '../mpp-library'
-  pod 'MultiPlatformLibraryUnits/Core', :git => 'https://github.com/icerockdev/moko-units.git', :tag => 'release/0.1.1'
-  pod 'MultiPlatformLibraryUnits/R.swift', :git => 'https://github.com/icerockdev/moko-units.git', :tag => 'release/0.1.1'
+  # In your projects you should use published podspecs instead of local - ":git => 'https://github.com/icerockdev/moko-units.git', :tag => 'release/0.2.0-dev-3'"
+  pod 'MultiPlatformLibraryUnits/Core', :path => '../../'
+  pod 'MultiPlatformLibraryUnits/R.swift', :path => '../../'
+  pod 'MultiPlatformLibraryUnits/Differ', :path => '../../'
 end

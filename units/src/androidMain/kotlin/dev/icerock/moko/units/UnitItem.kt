@@ -4,11 +4,14 @@
 
 package dev.icerock.moko.units
 
-import androidx.databinding.ViewDataBinding
+import android.view.ViewGroup
+import androidx.lifecycle.LifecycleOwner
+import androidx.recyclerview.widget.RecyclerView
 
-actual interface UnitItem {
+interface UnitItem {
     val itemId: Long
-    val layoutId: Int
+    val viewType: Int
 
-    fun bind(viewDataBinding: ViewDataBinding)
+    fun createViewHolder(parent: ViewGroup, lifecycleOwner: LifecycleOwner): RecyclerView.ViewHolder
+    fun bindViewHolder(viewHolder: RecyclerView.ViewHolder)
 }

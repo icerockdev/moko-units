@@ -1,11 +1,11 @@
 /*
- * Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
- */
+* Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
+*/
 
 import Foundation
 import Rswift
 
-public extension UITableViewCellUnit {
+public extension UICollectionViewCellUnit {
   public convenience init<ResourceType: Rswift.ReuseIdentifierType & Rswift.NibResourceType>(
     data: Cell.DataType,
     itemId: Int64,

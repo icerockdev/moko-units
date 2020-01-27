@@ -16,6 +16,9 @@
 		45F4791E219463C7003D25FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45F47914219463C7003D25FA /* Main.storyboard */; };
 		45F47921219463C7003D25FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45F4791A219463C7003D25FA /* Assets.xcassets */; };
 		45F47922219463C7003D25FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F4791B219463C7003D25FA /* AppDelegate.swift */; };
+		BDD7276323C71FDD00B82B78 /* SimpleCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD7276223C71FDD00B82B78 /* SimpleCollectionCell.swift */; };
+		BDD7276523C71FF100B82B78 /* SimpleCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDD7276423C71FF100B82B78 /* SimpleCollectionCell.xib */; };
+		BDD7276723C7265300B82B78 /* TestCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD7276623C7265300B82B78 /* TestCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +34,9 @@
 		45F4791B219463C7003D25FA /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45F4791C219463C7003D25FA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A644D2F1C5377C40A53FCD6A /* Pods-TestProj.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestProj.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestProj/Pods-TestProj.release.xcconfig"; sourceTree = "<group>"; };
+		BDD7276223C71FDD00B82B78 /* SimpleCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCollectionCell.swift; sourceTree = "<group>"; };
+		BDD7276423C71FF100B82B78 /* SimpleCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleCollectionCell.xib; sourceTree = "<group>"; };
+		BDD7276623C7265300B82B78 /* TestCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCollectionViewController.swift; sourceTree = "<group>"; };
 		DFBDF7D3559D080FDCA444A6 /* Pods-TestProj.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestProj.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TestProj/Pods-TestProj.debug.xcconfig"; sourceTree = "<group>"; };
 		E8D683A7C91DCD56058C7435 /* Pods_TestProj.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TestProj.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -83,6 +89,8 @@
 			children = (
 				4539A79E23508B950081362B /* SimpleCell.xib */,
 				4539A7A12350957E0081362B /* SimpleCell.swift */,
+				BDD7276223C71FDD00B82B78 /* SimpleCollectionCell.swift */,
+				BDD7276423C71FF100B82B78 /* SimpleCollectionCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -97,6 +105,7 @@
 				45F4791B219463C7003D25FA /* AppDelegate.swift */,
 				45F4791C219463C7003D25FA /* Info.plist */,
 				45D74FCB22BFDDFD00CAB0C8 /* TestViewController.swift */,
+				BDD7276623C7265300B82B78 /* TestCollectionViewController.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -186,6 +195,7 @@
 				4539A79F23508B950081362B /* SimpleCell.xib in Resources */,
 				45F4791D219463C7003D25FA /* LaunchScreen.storyboard in Resources */,
 				45F47921219463C7003D25FA /* Assets.xcassets in Resources */,
+				BDD7276523C71FF100B82B78 /* SimpleCollectionCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -260,6 +270,8 @@
 				45F47922219463C7003D25FA /* AppDelegate.swift in Sources */,
 				4539A7A22350957E0081362B /* SimpleCell.swift in Sources */,
 				4539A7B0235188090081362B /* R.generated.swift in Sources */,
+				BDD7276723C7265300B82B78 /* TestCollectionViewController.swift in Sources */,
+				BDD7276323C71FDD00B82B78 /* SimpleCollectionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,6 +332,7 @@
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
 		};
@@ -338,6 +351,7 @@
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
+				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
 		};

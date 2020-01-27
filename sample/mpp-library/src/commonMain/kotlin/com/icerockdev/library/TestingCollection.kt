@@ -4,11 +4,11 @@
 
 package com.icerockdev.library
 
-import dev.icerock.moko.units.TableUnitItem
+import dev.icerock.moko.units.CollectionUnitItem
 
-class Testing(val unitFactory: UnitFactory) {
+class TestingCollection(val unitFactory: CollectionUnitFactory) {
 
-    fun getUnits(): List<TableUnitItem> {
+    fun getUnits(): List<CollectionUnitItem> {
         return with(unitFactory) {
             listOf(
                 createSimpleUnit(id = 1, title = "hello"),
@@ -21,7 +21,7 @@ class Testing(val unitFactory: UnitFactory) {
         }
     }
 
-    interface UnitFactory {
-        fun createSimpleUnit(id: Long, title: String, itemData: ItemData? = null): TableUnitItem
+    interface CollectionUnitFactory {
+        fun createSimpleUnit(id: Long, title: String, itemData: ItemData? = null): CollectionUnitItem
     }
 }

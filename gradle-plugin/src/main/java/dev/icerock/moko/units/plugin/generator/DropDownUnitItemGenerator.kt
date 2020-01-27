@@ -28,7 +28,7 @@ class DropDownUnitItemGenerator(
         val unitClass = TypeSpec.classBuilder(className)
 
         unitClass.superclass(ClassName(parentPackage, parentName))
-        unitClass.addSuperinterface(ClassName.bestGuess("dev.icerock.moko.units.DropDownUnitItem"))
+        unitClass.addSuperinterface(ClassName.bestGuess("dev.icerock.moko.units.databinding.DataBindingDropDownUnitItem"))
         unitClass.addProperty(
             PropertySpec.builder("dropDownLayoutId", Int::class, KModifier.OVERRIDE)
                 .initializer("R.layout.$layoutName")
