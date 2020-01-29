@@ -14,5 +14,5 @@ actual interface TableUnitItem: RegistryUnit<UITableView> {
 
     override fun register(intoView: UITableView)
 
-    fun bind(cell: UITableViewCell)
+    fun bind(tableViewCell: UITableViewCell)
 }

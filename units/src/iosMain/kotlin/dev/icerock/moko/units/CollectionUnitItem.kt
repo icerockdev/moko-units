@@ -14,5 +14,5 @@ actual interface CollectionUnitItem : RegistryUnit<UICollectionView> {
 
     override fun register(intoView: UICollectionView)
 
-    fun bind(cell: UICollectionViewCell)
+    fun bind(collectionViewCell: UICollectionViewCell)
 }
