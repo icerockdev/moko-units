@@ -23,13 +23,9 @@ open class UITableViewCellUnit<Cell: Fillable & UITableViewCell>: UICellUnit<Cel
     )
   }
   
-  public func bind(cell_ cell: UITableViewCell) {
-    guard let cell = cell as? Cell else { return }
+  public func bind(tableViewCell: UITableViewCell) {
+    guard let cell = tableViewCell as? Cell else { return }
     configurator?(cell)
     cell.fill(data)
   }
 }
-
-
-
-

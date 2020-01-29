@@ -20,8 +20,8 @@ open class UICollectionViewCellUnit<Cell: Fillable & UICollectionViewCell>: UICe
       forCellWithReuseIdentifier: self.reusableIdentifier)
   }
   
-  public func bind(cell: UICollectionViewCell) {
-    guard let cell = cell as? Cell else { return }
+  public func bind(collectionViewCell: UICollectionViewCell) {
+    guard let cell = collectionViewCell as? Cell else { return }
     configurator?(cell)
     cell.fill(data)
   }
