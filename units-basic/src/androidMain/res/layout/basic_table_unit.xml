@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Copyright (C) 2011 The Android Open Source Project
+<?xml version="1.0" encoding="utf-8"?><!-- Copyright (C) 2011 The Android Open Source Project
 
      Licensed under the Apache License, Version 2.0 (the "License");
      you may not use this file except in compliance with the License.
@@ -20,15 +19,15 @@
     android:minHeight="?attr/listPreferredItemHeight"
     android:gravity="center_vertical"
     android:paddingStart="?attr/listPreferredItemPaddingStart"
-    android:paddingEnd="?attr/scrollbarSize"
+    android:paddingEnd="8dp"
     android:paddingLeft="?attr/listPreferredItemPaddingLeft"
-    android:paddingRight="?attr/scrollbarSize">
+    android:paddingRight="8dp">
 
     <ImageView
         android:id="@+id/icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center" />
 
     <RelativeLayout
         android:layout_width="0dip"
@@ -41,14 +40,16 @@
         android:layout_marginLeft="10dip"
         android:layout_marginRight="6dip">
 
-        <TextView android:id="@+id/title"
+        <TextView
+            android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:singleLine="true"
             android:ellipsize="none"
             android:textAppearance="?attr/textAppearanceListItem" />
 
-        <TextView android:id="@+id/summary"
+        <TextView
+            android:id="@+id/summary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/title"
@@ -56,7 +57,6 @@
             android:singleLine="true"
             android:ellipsize="none"
             android:textAppearance="?attr/textAppearanceListItemSecondary"
-            android:textColor="?attr/textColorSecondary"
             android:layout_alignLeft="@id/title" />
     </RelativeLayout>
 </LinearLayout>

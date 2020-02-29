@@ -7,6 +7,7 @@ package dev.icerock.moko.units.basic.table
 import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.units.TableUnitItem
+import kotlinx.cinterop.ExportObjCClass
 import platform.UIKit.UITableView
 import platform.UIKit.UITableViewCell
 import platform.UIKit.UITableViewCellStyle
@@ -33,13 +34,21 @@ actual class BasicTableUnitItem actual constructor(
 
     override fun register(intoView: UITableView) {
         intoView.registerClass(
-            cellClass = SubtitleTableViewCell().`class`(),
+            cellClass = SubtitleTableViewCell(
+                style = UITableViewCellStyle.UITableViewCellStyleSubtitle,
+                reuseIdentifier = null
+            ).`class`(),
             forCellReuseIdentifier = reusableIdentifier
         )
     }
 }
 
-private class SubtitleTableViewCell : UITableViewCell(
-    style = UITableViewCellStyle.UITableViewCellStyleSubtitle,
-    reuseIdentifier = null
-)
+@ExportObjCClass
+private class SubtitleTableViewCell @OverrideInit constructor(
+    style: UITableViewCellStyle,
+    reuseIdentifier: String?
+) :
+    UITableViewCell(
+        style = UITableViewCellStyle.UITableViewCellStyleSubtitle,
+        reuseIdentifier = reuseIdentifier
+    )

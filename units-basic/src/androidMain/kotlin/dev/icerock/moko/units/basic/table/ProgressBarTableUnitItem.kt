@@ -24,9 +24,12 @@ actual class ProgressBarTableUnitItem actual constructor(
     override fun bindViewHolder(viewHolder: RecyclerView.ViewHolder) {
         viewHolder as ViewHolder
 
-        // FIXME get default color from android theme
-        val colorInt = progressBarColor?.run { argb.toInt() } ?: 0x00FF00FF
-        DrawableCompat.setTint(viewHolder.progressBar.indeterminateDrawable, colorInt)
+        val colorInt = progressBarColor?.run { argb }
+        if (colorInt != null) {
+            DrawableCompat.setTint(viewHolder.progressBar.indeterminateDrawable, colorInt.toInt())
+        } else {
+            DrawableCompat.setTintList(viewHolder.progressBar.indeterminateDrawable, null)
+        }
     }
 
     override fun createViewHolder(parent: ViewGroup, lifecycleOwner: LifecycleOwner): RecyclerView.ViewHolder {

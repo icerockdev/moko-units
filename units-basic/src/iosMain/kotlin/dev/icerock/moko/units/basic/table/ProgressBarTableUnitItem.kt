@@ -7,14 +7,16 @@ package dev.icerock.moko.units.basic.table
 import dev.icerock.moko.graphics.Color
 import dev.icerock.moko.graphics.toUIColor
 import dev.icerock.moko.units.TableUnitItem
+import kotlinx.cinterop.ExportObjCClass
 import platform.UIKit.UIActivityIndicatorView
+import platform.UIKit.UIColor
 import platform.UIKit.UITableView
 import platform.UIKit.UITableViewCell
 import platform.UIKit.UITableViewCellStyle
 import platform.UIKit.addSubview
+import platform.UIKit.bottomAnchor
 import platform.UIKit.centerXAnchor
-import platform.UIKit.centerYAnchor
-import platform.UIKit.tintColor
+import platform.UIKit.topAnchor
 import platform.UIKit.translatesAutoresizingMaskIntoConstraints
 
 actual class ProgressBarTableUnitItem actual constructor(
@@ -26,28 +28,39 @@ actual class ProgressBarTableUnitItem actual constructor(
     override fun bind(tableViewCell: UITableViewCell) {
         tableViewCell as ProgressBarTableViewCell
 
-        tableViewCell.activityIndicatorView.color = progressBarColor?.toUIColor() ?: tableViewCell.tintColor
+        tableViewCell.activityIndicatorView.color = progressBarColor?.toUIColor() ?: tableViewCell.defaultColor
     }
 
     override fun register(intoView: UITableView) {
         intoView.registerClass(
-            cellClass = ProgressBarTableViewCell().`class`(),
+            cellClass = ProgressBarTableViewCell(
+                style = UITableViewCellStyle.UITableViewCellStyleDefault,
+                reuseIdentifier = null
+            ).`class`(),
             forCellReuseIdentifier = reusableIdentifier
         )
     }
 }
 
-private class ProgressBarTableViewCell : UITableViewCell(
-    style = UITableViewCellStyle.UITableViewCellStyleDefault,
-    reuseIdentifier = null
+@ExportObjCClass
+private class ProgressBarTableViewCell @OverrideInit constructor(
+    style: UITableViewCellStyle,
+    reuseIdentifier: String?
+) : UITableViewCell(
+    style = style,
+    reuseIdentifier = reuseIdentifier
 ) {
+    lateinit var defaultColor: UIColor
+        private set
     val activityIndicatorView: UIActivityIndicatorView by lazy {
         UIActivityIndicatorView().apply {
             translatesAutoresizingMaskIntoConstraints = false
+            startAnimating()
+            defaultColor = color
         }
     }
 
-    external override fun prepareForReuse() {
+    override fun prepareForReuse() {
         super.prepareForReuse()
 
         activityIndicatorView.startAnimating()
@@ -56,7 +69,16 @@ private class ProgressBarTableViewCell : UITableViewCell(
     init {
         contentView.addSubview(activityIndicatorView)
 
-        activityIndicatorView.centerXAnchor.constraintEqualToAnchor(contentView.centerXAnchor).active = true
-        activityIndicatorView.centerYAnchor.constraintEqualToAnchor(contentView.centerYAnchor).active = true
+        activityIndicatorView.centerXAnchor.constraintEqualToAnchor(
+            anchor = contentView.centerXAnchor
+        ).active = true
+        activityIndicatorView.topAnchor.constraintEqualToAnchor(
+            anchor = contentView.topAnchor,
+            constant = 8.0
+        ).active = true
+        contentView.bottomAnchor.constraintEqualToAnchor(
+            anchor = activityIndicatorView.bottomAnchor,
+            constant = 8.0
+        ).active = true
     }
 }
