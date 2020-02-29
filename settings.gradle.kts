@@ -30,6 +30,7 @@ val libraryPublish: Boolean = properties.containsKey("libraryPublish")
 
 include(":gradle-plugin")
 include(":units")
+include(":units-basic")
 
 if (!libraryPublish) {
     include(":sample:android-app")
