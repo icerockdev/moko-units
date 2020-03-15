@@ -8,8 +8,9 @@ import dev.icerock.moko.resources.ImageResource
 import dev.icerock.moko.resources.desc.StringDesc
 import dev.icerock.moko.units.TableUnitItem
 
-expect class BasicTableUnitItem(
+expect class SubtitleTableUnitItem(
     itemId: Long,
     title: StringDesc,
+    subtitle: StringDesc,
     image: ImageResource? = null
 ) : TableUnitItem

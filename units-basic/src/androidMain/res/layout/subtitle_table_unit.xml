@@ -40,8 +40,7 @@
         android:layout_marginBottom="6dip"
         android:layout_weight="1"
         android:layout_marginLeft="10dip"
-        android:layout_marginRight="6dip"
-        android:gravity="center_vertical">
+        android:layout_marginRight="6dip">
 
         <TextView
             android:id="@+id/title"
@@ -51,5 +50,18 @@
             android:ellipsize="none"
             android:textAppearance="?attr/textAppearanceListItem"
             tools:text="@tools:sample/full_names" />
+
+        <TextView
+            android:id="@+id/subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:layout_alignStart="@id/title"
+            android:layout_marginTop="3dip"
+            android:singleLine="true"
+            android:ellipsize="none"
+            android:textAppearance="?attr/textAppearanceListItemSecondary"
+            android:layout_alignLeft="@id/title"
+            tools:text="@tools:sample/date/ddmmyy" />
     </RelativeLayout>
 </LinearLayout>

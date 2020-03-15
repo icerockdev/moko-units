@@ -14,15 +14,17 @@ import platform.UIKit.UITableViewCellStyle
 import platform.UIKit.hidden
 import platform.UIKit.text
 
-actual class BasicTableUnitItem actual constructor(
+actual class SubtitleTableUnitItem actual constructor(
     override val itemId: Long,
     private val title: StringDesc,
+    private val subtitle: StringDesc,
     private val image: ImageResource?
 ) : TableUnitItem {
-    override val reusableIdentifier: String = "BasicTableUnitItem"
+    override val reusableIdentifier: String = "SubtitleTableUnitItem"
 
     override fun bind(tableViewCell: UITableViewCell) {
         tableViewCell.text = title.localized()
+        tableViewCell.detailTextLabel?.text = subtitle.localized()
 
         tableViewCell.imageView?.image = image?.toUIImage()
         tableViewCell.imageView?.hidden = image == null
@@ -30,22 +32,22 @@ actual class BasicTableUnitItem actual constructor(
 
     override fun register(intoView: UITableView) {
         intoView.registerClass(
-            cellClass = BasicTableViewCell().`class`(),
+            cellClass = SubtitleTableViewCell().`class`(),
             forCellReuseIdentifier = reusableIdentifier
         )
     }
 }
 
 @ExportObjCClass
-private class BasicTableViewCell @OverrideInit constructor(
+private class SubtitleTableViewCell @OverrideInit constructor(
     style: UITableViewCellStyle,
     reuseIdentifier: String?
 ) : UITableViewCell(
-    style = UITableViewCellStyle.UITableViewCellStyleDefault,
+    style = UITableViewCellStyle.UITableViewCellStyleSubtitle,
     reuseIdentifier = reuseIdentifier
 ) {
     constructor() : this(
-        style = UITableViewCellStyle.UITableViewCellStyleDefault,
+        style = UITableViewCellStyle.UITableViewCellStyleSubtitle,
         reuseIdentifier = null
     )
 }

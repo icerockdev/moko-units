@@ -25,14 +25,17 @@ enableFeaturePreview("GRADLE_METADATA")
 
 val properties = startParameter.projectProperties
 
-// ./gradlew -PlibraryPublish :units:publishToMavenLocal :gradle-plugin:publishPluginPublicationToMavenLocal
-val libraryPublish: Boolean = properties.containsKey("libraryPublish")
+val corePublish: Boolean = properties.containsKey("corePublish")
+val additionsPublish: Boolean = properties.containsKey("additionsPublish")
 
 include(":gradle-plugin")
 include(":units")
-include(":units-basic")
 
-if (!libraryPublish) {
-    include(":sample:android-app")
-    include(":sample:mpp-library")
+if (!corePublish) {
+    include(":units-basic")
+
+    if (!additionsPublish) {
+        include(":sample:android-app")
+        include(":sample:mpp-library")
+    }
 }
