@@ -34,6 +34,9 @@ dependencies {
     mppLibrary(Deps.Libs.MultiPlatform.mokoUnits)
 
     androidLibrary(Deps.Libs.Android.recyclerView)
+
+    // fix of package javax.annotation does not exist import javax.annotation.Generated in DataBinding code
+    compileOnly("javax.annotation:jsr250-api:1.0")
 }
 
 multiplatformUnits {
