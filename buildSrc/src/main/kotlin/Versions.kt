@@ -28,6 +28,8 @@ object Versions {
 
         object MultiPlatform {
             const val mokoUnits = Versions.mokoUnits
+            const val mokoGraphics = "0.3.0"
+            const val mokoResources = "0.9.0"
         }
 
         object Jvm {
