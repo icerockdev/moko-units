@@ -1,11 +1,10 @@
 /*
- * Copyright 2019 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
+ * Copyright 2020 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.multiplatform")
-    id("kotlin-kapt")
     id("dev.icerock.mobile.multiplatform")
     id("maven-publish")
 }
@@ -20,10 +19,6 @@ android {
         minSdkVersion(Versions.Android.minSdk)
         targetSdkVersion(Versions.Android.targetSdk)
     }
-
-    dataBinding {
-        isEnabled = true
-    }
 }
 
 dependencies {
@@ -32,8 +27,9 @@ dependencies {
     androidLibrary(Deps.Libs.Android.appCompat)
     androidLibrary(Deps.Libs.Android.recyclerView)
 
-    // fix of package javax.annotation does not exist import javax.annotation.Generated in DataBinding code
-    compileOnly("javax.annotation:jsr250-api:1.0")
+    mppLibrary(Deps.Libs.MultiPlatform.mokoUnits)
+    mppLibrary(Deps.Libs.MultiPlatform.mokoGraphics)
+    mppLibrary(Deps.Libs.MultiPlatform.mokoResources)
 }
 
 publishing {
