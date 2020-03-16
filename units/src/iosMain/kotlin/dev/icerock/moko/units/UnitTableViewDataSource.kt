@@ -16,7 +16,7 @@ import platform.darwin.NSObject
 typealias UITableViewReloadHandler = (UITableView, oldData: List<TableUnitItem>?, newData: List<TableUnitItem>?) -> Unit
 
 @ExportObjCClass
-class UnitTableViewDataSource private constructor(
+class UnitTableViewDataSource internal constructor(
     private val tableView: UITableView,
     private val reloadDataHandler: UITableViewReloadHandler
 ) : NSObject(), UITableViewDataSourceProtocol {
@@ -59,11 +59,9 @@ class UnitTableViewDataSource private constructor(
     override fun numberOfSectionsInTableView(tableView: UITableView): NSInteger {
         return 1
     }
-
-    companion object {
-        fun create(
-            tableView: UITableView,
-            reloadDataHandler: UITableViewReloadHandler = { _tableView, _, _ -> _tableView.reloadData() }
-        ) = UnitTableViewDataSource(tableView, reloadDataHandler)
-    }
 }
+
+fun createUnitTableViewDataSource(
+    tableView: UITableView,
+    reloadDataHandler: UITableViewReloadHandler = { _tableView, _, _ -> _tableView.reloadData() }
+) = UnitTableViewDataSource(tableView, reloadDataHandler)
