@@ -11,7 +11,7 @@ object Versions {
 
     const val kotlin = "1.3.70"
 
-    private const val mokoUnits = "0.3.0"
+    private const val mokoUnits = "0.3.1"
 
     object Plugins {
         const val android = "3.6.1"

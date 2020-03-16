@@ -14,7 +14,7 @@ fun create(
     withReloadHandler: UICollectionViewReloadHandler = { collectionView, _, _ -> collectionView.reloadData() }
 ): CollectionUnitsSource {
     return object: CollectionUnitsSource {
-        private val unitsSource = UnitCollectionViewDataSource.create(forCollectionView, withReloadHandler)
+        private val unitsSource = createUnitCollectionViewDataSource(forCollectionView, withReloadHandler)
         override var unitItems: List<CollectionUnitItem>?
             get() {
                 return unitsSource.unitItems

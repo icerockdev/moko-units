@@ -16,7 +16,7 @@ import platform.darwin.NSObject
 typealias UICollectionViewReloadHandler = (UICollectionView, oldData: List<CollectionUnitItem>?, newData: List<CollectionUnitItem>?) -> Unit
 
 @ExportObjCClass
-class UnitCollectionViewDataSource private constructor(
+class UnitCollectionViewDataSource internal constructor(
     private val collectionView: UICollectionView,
     private val reloadDataHandler: UICollectionViewReloadHandler
 ) : NSObject(), UICollectionViewDataSourceProtocol {
@@ -62,11 +62,9 @@ class UnitCollectionViewDataSource private constructor(
     override fun numberOfSectionsInCollectionView(collectionView: UICollectionView): NSInteger {
         return 1
     }
-
-    companion object {
-        fun create(
-            collectionView: UICollectionView,
-            reloadDataHandler: UICollectionViewReloadHandler = { _collectionView, _, _ -> _collectionView.reloadData() }
-        ) = UnitCollectionViewDataSource(collectionView, reloadDataHandler)
-    }
 }
+
+fun createUnitCollectionViewDataSource(
+    collectionView: UICollectionView,
+    reloadDataHandler: UICollectionViewReloadHandler = { _collectionView, _, _ -> _collectionView.reloadData() }
+) = UnitCollectionViewDataSource(collectionView, reloadDataHandler)
