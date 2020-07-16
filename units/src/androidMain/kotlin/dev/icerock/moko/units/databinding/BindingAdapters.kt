@@ -48,8 +48,9 @@ fun RecyclerView.setAdapter(adapterClassName: String) {
     val adapterClass = this.javaClass.classLoader?.loadClass(adapterClassName)
 
     if (adapterClass == UnitsRecyclerViewAdapter::class.java) {
+        val context = context
         val lifecycleOwner = if (context is ContextThemeWrapper) {
-            (context as ContextThemeWrapper).baseContext as LifecycleOwner
+            context.baseContext as LifecycleOwner
         } else {
             context as LifecycleOwner
         }
