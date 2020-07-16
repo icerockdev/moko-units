@@ -4,6 +4,7 @@
 
 package dev.icerock.moko.units.databinding
 
+import android.view.ContextThemeWrapper
 import android.widget.Adapter
 import android.widget.AdapterView
 import androidx.databinding.BindingAdapter
@@ -47,7 +48,13 @@ fun RecyclerView.setAdapter(adapterClassName: String) {
     val adapterClass = this.javaClass.classLoader?.loadClass(adapterClassName)
 
     if (adapterClass == UnitsRecyclerViewAdapter::class.java) {
-        adapter = UnitsRecyclerViewAdapter(context as LifecycleOwner)
+        val context = context
+        val lifecycleOwner = if (context is ContextThemeWrapper) {
+            context.baseContext as LifecycleOwner
+        } else {
+            context as LifecycleOwner
+        }
+        adapter = UnitsRecyclerViewAdapter(lifecycleOwner)
         return
     }
 
