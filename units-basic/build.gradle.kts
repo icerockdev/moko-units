@@ -13,10 +13,11 @@ group = "dev.icerock.moko"
 version = Deps.mokoUnitsVersion
 
 dependencies {
+    commonMainApi(project(":units"))
+
     androidMainImplementation(Deps.Libs.Android.appCompat)
     androidMainImplementation(Deps.Libs.Android.recyclerView)
 
-    commonMainApi(Deps.Libs.MultiPlatform.mokoUnits.common)
     commonMainApi(Deps.Libs.MultiPlatform.mokoGraphics.common)
     commonMainApi(Deps.Libs.MultiPlatform.mokoResources.common)
 
