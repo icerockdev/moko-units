@@ -3,37 +3,33 @@
  */
 
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.multiplatform")
-    id("kotlin-kapt")
-    id("dev.icerock.mobile.multiplatform")
-    id("maven-publish")
+    plugin(Deps.Plugins.androidLibrary)
+    plugin(Deps.Plugins.kotlinMultiplatform)
+    plugin(Deps.Plugins.kotlinKapt)
+    plugin(Deps.Plugins.mobileMultiplatform)
+    plugin(Deps.Plugins.mavenPublish)
 }
 
 group = "dev.icerock.moko"
-version = Versions.Libs.MultiPlatform.mokoUnits
+version = Deps.mokoUnitsVersion
 
-android {
-    compileSdkVersion(Versions.Android.compileSdk)
+android.buildFeatures.dataBinding = true
 
-    defaultConfig {
-        minSdkVersion(Versions.Android.minSdk)
-        targetSdkVersion(Versions.Android.targetSdk)
-    }
+kotlin {
+    sourceSets {
+        val iosArm64Main by getting
+        val iosX64Main by getting
 
-    dataBinding {
-        isEnabled = true
+        iosArm64Main.dependsOn(iosX64Main)
     }
 }
 
 dependencies {
-    mppLibrary(Deps.Libs.MultiPlatform.kotlinStdLib)
-
-    androidLibrary(Deps.Libs.Android.appCompat)
-    androidLibrary(Deps.Libs.Android.recyclerView)
+    androidMainImplementation(Deps.Libs.Android.appCompat)
+    androidMainImplementation(Deps.Libs.Android.recyclerView)
 
     // fix of package javax.annotation does not exist import javax.annotation.Generated in DataBinding code
-    compileOnly("javax.annotation:jsr250-api:1.0")
+    androidMainCompileOnly("javax.annotation:jsr250-api:1.0")
 }
 
 publishing {

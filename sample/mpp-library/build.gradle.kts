@@ -3,44 +3,31 @@
  */
 
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.multiplatform")
-    id("dev.icerock.mobile.multiplatform")
-    id("dev.icerock.mobile.multiplatform-units")
-    id("kotlin-kapt")
+    plugin(Deps.Plugins.androidLibrary)
+    plugin(Deps.Plugins.kotlinMultiplatform)
+    plugin(Deps.Plugins.mobileMultiplatform)
+    plugin(Deps.Plugins.mokoUnits)
+    plugin(Deps.Plugins.kotlinKapt)
+    plugin(Deps.Plugins.iosFramework)
 }
 
-android {
-    compileSdkVersion(Versions.Android.compileSdk)
-
-    defaultConfig {
-        minSdkVersion(Versions.Android.minSdk)
-        targetSdkVersion(Versions.Android.targetSdk)
-    }
-
-    dataBinding {
-        isEnabled = true
-    }
-}
-
-setupFramework(
-    exports = listOf(
-        Deps.Libs.MultiPlatform.mokoUnits
-    )
-)
+android.buildFeatures.dataBinding = true
 
 dependencies {
-    mppLibrary(Deps.Libs.MultiPlatform.kotlinStdLib)
-    mppLibrary(Deps.Libs.MultiPlatform.mokoUnits)
+    commonMainApi(Deps.Libs.MultiPlatform.mokoUnits.common)
 
-    androidLibrary(Deps.Libs.Android.recyclerView)
+    androidMainImplementation(Deps.Libs.Android.recyclerView)
 
     // fix of package javax.annotation does not exist import javax.annotation.Generated in DataBinding code
-    compileOnly("javax.annotation:jsr250-api:1.0")
+    androidMainCompileOnly("javax.annotation:jsr250-api:1.0")
 }
 
 multiplatformUnits {
     classesPackage = "com.icerockdev.library"
     dataBindingPackage = "com.icerockdev.library"
     layoutsSourceSet = "androidMain"
+}
+
+framework {
+    export(project(":units"))
 }

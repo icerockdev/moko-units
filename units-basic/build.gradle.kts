@@ -3,33 +3,25 @@
  */
 
 plugins {
-    id("com.android.library")
-    id("org.jetbrains.kotlin.multiplatform")
-    id("dev.icerock.mobile.multiplatform")
-    id("maven-publish")
+    plugin(Deps.Plugins.androidLibrary)
+    plugin(Deps.Plugins.kotlinMultiplatform)
+    plugin(Deps.Plugins.mobileMultiplatform)
+    plugin(Deps.Plugins.mavenPublish)
 }
 
 group = "dev.icerock.moko"
-version = Versions.Libs.MultiPlatform.mokoUnits
-
-android {
-    compileSdkVersion(Versions.Android.compileSdk)
-
-    defaultConfig {
-        minSdkVersion(Versions.Android.minSdk)
-        targetSdkVersion(Versions.Android.targetSdk)
-    }
-}
+version = Deps.mokoUnitsVersion
 
 dependencies {
-    mppLibrary(Deps.Libs.MultiPlatform.kotlinStdLib)
+    androidMainImplementation(Deps.Libs.Android.appCompat)
+    androidMainImplementation(Deps.Libs.Android.recyclerView)
 
-    androidLibrary(Deps.Libs.Android.appCompat)
-    androidLibrary(Deps.Libs.Android.recyclerView)
+    commonMainApi(Deps.Libs.MultiPlatform.mokoUnits.common)
+    commonMainApi(Deps.Libs.MultiPlatform.mokoGraphics.common)
+    commonMainApi(Deps.Libs.MultiPlatform.mokoResources.common)
 
-    mppLibrary(Deps.Libs.MultiPlatform.mokoUnits)
-    mppLibrary(Deps.Libs.MultiPlatform.mokoGraphics)
-    mppLibrary(Deps.Libs.MultiPlatform.mokoResources)
+    // temporary fix of https://youtrack.jetbrains.com/issue/KT-41083
+    commonMainImplementation("dev.icerock.moko:parcelize:0.4.0")
 }
 
 publishing {

@@ -3,24 +3,22 @@
  */
 
 plugins {
-    `kotlin-dsl`
-    `maven-publish`
+    plugin(Deps.Plugins.javaGradle)
+    plugin(Deps.Plugins.kotlinJvm)
+    plugin(Deps.Plugins.mavenPublish)
 }
 
 repositories {
-    mavenLocal()
-
     jcenter()
     google()
 }
 
-dependencies {
-    implementation(Deps.Libs.Jvm.kotlinPoet)
-    compileOnly(Deps.Plugins.android)
-}
+group = "dev.icerock.moko"
+version = Deps.mokoUnitsVersion
 
-kotlinDslPluginOptions {
-    experimentalWarning.set(false)
+dependencies {
+    compileOnly(Deps.Libs.Jvm.androidGradlePlugin)
+    implementation(Deps.Libs.Jvm.kotlinPoet)
 }
 
 publishing {
@@ -32,14 +30,10 @@ publishing {
             password = System.getProperty("BINTRAY_KEY")
         }
     }
+}
 
-    publications {
-        register("plugin", MavenPublication::class) {
-            groupId = "dev.icerock.moko"
-            artifactId = "units-generator"
-            version = Versions.Libs.MultiPlatform.mokoUnits
-
-            from(components["java"])
-        }
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile>().configureEach {
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }
