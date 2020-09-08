@@ -1,5 +1,5 @@
 ![moko-units](img/logo.png)  
-[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/icerockdev/moko/moko-units/images/download.svg) ](https://bintray.com/icerockdev/moko/moko-units/_latestVersion) ![kotlin-version](https://img.shields.io/badge/kotlin-1.3.70-orange)
+[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/icerockdev/moko/moko-units/images/download.svg) ](https://bintray.com/icerockdev/moko/moko-units/_latestVersion) ![kotlin-version](https://img.shields.io/badge/kotlin-1.4.0-orange)
 
 # Mobile Kotlin units
 This is a Kotlin MultiPlatform library that provides RecyclerView/UITableView/UICollectionView filling from common code.
@@ -11,13 +11,13 @@ This is a Kotlin MultiPlatform library that provides RecyclerView/UITableView/UI
 - [Installation](#installation)
 - [Usage](#usage)
 - [Samples](#samples)
-- [Set Up Locally](#setup-locally)
+- [Set Up Locally](#set-up-locally)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## Features
-- **** .
-TODO
+- **Control UI lists from common code** - content for `RecyclerView`/`UITableView`/`UICollectionView`
+ creating from common kotlin code.
 
 ## Requirements
 - Gradle version 5.6.4+
@@ -35,6 +35,8 @@ TODO
 - kotlin 1.3.70
   - 0.3.0
   - 0.3.1
+- kotlin 1.4.0
+  - 0.4.0
 
 ## Installation
 root build.gradle  
@@ -45,7 +47,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "dev.icerock.moko:units-generator:0.3.1"
+        classpath "dev.icerock.moko:units-generator:0.4.0"
     }
 }
 
@@ -62,7 +64,7 @@ project build.gradle
 apply plugin: "dev.icerock.mobile.multiplatform-units"
 
 dependencies {
-    commonMainApi("dev.icerock.moko:units:0.3.1")
+    commonMainApi("dev.icerock.moko:units:0.4.0")
 }
 
 multiplatformUnits {
@@ -74,7 +76,7 @@ multiplatformUnits {
 
 On iOS, in addition to the Kotlin library add Pod in the Podfile.
 ```ruby
-pod 'MultiPlatformLibraryUnits', :git => 'https://github.com/icerockdev/moko-units.git', :tag => 'release/0.3.1'
+pod 'MultiPlatformLibraryUnits', :git => 'https://github.com/icerockdev/moko-units.git', :tag => 'release/0.4.0'
 ```
 **`MultiPlatformLibraryUnits` CocoaPod requires that the framework compiled from Kotlin be named 
 `MultiPlatformLibrary` and be connected as a CocoaPod `MultiPlatformLibrary`. 
@@ -165,8 +167,7 @@ Please see more examples in the [sample directory](sample).
 ## Set Up Locally 
 - The [units directory](units) contains the `units` library;
 - The [gradle-plugin directory](gradle-plugin) contains a gradle plugin with a `MR` class generator;
-- The [sample directory](sample) contains sample apps for Android and iOS; plus the mpp-library connected to the apps;
-- For local testing use the `./publishToMavenLocal.sh` script - so that sample apps use the locally published version.
+- The [sample directory](sample) contains sample apps for Android and iOS; plus the mpp-library connected to the apps.
 
 ## Contributing
 All development (both new features and bug fixes) is performed in the `develop` branch. This way `master` always contains the sources of the most recently released version. Please send PRs with bug fixes to the `develop` branch. Documentation fixes in the markdown files are an exception to this rule. They are updated directly in `master`.

@@ -4,9 +4,8 @@
 
 package dev.icerock.moko.units.plugin
 
-import com.android.build.gradle.AppExtension
 import com.android.build.gradle.BaseExtension
-import com.android.build.gradle.LibraryExtension
+import com.android.build.gradle.BasePlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
@@ -21,18 +20,22 @@ class UnitsGeneratorPlugin : Plugin<Project> {
         )
         generateTask.configuration = config
 
-        project.afterEvaluate {
-            val generatedDir = generateTask.generationPath
-            generatedDir.mkdirs()
+        val generatedDir = generateTask.generationPath
+        generatedDir.mkdirs()
 
-            val exts = project.extensions
-            val buildProperties: BaseExtension = exts.findByType(AppExtension::class.java)
-                ?: exts.findByType(LibraryExtension::class.java)
-                ?: return@afterEvaluate
+        project.plugins
+            .matching { it is BasePlugin }
+            .configureEach {
+                val baseExtension = project.extensions
+                    .getByName("android") as BaseExtension
 
-            buildProperties.sourceSets.getByName("main").java.srcDirs(generatedDir)
+                baseExtension.sourceSets
+                    .matching { it.name == "main" }
+                    .configureEach {
+                        it.java.srcDirs(generatedDir)
+                    }
 
-            tasks.getByName("preBuild").dependsOn(generateTask)
-        }
+                project.tasks.getByName("preBuild").dependsOn(generateTask)
+            }
     }
 }
