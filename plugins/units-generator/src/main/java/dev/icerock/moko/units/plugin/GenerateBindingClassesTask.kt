@@ -7,6 +7,7 @@ package dev.icerock.moko.units.plugin
 import dev.icerock.moko.units.plugin.generator.DropDownUnitItemGenerator
 import dev.icerock.moko.units.plugin.generator.UnitItemGenerator
 import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.TaskAction
 import org.w3c.dom.Element
 import org.xml.sax.SAXException
@@ -18,7 +19,9 @@ import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.parsers.ParserConfigurationException
 
 open class GenerateBindingClassesTask : DefaultTask() {
+    @get:Internal
     lateinit var configuration: Configuration
+    @get:Internal
     val generationPath by lazy { File(project.buildDir, "generated/moko/units/src/") }
 
     internal enum class BindingClassType {
@@ -26,8 +29,8 @@ open class GenerateBindingClassesTask : DefaultTask() {
         DROPDOWN
     }
 
-    override fun getGroup(): String {
-        return "moko"
+    init {
+        group = "moko-units"
     }
 
     @TaskAction
