@@ -3,7 +3,8 @@ name: KMP library compilation check
 on:
   pull_request:
     branches:
-    - master
+      - develop
+      - master
 
 jobs:
   build:
@@ -16,8 +17,6 @@ jobs:
         with:
           java-version: 1.8
       - name: Check plugin
-        run: ./gradlew -PcorePublish :gradle-plugin:publishPluginPublicationToMavenLocal
-      - name: Check core
-        run: ./gradlew -PcorePublish :units:publishToMavenLocal
-      - name: Check basic units
-        run: ./gradlew -PadditionsPublish :units-basic:publishToMavenLocal
+        run: ./gradlew -p plugins build publishToMavenLocal
+      - name: Check runtime
+        run: ./gradlew build publishToMavenLocal
