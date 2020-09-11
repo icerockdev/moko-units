@@ -4,6 +4,8 @@
 
 package dev.icerock.moko.units.databinding
 
+import android.content.Context
+import android.content.ContextWrapper
 import android.view.ContextThemeWrapper
 import android.widget.Adapter
 import android.widget.AdapterView
@@ -48,12 +50,7 @@ fun RecyclerView.setAdapter(adapterClassName: String) {
     val adapterClass = this.javaClass.classLoader?.loadClass(adapterClassName)
 
     if (adapterClass == UnitsRecyclerViewAdapter::class.java) {
-        val context = context
-        val lifecycleOwner = if (context is ContextThemeWrapper) {
-            context.baseContext as LifecycleOwner
-        } else {
-            context as LifecycleOwner
-        }
+        val lifecycleOwner = getLifecycleOwnerFromContext(context)
         adapter = UnitsRecyclerViewAdapter(lifecycleOwner)
         return
     }
@@ -91,4 +88,10 @@ private fun Any.setList(list: List<UnitItem>) {
     } else {
         throw IllegalArgumentException("can't set list on $this (not implemented Settable interface)")
     }
+}
+
+private fun getLifecycleOwnerFromContext(context: Context): LifecycleOwner {
+    if(context is LifecycleOwner) return context
+    if(context is ContextWrapper) return getLifecycleOwnerFromContext(context.baseContext)
+    throw IllegalArgumentException("context $context not implement LifecycleOwner")
 }
