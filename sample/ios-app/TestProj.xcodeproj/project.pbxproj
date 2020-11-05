@@ -327,12 +327,13 @@
 				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = src/Info.plist;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.icerock.moko.sample.units;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = mokoSampleUnits;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -351,7 +352,7 @@
 				SDKROOT = iphoneos;
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_SWIFT3_OBJC_INFERENCE = On;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

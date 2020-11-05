@@ -11,7 +11,7 @@ Pod::Spec.new do |spec|
     spec.dependency 'MultiPlatformLibrary'
 
     spec.ios.deployment_target  = '9.0'
-    spec.swift_version = '4.2'
+    spec.swift_version = '5'
 
     spec.default_subspec = 'Core'
 
