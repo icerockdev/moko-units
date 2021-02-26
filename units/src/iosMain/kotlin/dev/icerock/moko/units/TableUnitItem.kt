@@ -10,7 +10,7 @@ import platform.UIKit.UITableViewCell
 actual interface TableUnitItem: RegistryUnit<UITableView> {
     val itemId: Long
 
-    val reusableIdentifier: String
+    override val reusableIdentifier: String
 
     override fun register(intoView: UITableView)
 

@@ -10,7 +10,7 @@ import platform.UIKit.UICollectionViewCell
 actual interface CollectionUnitItem : RegistryUnit<UICollectionView> {
     val itemId: Long
 
-    val reusableIdentifier: String
+    override val reusableIdentifier: String
 
     override fun register(intoView: UICollectionView)
 
