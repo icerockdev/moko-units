@@ -5,12 +5,13 @@
 package dev.icerock.moko.units
 
 class UnitsRegistry<V, U : RegistryUnit<V>>(private val view: V) {
-    private val registeredUnits = mutableSetOf<U>()
+    private val registeredIdentifiers = mutableSetOf<String>()
 
     fun registerIfNeeded(unitItem: U) {
-        if (registeredUnits.contains(unitItem)) return
+        val identifier = unitItem.reusableIdentifier
+        if (registeredIdentifiers.contains(identifier)) return
 
-        registeredUnits.add(unitItem)
+        registeredIdentifiers.add(identifier)
         unitItem.register(view)
     }
 

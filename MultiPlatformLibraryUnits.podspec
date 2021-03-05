@@ -21,12 +21,12 @@ Pod::Spec.new do |spec|
 
     spec.subspec 'R.swift' do |sp|
       sp.source_files = "units/src/iosMain/swift/R.swift/**/*.{h,m,swift}"
-      sp.dependency 'R.swift'
+      sp.dependency 'R.swift', '5.1.0'
     end
 
     spec.subspec 'Differ' do |sp|
       sp.source_files = "units/src/iosMain/swift/Differ/**/*.{h,m,swift}"
-      sp.dependency 'Differ'
+      sp.dependency 'Differ', '1.4.4'
     end
 
 

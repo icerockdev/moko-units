@@ -6,4 +6,6 @@ package dev.icerock.moko.units
 
 interface RegistryUnit<T> {
     fun register(intoView: T)
+
+    val reusableIdentifier: String
 }
