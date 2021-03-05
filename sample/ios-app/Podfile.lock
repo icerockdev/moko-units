@@ -34,7 +34,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Differ: 5cd747e2f29c11ea9605eba7cb369df17e2b1ee2
   MultiPlatformLibrary: 176fb8ade516666cd47e93de1b71ba0441a541bb
-  MultiPlatformLibraryUnits: 7539c9ad63fee772984f8e2e4b65f99da1299664
+  MultiPlatformLibraryUnits: 67c660e09f91f73d4b0493ef29a8abdc9f312673
   R.swift: 8cbc4fc69b740305b6a17c8a8ed968eb788962d9
   R.swift.Library: fa85ce1e0d0b7e818cd9e080df910ba54d2776cc
 
