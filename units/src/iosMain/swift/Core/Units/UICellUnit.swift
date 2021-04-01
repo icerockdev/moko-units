@@ -21,7 +21,7 @@ open class UICellUnit<Cell: Fillable> {
        reuseId: String,
        nibName: String,
        bundle: Bundle = Bundle.main,
-       configurator: ConfiguratorType?) {
+       configurator: ConfiguratorType? = nil) {
     self.data = data
     self.itemId = itemId
     self.reuseId = reuseId
@@ -38,7 +38,7 @@ open class UICellUnit<Cell: Fillable> {
 public extension UICellUnit where Cell: Reusable {
   convenience init(data: Cell.DataType,
   itemId: Int64,
-  configurator: ConfiguratorType?) {
+  configurator: ConfiguratorType? = nil) {
     self.init(data: data,
               itemId: itemId,
               reuseId: Cell.reusableIdentifier(),
