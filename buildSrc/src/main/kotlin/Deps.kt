@@ -3,7 +3,7 @@
  */
 
 object Deps {
-    private const val kotlinVersion = "1.4.10"
+    private const val kotlinVersion = "1.4.31"
     private const val androidGradleVersion = "4.0.1"
 
     private const val androidAppCompatVersion = "1.1.0"
@@ -13,8 +13,8 @@ object Deps {
     private const val kotlinPoetVersion = "1.3.0"
 
     private const val coroutinesVersion = "1.3.9"
-    private const val mokoGraphicsVersion = "0.4.0"
-    private const val mokoResourcesVersion = "0.13.0"
+    private const val mokoGraphicsVersion = "0.6.1"
+    private const val mokoResourcesVersion = "0.15.1"
     const val mokoUnitsVersion = "0.4.2"
 
     object Android {
@@ -40,6 +40,8 @@ object Deps {
             id = "dev.icerock.mobile.multiplatform-units",
             module = "dev.icerock.moko:units-generator:$mokoUnitsVersion"
         )
+
+        val signing = GradlePlugin(id = "signing")
     }
 
     object Libs {
