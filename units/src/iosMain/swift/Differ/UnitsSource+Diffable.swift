@@ -7,12 +7,17 @@ import MultiPlatformLibrary
 import UIKit
 
 extension TableUnitsSourceKt {
-  public static func diffable(for tableView: UITableView) -> TableUnitsSource {
+  public static func diffable(
+    for tableView: UITableView,
+    deletionAnimation: DiffRowAnimation = .automatic,
+    insertionAnimation: DiffRowAnimation = .automatic) -> TableUnitsSource {
     return TableUnitsSourceKt.create(forTableView: tableView) { (view, old, new) in
       view.animateRowChanges(
         oldData: old ?? [],
         newData: new ?? [],
-        isEqual: { $0.itemId == $1.itemId })
+        isEqual: { $0.itemId == $1.itemId },
+        deletionAnimation: deletionAnimation,
+        insertionAnimation: insertionAnimation)
     }
   }
 }
