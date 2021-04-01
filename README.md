@@ -1,5 +1,5 @@
 ![moko-units](img/logo.png)  
-[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://api.bintray.com/packages/icerockdev/moko/moko-units/images/download.svg) ](https://bintray.com/icerockdev/moko/moko-units/_latestVersion) ![kotlin-version](https://img.shields.io/badge/kotlin-1.4.10-orange)
+[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://img.shields.io/maven-central/v/dev.icerock.moko/units) ](https://repo1.maven.org/maven2/dev/icerock/moko/moko-units) ![kotlin-version](https://img.shields.io/badge/kotlin-1.4.31-orange)
 
 # Mobile Kotlin units
 This is a Kotlin MultiPlatform library that provides RecyclerView/UITableView/UICollectionView filling from common code.
@@ -25,6 +25,7 @@ This is a Kotlin MultiPlatform library that provides RecyclerView/UITableView/UI
 - iOS version 9.0+
 
 ## Versions
+### Bintray
 - kotlin 1.3.50
   - 0.1.0
   - 0.1.1
@@ -39,24 +40,27 @@ This is a Kotlin MultiPlatform library that provides RecyclerView/UITableView/UI
   - 0.4.0
 - kotlin 1.4.10
   - 0.4.1
+### mavenCentral
+- kotlin 1.4.31
+  - 0.4.2
 
 ## Installation
 root build.gradle  
 ```groovy
 buildscript {
     repositories {
-        maven { url = "https://dl.bintray.com/icerockdev/plugins" }
+        mavenCentral()
     }
 
     dependencies {
-        classpath "dev.icerock.moko:units-generator:0.4.1"
+        classpath "dev.icerock.moko:units-generator:0.4.2"
     }
 }
 
 
 allprojects {
     repositories {
-        maven { url = "https://dl.bintray.com/icerockdev/moko" }
+       mavenCentral()
     }
 }
 ```
@@ -66,7 +70,7 @@ project build.gradle
 apply plugin: "dev.icerock.mobile.multiplatform-units"
 
 dependencies {
-    commonMainApi("dev.icerock.moko:units:0.4.1")
+    commonMainApi("dev.icerock.moko:units:0.4.2")
 }
 
 multiplatformUnits {
