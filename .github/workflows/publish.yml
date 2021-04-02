@@ -26,7 +26,7 @@ jobs:
         with:
           java-version: 1.8
       - name: Publish plugin
-        run: ./gradlew -p plugins publishMavenJavaPublicationToOSSRHRepository
+        run: ./gradlew -p plugins publishMavenJavaPublicationToOSSRHRepository --stacktrace
       - name: Publish runtime
         run: ./gradlew publish
   release:
