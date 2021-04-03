@@ -7,7 +7,7 @@ on:
       - master
 
 jobs:
-  build common & android:
+  build:
     runs-on: macOS-latest
 
     steps:
