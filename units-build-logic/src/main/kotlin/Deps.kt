@@ -12,7 +12,7 @@ object Deps {
 
     private const val kotlinPoetVersion = "1.3.0"
 
-    private const val coroutinesVersion = "1.3.9"
+    private const val coroutinesVersion = "1.4.2"
     private const val mokoGraphicsVersion = "0.6.1"
     private const val mokoResourcesVersion = "0.15.1"
     const val mokoUnitsVersion = "0.4.2"

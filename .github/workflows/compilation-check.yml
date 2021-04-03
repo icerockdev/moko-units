@@ -7,7 +7,7 @@ on:
       - master
 
 jobs:
-  build:
+  build common & android:
     runs-on: macOS-latest
 
     steps:
@@ -17,6 +17,12 @@ jobs:
         with:
           java-version: 1.8
       - name: Check plugin
-        run: ./gradlew -p plugins build publishToMavenLocal
+        run: ./gradlew -p units-generator build publishToMavenLocal
       - name: Check runtime
-        run: ./gradlew build publishToMavenLocal
+        run: ./gradlew build publishToMavenLocal syncMultiPlatformLibraryDebugFrameworkIosX64
+      - name: Go to ios dir
+        run: cd sample/ios-app
+      - name: Install pods
+        run: pod install
+      - name: build ios sample
+        run: xcodebuild -scheme TestProj -workspace TestProj.xcworkspace -configuration Debug build CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO

@@ -7,43 +7,15 @@ buildscript {
         mavenCentral()
         google()
 
-        gradlePluginPortal()
-    }
-    dependencies {
-        plugin(Deps.Plugins.mokoUnits)
-    }
-}
-
-allprojects {
-    repositories {
-        mavenCentral()
-        google()
-
         jcenter {
             content {
                 includeGroup("org.jetbrains.trove4j")
-                includeModule("org.jetbrains.kotlinx", "kotlinx-html-jvm")
             }
         }
     }
-
-    plugins.withId(Deps.Plugins.androidLibrary.id) {
-        configure<com.android.build.gradle.LibraryExtension> {
-            compileSdkVersion(Deps.Android.compileSdk)
-
-            defaultConfig {
-                minSdkVersion(Deps.Android.minSdk)
-                targetSdkVersion(Deps.Android.targetSdk)
-            }
-        }
-    }
-
-    tasks.matching {
-        it.name == "publishToMavenLocal"
-    }.configureEach {
-        val pluginPublish = gradle.includedBuild("plugins")
-            .task(":units-generator:publishToMavenLocal")
-        dependsOn(pluginPublish)
+    dependencies {
+        classpath("dev.icerock.moko:units-generator")
+        classpath("gradle:units-build-logic:1")
     }
 }
 

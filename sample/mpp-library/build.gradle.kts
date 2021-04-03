@@ -3,12 +3,10 @@
  */
 
 plugins {
-    plugin(Deps.Plugins.androidLibrary)
-    plugin(Deps.Plugins.kotlinMultiplatform)
-    plugin(Deps.Plugins.mobileMultiplatform)
-    plugin(Deps.Plugins.mokoUnits)
-    plugin(Deps.Plugins.kotlinKapt)
-    plugin(Deps.Plugins.iosFramework)
+    id("mpp-library-convention")
+    id("kotlin-kapt")
+    id("dev.icerock.mobile.multiplatform-units")
+    id("dev.icerock.mobile.multiplatform.ios-framework")
 }
 
 android.buildFeatures.dataBinding = true
