@@ -4,6 +4,7 @@
 
 plugins {
     id("mpp-library-convention")
+    id("stub-javadoc-convention")
     id("publication-convention")
 }
 

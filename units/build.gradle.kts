@@ -5,6 +5,7 @@
 plugins {
     id("mpp-library-convention")
     id("kotlin-kapt")
+    id("stub-javadoc-convention")
     id("publication-convention")
 }
 

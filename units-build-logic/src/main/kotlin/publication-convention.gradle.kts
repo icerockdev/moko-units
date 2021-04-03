@@ -12,10 +12,6 @@ plugins {
 group = "dev.icerock.moko"
 version = Deps.mokoUnitsVersion
 
-val javadocJar by tasks.registering(Jar::class) {
-    archiveClassifier.set("javadoc")
-}
-
 publishing {
     repositories.maven("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
         name = "OSSRH"
@@ -27,9 +23,6 @@ publishing {
     }
 
     publications.withType<MavenPublication> {
-        // Stub javadoc.jar artifact
-        artifact(javadocJar.get())
-
         // Provide artifacts information requited by Maven Central
         pom {
             name.set("MOKO units")
