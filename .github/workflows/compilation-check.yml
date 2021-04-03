@@ -18,6 +18,8 @@ jobs:
           java-version: 1.8
       - name: Check plugin
         run: ./gradlew -p units-generator build publishToMavenLocal
+      - name: Build K/N cache
+        run: ./gradlew :units:runCommonizer
       - name: Check runtime
         run: ./gradlew build publishToMavenLocal syncMultiPlatformLibraryDebugFrameworkIosX64
       - name: Go to ios dir
