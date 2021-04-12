@@ -18,6 +18,9 @@ dependencies {
 
     // fix of package javax.annotation does not exist import javax.annotation.Generated in DataBinding code
     androidMainCompileOnly("javax.annotation:jsr250-api:1.0")
+
+    commonTestImplementation(Deps.Libs.Tests.mokoTest)
+    commonTestImplementation(project(":units-test"))
 }
 
 multiplatformUnits {

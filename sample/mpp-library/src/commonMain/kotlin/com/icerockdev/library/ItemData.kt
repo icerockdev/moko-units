@@ -4,6 +4,6 @@
 
 package com.icerockdev.library
 
-class ItemData(
+data class ItemData(
     val data: String
 )
