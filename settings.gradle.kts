@@ -30,5 +30,6 @@ includeBuild("units-generator")
 
 include(":units")
 include(":units-basic")
+include(":units-test")
 include(":sample:android-app")
 include(":sample:mpp-library")
