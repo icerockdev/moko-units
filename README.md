@@ -43,6 +43,7 @@ This is a Kotlin MultiPlatform library that provides RecyclerView/UITableView/UI
 ### mavenCentral
 - kotlin 1.4.31
   - 0.4.2
+  - 0.5.0
 
 ## Installation
 root build.gradle  
@@ -53,7 +54,7 @@ buildscript {
     }
 
     dependencies {
-        classpath "dev.icerock.moko:units-generator:0.4.2"
+        classpath("dev.icerock.moko:units-generator:0.5.0")
     }
 }
 
@@ -70,7 +71,10 @@ project build.gradle
 apply plugin: "dev.icerock.mobile.multiplatform-units"
 
 dependencies {
-    commonMainApi("dev.icerock.moko:units:0.4.2")
+    commonMainApi("dev.icerock.moko:units:0.5.0")
+    commonMainImplementation("dev.icerock.moko:units-basic:0.5.0")
+
+    commonTestImplementation("dev.icerock.moko:units-test:0.5.0")
 }
 
 multiplatformUnits {
@@ -82,7 +86,7 @@ multiplatformUnits {
 
 On iOS, in addition to the Kotlin library add Pod in the Podfile.
 ```ruby
-pod 'MultiPlatformLibraryUnits', :git => 'https://github.com/icerockdev/moko-units.git', :tag => 'release/0.4.0'
+pod 'MultiPlatformLibraryUnits', :git => 'https://github.com/icerockdev/moko-units.git', :tag => 'release/0.5.0'
 ```
 **`MultiPlatformLibraryUnits` CocoaPod requires that the framework compiled from Kotlin be named 
 `MultiPlatformLibrary` and be connected as a CocoaPod `MultiPlatformLibrary`. 
