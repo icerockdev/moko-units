@@ -22,7 +22,7 @@ kotlin {
 
 dependencies {
     androidMainImplementation(Deps.Libs.Android.appCompat)
-    androidMainImplementation(Deps.Libs.Android.recyclerView)
+    androidMainApi(Deps.Libs.Android.recyclerView)
 
     // fix of package javax.annotation does not exist import javax.annotation.Generated in DataBinding code
     androidMainCompileOnly("javax.annotation:jsr250-api:1.0")

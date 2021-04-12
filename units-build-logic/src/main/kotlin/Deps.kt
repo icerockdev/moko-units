@@ -15,6 +15,7 @@ object Deps {
     private const val coroutinesVersion = "1.4.2"
     private const val mokoGraphicsVersion = "0.6.1"
     private const val mokoResourcesVersion = "0.15.1"
+    private const val mokoTestVersion = "0.2.1"
     const val mokoUnitsVersion = "0.4.2"
 
     object Android {
@@ -80,6 +81,8 @@ object Deps {
                 "org.jetbrains.kotlin:kotlin-test-junit:$kotlinVersion"
             const val androidCoreTesting =
                 "androidx.arch.core:core-testing:$androidCoreTestingVersion"
+            const val mokoTest =
+                "dev.icerock.moko:test:$mokoTestVersion"
         }
 
         object Jvm {

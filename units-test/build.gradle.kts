@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
+ * Copyright 2021 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
  */
 
 plugins {
@@ -12,7 +12,5 @@ dependencies {
     commonMainApi(project(":units"))
 
     androidMainImplementation(Deps.Libs.Android.appCompat)
-
-    commonMainApi(Deps.Libs.MultiPlatform.mokoGraphics.common)
-    commonMainApi(Deps.Libs.MultiPlatform.mokoResources.common)
+    androidMainImplementation(Deps.Libs.Android.recyclerView)
 }
