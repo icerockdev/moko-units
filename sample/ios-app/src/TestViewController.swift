@@ -39,4 +39,24 @@ extension TestViewController: TestingUnitFactory {
 //            configurator: nil
 //        )
     }
+    
+    func createComplexUnit(id: Int64, title: String, itemData: ItemData?) -> TableUnitItem {
+        return UITableViewCellUnit<ComplexCell>(
+            data: ComplexCell.CellModel(id: id, title: title),
+            itemId: id,
+            configurator: nil)
+    }
+    
+    func createRedDividerUnit(id: Int64) -> TableUnitItem {
+        return UITableViewCellUnit<RedDividerCell>(
+            data: Void(),
+            itemId: id,
+            configurator: nil)
+    }
+    func createBlueDividerUnit(id: Int64) -> TableUnitItem {
+        return UITableViewCellUnit<BlueDividerCell>(
+            data: Void(),
+            itemId: id,
+            configurator: nil)
+    }
 }

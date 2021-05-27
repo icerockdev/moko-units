@@ -16,6 +16,18 @@ class TableFactory : Testing.UnitFactory {
             itemData = itemData
         )
     }
+
+    override fun createBlueDividerUnit(id: Long): TableUnitItem {
+        TODO("Not yet implemented")
+    }
+
+    override fun createComplexUnit(id: Long, title: String, itemData: ItemData?): TableUnitItem {
+        TODO("Not yet implemented")
+    }
+
+    override fun createRedDividerUnit(id: Long): TableUnitItem {
+        TODO("Not yet implemented")
+    }
 }
 
 
