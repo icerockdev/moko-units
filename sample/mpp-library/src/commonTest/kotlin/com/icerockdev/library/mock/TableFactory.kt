@@ -18,15 +18,27 @@ class TableFactory : Testing.UnitFactory {
     }
 
     override fun createBlueDividerUnit(id: Long): TableUnitItem {
-        TODO("Not yet implemented")
+        return SimpleTableUnitMock(
+            id = id,
+            title = "",
+            itemData = null
+        )
     }
 
     override fun createComplexUnit(id: Long, title: String, itemData: ItemData?): TableUnitItem {
-        TODO("Not yet implemented")
+        return SimpleTableUnitMock(
+            id = id,
+            title = title,
+            itemData = itemData
+        )
     }
 
     override fun createRedDividerUnit(id: Long): TableUnitItem {
-        TODO("Not yet implemented")
+        return SimpleTableUnitMock(
+            id = id,
+            title = "",
+            itemData = null
+        )
     }
 }
 
