@@ -16,6 +16,7 @@
 		45F4791E219463C7003D25FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45F47914219463C7003D25FA /* Main.storyboard */; };
 		45F47921219463C7003D25FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45F4791A219463C7003D25FA /* Assets.xcassets */; };
 		45F47922219463C7003D25FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F4791B219463C7003D25FA /* AppDelegate.swift */; };
+		49D74F18265F534200EF9545 /* DiffableTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49D74F17265F534200EF9545 /* DiffableTestViewController.swift */; };
 		BDD7276323C71FDD00B82B78 /* SimpleCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD7276223C71FDD00B82B78 /* SimpleCollectionCell.swift */; };
 		BDD7276523C71FF100B82B78 /* SimpleCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BDD7276423C71FF100B82B78 /* SimpleCollectionCell.xib */; };
 		BDD7276723C7265300B82B78 /* TestCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDD7276623C7265300B82B78 /* TestCollectionViewController.swift */; };
@@ -33,6 +34,7 @@
 		45F4791A219463C7003D25FA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		45F4791B219463C7003D25FA /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		45F4791C219463C7003D25FA /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49D74F17265F534200EF9545 /* DiffableTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiffableTestViewController.swift; sourceTree = "<group>"; };
 		A644D2F1C5377C40A53FCD6A /* Pods-TestProj.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TestProj.release.xcconfig"; path = "Pods/Target Support Files/Pods-TestProj/Pods-TestProj.release.xcconfig"; sourceTree = "<group>"; };
 		BDD7276223C71FDD00B82B78 /* SimpleCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCollectionCell.swift; sourceTree = "<group>"; };
 		BDD7276423C71FF100B82B78 /* SimpleCollectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SimpleCollectionCell.xib; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				45F4791C219463C7003D25FA /* Info.plist */,
 				45D74FCB22BFDDFD00CAB0C8 /* TestViewController.swift */,
 				BDD7276623C7265300B82B78 /* TestCollectionViewController.swift */,
+				49D74F17265F534200EF9545 /* DiffableTestViewController.swift */,
 			);
 			path = src;
 			sourceTree = "<group>";
@@ -270,6 +273,7 @@
 				45F47922219463C7003D25FA /* AppDelegate.swift in Sources */,
 				4539A7A22350957E0081362B /* SimpleCell.swift in Sources */,
 				4539A7B0235188090081362B /* R.generated.swift in Sources */,
+				49D74F18265F534200EF9545 /* DiffableTestViewController.swift in Sources */,
 				BDD7276723C7265300B82B78 /* TestCollectionViewController.swift in Sources */,
 				BDD7276323C71FDD00B82B78 /* SimpleCollectionCell.swift in Sources */,
 			);

@@ -16,7 +16,21 @@ class Testing(val unitFactory: UnitFactory) {
                 createSimpleUnit(id = 3, title = "and"),
                 createSimpleUnit(id = 4, title = "work"),
                 createSimpleUnit(id = 5, title = "!"),
-                createSimpleUnit(id = 6, title = "data", itemData = ItemData("there data"))
+                createSimpleUnit(id = 6, title = "diffable move"),
+                createSimpleUnit(id = 7, title = "data", itemData = ItemData("there data"))
+            )
+        }
+    }
+
+    fun getDiffableUnits(): List<TableUnitItem> {
+        return with(unitFactory) {
+            listOf(
+                createSimpleUnit(id = 1, title = "hello diff"),
+                createSimpleUnit(id = 2, title = "world diff"),
+                createSimpleUnit(id = 3, title = "and diff"),
+                createSimpleUnit(id = 4, title = "work diff"),
+                createSimpleUnit(id = 6, title = "diffable moved"),
+                createSimpleUnit(id = 5, title = "! diff")
             )
         }
     }
