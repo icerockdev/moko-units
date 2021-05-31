@@ -3,6 +3,7 @@
  */
 
 import Foundation
+import UIKit
 import MultiPlatformLibrary
 
 open class UICollectionViewCellUnit<Cell: Fillable & UICollectionViewCell>: UICellUnit<Cell>, CollectionUnitItem {
@@ -15,9 +16,14 @@ open class UICollectionViewCellUnit<Cell: Fillable & UICollectionViewCell>: UICe
   
   public func register(intoView: Any?) {
     guard let collectionView = intoView as? UICollectionView else { return }
-    collectionView.register(
-      UINib(nibName: self.nibName, bundle: self.bundle),
-      forCellWithReuseIdentifier: self.reusableIdentifier)
+    if (checkNibExistsInBundle()) {
+        collectionView.register(
+          UINib(nibName: self.nibName, bundle: self.bundle),
+            forCellWithReuseIdentifier: self.reusableIdentifier
+        )
+    } else {
+        collectionView.register(Cell.self, forCellWithReuseIdentifier: reusableIdentifier)
+    }
   }
   
   public func bind(collectionViewCell: UICollectionViewCell) {

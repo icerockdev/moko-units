@@ -16,11 +16,14 @@ open class UITableViewCellUnit<Cell: Fillable & UITableViewCell>: UICellUnit<Cel
   
   public func register(intoView: Any?) {
     guard let tableView = intoView as? UITableView else { return }
-    
-    tableView.register(
-      UINib(nibName: self.nibName, bundle: self.bundle),
-      forCellReuseIdentifier: self.reusableIdentifier
-    )
+    if (checkNibExistsInBundle()) {
+        tableView.register(
+          UINib(nibName: self.nibName, bundle: self.bundle),
+          forCellReuseIdentifier: self.reusableIdentifier
+        )
+    } else {
+        tableView.register(Cell.self, forCellReuseIdentifier: self.reusableIdentifier)
+    }
   }
   
   public func bind(tableViewCell: UITableViewCell) {
