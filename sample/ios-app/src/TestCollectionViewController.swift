@@ -22,11 +22,6 @@ class TestCollectionViewController: UIViewController {
     }
 }
 
-extension UICollectionViewCell: Reusable {
-    public static func xibName() -> String { return String(describing: self) }
-    public static func reusableIdentifier() -> String { return String(describing: self) }
-}
-
 extension TestCollectionViewController: TestingCollectionCollectionUnitFactory {
     func createSimpleUnit(id: Int64, title: String, itemData: ItemData?) -> CollectionUnitItem {
         // without R.swift
