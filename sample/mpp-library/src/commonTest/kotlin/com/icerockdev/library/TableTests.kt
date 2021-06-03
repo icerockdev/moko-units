@@ -16,7 +16,7 @@ class TableTests {
     fun `table units building`() {
         val testing = Testing(unitFactory = TableFactory())
         val units: List<TableUnitItem> = testing.getUnits()
-
+        
         assertEquals(
             expected = listOf(
                 SimpleTableUnitMock(
@@ -25,8 +25,18 @@ class TableTests {
                     itemData = null
                 ),
                 SimpleTableUnitMock(
+                    id = -1,
+                    title = "",
+                    itemData = null
+                ),
+                SimpleTableUnitMock(
                     id = 2,
                     title = "world",
+                    itemData = null
+                ),
+                SimpleTableUnitMock(
+                    id = -1,
+                    title = "",
                     itemData = null
                 ),
                 SimpleTableUnitMock(
@@ -35,8 +45,18 @@ class TableTests {
                     itemData = null
                 ),
                 SimpleTableUnitMock(
+                    id = -1,
+                    title = "",
+                    itemData = null
+                ),
+                SimpleTableUnitMock(
                     id = 4,
                     title = "work",
+                    itemData = null
+                ),
+                SimpleTableUnitMock(
+                    id = -1,
+                    title = "",
                     itemData = null
                 ),
                 SimpleTableUnitMock(
@@ -45,7 +65,22 @@ class TableTests {
                     itemData = null
                 ),
                 SimpleTableUnitMock(
+                    id = -1,
+                    title = "",
+                    itemData = null
+                ),
+                SimpleTableUnitMock(
                     id = 6,
+                    title = "diffable move",
+                    itemData = null
+                ),
+                SimpleTableUnitMock(
+                    id = -1,
+                    title = "",
+                    itemData = null
+                ),
+                SimpleTableUnitMock(
+                    id = 7,
                     title = "data",
                     itemData = ItemData("there data")
                 )
