@@ -1,12 +1,12 @@
 PODS:
   - Differ (1.4.4)
   - MultiPlatformLibrary (0.1.0)
-  - MultiPlatformLibraryUnits/Core (0.4.0):
+  - MultiPlatformLibraryUnits/Core (0.5.0):
     - MultiPlatformLibrary
-  - MultiPlatformLibraryUnits/Differ (0.4.0):
+  - MultiPlatformLibraryUnits/Differ (0.5.0):
     - Differ (= 1.4.4)
     - MultiPlatformLibrary
-  - MultiPlatformLibraryUnits/R.swift (0.4.0):
+  - MultiPlatformLibraryUnits/R.swift (0.5.0):
     - MultiPlatformLibrary
     - R.swift (= 5.1.0)
   - R.swift (5.1.0):
@@ -34,7 +34,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   Differ: 5cd747e2f29c11ea9605eba7cb369df17e2b1ee2
   MultiPlatformLibrary: 176fb8ade516666cd47e93de1b71ba0441a541bb
-  MultiPlatformLibraryUnits: 67c660e09f91f73d4b0493ef29a8abdc9f312673
+  MultiPlatformLibraryUnits: 51402fb5d6c1c4270c09bbc62f1408ac93fdf181
   R.swift: 8cbc4fc69b740305b6a17c8a8ed968eb788962d9
   R.swift.Library: fa85ce1e0d0b7e818cd9e080df910ba54d2776cc
 

@@ -11,44 +11,58 @@ extension TableUnitsSourceKt {
         for tableView: UITableView,
         deletionAnimation: DiffRowAnimation = .automatic,
         insertionAnimation: DiffRowAnimation = .automatic) -> TableUnitsSource {
-        return TableUnitsSourceKt.create(forTableView: tableView) { (view, old, new) in
+        return TableUnitsSourceKt.create(forTableView: tableView) { (view: UITableView, old: Array<TableUnitItem>?, new: Array<TableUnitItem>?) in
             
             guard let diff = old?.extendedDiff(
                 new ?? [],
                 isEqual: { compareTabelUnitItems(first: $0, second: $1) }
             ) else { return }
             
-            if #available(iOS 11.0, *) {
-                tableView.performBatchUpdates {
-                    tableView.apply(
-                        diff,
-                        deletionAnimation: deletionAnimation,
-                        insertionAnimation: insertionAnimation,
-                        indexPathTransform: { $0 }
-                    )
-                } completion: { _ in
-                    tableView.reloadRows(at: tableView.indexPathsForVisibleRows ?? [], with: .none)
-                }
-            } else {
+            let update = BatchUpdate(diff: diff, indexPathTransform: { $0 })
+
+            tableView.performBatchUpdates {
                 tableView.apply(
                     diff,
                     deletionAnimation: deletionAnimation,
                     insertionAnimation: insertionAnimation,
                     indexPathTransform: { $0 }
                 )
-                
-                let update = BatchUpdate(diff: diff, indexPathTransform: { $0 })
-                let cellsToUpdate = tableView.indexPathsForVisibleRows?.filter({ indexPath -> Bool in
-                    !update.deletions.contains(indexPath) && !update.insertions.contains(indexPath)
-                })
-                
-                tableView.reloadRows(at: cellsToUpdate ?? [], with: .none)
+            } completion: { _ in
+                let visibleIndexPaths: Array<IndexPath> = tableView.indexPathsForVisibleRows ?? []
+                let cellsToUpdate: Array<IndexPath> = visibleIndexPaths.filter { indexPath in
+                    let newItem: TableUnitItem? = new?.getSafe(indexPath: indexPath)
+                    let noId: Bool = newItem?.itemId == TableUnitItemCompanion().NO_ID
+                    let notInsertOrDelete: Bool = !update.contains(indexPath: indexPath)
+                    return noId || notInsertOrDelete
+                }
+                let cellsForReload: Array<IndexPath> = cellsToUpdate.filter { indexPath in
+                    let oldItem: TableUnitItem? = old?.getSafe(indexPath: indexPath)
+                    let newItem: TableUnitItem? = new?.getSafe(indexPath: indexPath)
+                    
+                    if let oldItem = oldItem, let newItem = newItem,
+                       type(of: oldItem) == type(of: newItem) {
+                        return false
+                    } else {
+                        return true
+                    }
+                }
+                cellsToUpdate.filter { !cellsForReload.contains($0) }.forEach { indexPath in
+                    let newItem: TableUnitItem? = new?.getSafe(indexPath: indexPath)
+                    let cell = tableView.cellForRow(at: indexPath)
+                    if let newItem = newItem, let cell = cell {
+                        newItem.bind(tableViewCell: cell)
+                    }
+                }
+
+                tableView.reloadRows(at: cellsForReload ?? [], with: .none)
             }
         }
     }
     
     private static func compareTabelUnitItems(first: TableUnitItem, second: TableUnitItem) -> Bool {
-        return (first.itemId == second.itemId)
+        return first.itemId != TableUnitItemCompanion().NO_ID &&
+            (type(of: first) == type(of: second)) &&
+            (first.itemId == second.itemId)
     }
 }
 
@@ -61,26 +75,62 @@ extension CollectionUnitsSourceKt {
                 isEqual: { compareCollectionUnitItems(first: $0, second: $1) }
             ) else { return }
             
-            if #available(iOS 11.0, *) {
-                collectionView.performBatchUpdates {
-                    collectionView.apply(diff, updateData: { })
-                } completion: { _ in
-                    collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems ?? [])
-                }
-            } else {
+            let update = BatchUpdate(diff: diff, indexPathTransform: { $0 })
+            
+            collectionView.performBatchUpdates {
                 collectionView.apply(diff, updateData: { })
-                let update = BatchUpdate(diff: diff, indexPathTransform: { $0 })
+            } completion: { _ in
+                let visibleIndexPaths: Array<IndexPath> = collectionView.indexPathsForVisibleItems ?? []
+                let cellsToUpdate: Array<IndexPath> = visibleIndexPaths.filter { indexPath in
+                    let newItem: CollectionUnitItem? = new?.getSafe(indexPath: indexPath)
+                    let noId: Bool = newItem?.itemId == TableUnitItemCompanion().NO_ID
+                    let notInsertOrDelete: Bool = !update.contains(indexPath: indexPath)
+                    return noId || notInsertOrDelete
+                }
+                let cellsForReload: Array<IndexPath> = cellsToUpdate.filter { indexPath in
+                    let oldItem: CollectionUnitItem? = old?.getSafe(indexPath: indexPath)
+                    let newItem: CollectionUnitItem? = new?.getSafe(indexPath: indexPath)
+                    
+                    if let oldItem = oldItem, let newItem = newItem,
+                       type(of: oldItem) == type(of: newItem) {
+                        return false
+                    } else {
+                        return true
+                    }
+                }
+                cellsToUpdate.filter { !cellsForReload.contains($0) }.forEach { indexPath in
+                    let newItem: CollectionUnitItem? = new?.getSafe(indexPath: indexPath)
+                    let cell = collectionView.cellForItem(at: indexPath)
+                    if let newItem = newItem, let cell = cell {
+                        newItem.bind(collectionViewCell: cell)
+                    }
+                }
                 
-                let cellsToUpdate = collectionView.indexPathsForVisibleItems.filter({ indexPath -> Bool in
-                    !update.deletions.contains(indexPath) && !update.insertions.contains(indexPath)
-                })
-                
-                collectionView.reloadItems(at: cellsToUpdate)
+                collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems ?? [])
             }
         }
     }
     
     private static func compareCollectionUnitItems(first: CollectionUnitItem, second: CollectionUnitItem) -> Bool {
-        return first.itemId == second.itemId
+        return first.itemId != CollectionUnitItemCompanion().NO_ID &&
+            (type(of: first) == type(of: second)) &&
+            (first.itemId == second.itemId)
+    }
+}
+
+fileprivate extension Array {
+    func getSafe(indexPath: IndexPath) -> Element? {
+        if indexPath.row <= self.endIndex {
+            return self[indexPath.row]
+        } else {
+            return nil
+        }
+    }
+}
+
+fileprivate extension BatchUpdate {
+    func contains(indexPath: IndexPath) -> Bool {
+        return self.deletions.contains(indexPath) ||
+            self.insertions.contains(indexPath)
     }
 }
