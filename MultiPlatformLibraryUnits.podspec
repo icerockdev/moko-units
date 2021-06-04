@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
     spec.name                     = 'MultiPlatformLibraryUnits'
-    spec.version                  = '0.5.0'
+    spec.version                  = '0.5.1'
     spec.homepage                 = 'https://github.com/icerockdev/moko-units'
     spec.source                   = { :git => "https://github.com/icerockdev/moko-units.git", :tag => "release/#{spec.version}" }
     spec.authors                  = 'IceRock Development'
@@ -10,7 +10,7 @@ Pod::Spec.new do |spec|
     
     spec.dependency 'MultiPlatformLibrary'
 
-    spec.ios.deployment_target  = '9.0'
+    spec.ios.deployment_target  = '11.0'
     spec.swift_version = '5'
 
     spec.default_subspec = 'Core'

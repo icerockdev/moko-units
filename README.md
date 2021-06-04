@@ -44,6 +44,7 @@ This is a Kotlin MultiPlatform library that provides RecyclerView/UITableView/UI
 - kotlin 1.4.31
   - 0.4.2
   - 0.5.0
+  - 0.5.1
 
 ## Installation
 root build.gradle  
@@ -54,7 +55,7 @@ buildscript {
     }
 
     dependencies {
-        classpath("dev.icerock.moko:units-generator:0.5.0")
+        classpath("dev.icerock.moko:units-generator:0.5.1")
     }
 }
 
@@ -71,10 +72,10 @@ project build.gradle
 apply plugin: "dev.icerock.mobile.multiplatform-units"
 
 dependencies {
-    commonMainApi("dev.icerock.moko:units:0.5.0")
-    commonMainImplementation("dev.icerock.moko:units-basic:0.5.0")
+    commonMainApi("dev.icerock.moko:units:0.5.1")
+    commonMainImplementation("dev.icerock.moko:units-basic:0.5.1")
 
-    commonTestImplementation("dev.icerock.moko:units-test:0.5.0")
+    commonTestImplementation("dev.icerock.moko:units-test:0.5.1")
 }
 
 multiplatformUnits {

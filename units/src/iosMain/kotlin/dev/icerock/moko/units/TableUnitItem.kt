@@ -15,4 +15,8 @@ actual interface TableUnitItem: RegistryUnit<UITableView> {
     override fun register(intoView: UITableView)
 
     fun bind(tableViewCell: UITableViewCell)
+
+    actual companion object {
+        actual val NO_ID: Long = -1
+    }
 }

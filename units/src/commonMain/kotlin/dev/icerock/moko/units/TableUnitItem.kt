@@ -4,4 +4,8 @@
 
 package dev.icerock.moko.units
 
-expect interface TableUnitItem
+expect interface TableUnitItem {
+    companion object {
+        val NO_ID: Long
+    }
+}

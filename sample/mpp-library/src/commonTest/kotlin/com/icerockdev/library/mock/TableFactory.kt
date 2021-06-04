@@ -16,6 +16,30 @@ class TableFactory : Testing.UnitFactory {
             itemData = itemData
         )
     }
+
+    override fun createBlueDividerUnit(id: Long): TableUnitItem {
+        return SimpleTableUnitMock(
+            id = id,
+            title = "",
+            itemData = null
+        )
+    }
+
+    override fun createComplexUnit(id: Long, title: String, itemData: ItemData?): TableUnitItem {
+        return SimpleTableUnitMock(
+            id = id,
+            title = title,
+            itemData = itemData
+        )
+    }
+
+    override fun createRedDividerUnit(id: Long): TableUnitItem {
+        return SimpleTableUnitMock(
+            id = id,
+            title = "",
+            itemData = null
+        )
+    }
 }
 
 

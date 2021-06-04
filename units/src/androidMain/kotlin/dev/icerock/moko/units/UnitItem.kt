@@ -14,4 +14,8 @@ interface UnitItem {
 
     fun createViewHolder(parent: ViewGroup, lifecycleOwner: LifecycleOwner): RecyclerView.ViewHolder
     fun bindViewHolder(viewHolder: RecyclerView.ViewHolder)
+
+    companion object {
+        val NO_ID: Long = RecyclerView.NO_ID
+    }
 }

@@ -30,23 +30,39 @@ open class UICellUnit<Cell: Fillable> {
     self.configurator = configurator
   }
   
+  public convenience init(data: Cell.DataType,
+                          itemId: Int64,
+                          configurator: ConfiguratorType? = nil) {
+    if let rType = (Cell.self as? Reusable.Type) {
+      self.init(
+        data: data,
+        itemId: itemId,
+        reuseId: rType.reusableIdentifier(),
+        nibName: rType.xibName?() ?? rType.reusableIdentifier(),
+        bundle: rType.bundle?() ?? Bundle.main,
+        configurator: configurator
+      )
+    } else {
+      self.init(
+        data: data,
+        itemId: itemId,
+        reuseId: String(describing: Cell.self),
+        nibName: String(describing: Cell.self),
+        bundle: Bundle.main,
+        configurator: configurator
+      )
+    }
+  }
+  
   public func itemData() -> Any {
     return data
   }
-}
-
-public extension UICellUnit where Cell: Reusable {
-  convenience init(data: Cell.DataType,
-  itemId: Int64,
-  configurator: ConfiguratorType? = nil) {
-    self.init(data: data,
-              itemId: itemId,
-              reuseId: Cell.reusableIdentifier(),
-              nibName: Cell.self.xibName?() ?? Cell.reusableIdentifier(),
-              bundle: Cell.self.bundle?() ?? Bundle.main,
-              configurator: configurator)
+  
+  internal func checkNibExistsInBundle() -> Bool {
+    if (bundle.path(forResource: nibName, ofType: "nib") == nil) {
+      NSLog("== MOKO-UNITS: Warning, nib \(nibName) not found in bundle \(bundle.bundlePath)")
+      return false
+    }
+    return true
   }
 }
-
-
-

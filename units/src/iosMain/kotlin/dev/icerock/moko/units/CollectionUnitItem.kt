@@ -15,4 +15,8 @@ actual interface CollectionUnitItem : RegistryUnit<UICollectionView> {
     override fun register(intoView: UICollectionView)
 
     fun bind(collectionViewCell: UICollectionViewCell)
+
+    actual companion object {
+        actual val NO_ID: Long = -1
+    }
 }
