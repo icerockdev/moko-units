@@ -13,9 +13,8 @@ extension TableUnitsSourceKt {
         insertionAnimation: DiffRowAnimation = .automatic) -> TableUnitsSource {
         return TableUnitsSourceKt.create(forTableView: tableView) { (view: UITableView, old: Array<TableUnitItem>?, new: Array<TableUnitItem>?) in
             
-            
             if tableView.window == nil {
-                print("Warning: - refresh cells without tableview being in the view hierarchy may cause a crash")
+                print("Warning: - refresh cells without tableView being in the view hierarchy may cause a crash")
                 return
             }
             
@@ -76,10 +75,15 @@ extension CollectionUnitsSourceKt {
     public static func diffable(for collectionView: UICollectionView) -> CollectionUnitsSource {
         return CollectionUnitsSourceKt.create(forCollectionView: collectionView) { (view, old, new) in
             
-            guard let diff = old?.extendedDiff(
+            if collectionView.window == nil {
+                print("Warning: - refresh cells without collectionView being in the view hierarchy may cause a crash")
+                return
+            }
+            
+            let diff = (old ?? []).extendedDiff(
                 new ?? [],
                 isEqual: { compareCollectionUnitItems(first: $0, second: $1) }
-            ) else { return }
+            )
             
             let update = BatchUpdate(diff: diff, indexPathTransform: { $0 })
             
