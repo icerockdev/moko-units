@@ -13,10 +13,16 @@ extension TableUnitsSourceKt {
         insertionAnimation: DiffRowAnimation = .automatic) -> TableUnitsSource {
         return TableUnitsSourceKt.create(forTableView: tableView) { (view: UITableView, old: Array<TableUnitItem>?, new: Array<TableUnitItem>?) in
             
-            guard let diff = old?.extendedDiff(
+            
+            if tableView.window == nil {
+                print("Warning: - refresh cells without tableview being in the view hierarchy may cause a crash")
+                return
+            }
+            
+            let diff = (old ?? []).extendedDiff(
                 new ?? [],
                 isEqual: { compareTabelUnitItems(first: $0, second: $1) }
-            ) else { return }
+            )
             
             let update = BatchUpdate(diff: diff, indexPathTransform: { $0 })
 
