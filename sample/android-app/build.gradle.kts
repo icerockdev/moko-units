@@ -18,8 +18,8 @@ android {
 }
 
 dependencies {
-    implementation(Deps.Libs.Android.appCompat)
-    implementation(Deps.Libs.Android.recyclerView)
+    implementation(libs.appCompat)
+    implementation(libs.recyclerView)
 
-    implementation(project(":sample:mpp-library"))
+    implementation(projects.sample)
 }
