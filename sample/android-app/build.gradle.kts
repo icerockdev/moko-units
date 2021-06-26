@@ -21,5 +21,5 @@ dependencies {
     implementation(libs.appCompat)
     implementation(libs.recyclerView)
 
-    implementation(projects.sample)
+    implementation(projects.sample.mppLibrary)
 }
