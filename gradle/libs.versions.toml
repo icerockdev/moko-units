@@ -1,6 +1,6 @@
 [versions]
 kotlinVersion = "1.5.10"
-androidGradleVersion = "4.0.1"
+androidGradleVersion = "4.2.1"
 androidAppCompatVersion = "1.2.0"
 androidCoreTestingVersion = "2.1.0"
 recyclerViewVersion = "1.0.0"
