@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "dev.icerock.moko"
-version = Deps.mokoUnitsVersion
+version = libs.versions.mokoUnitsVersion.get()
 
 publishing {
     repositories.maven("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {

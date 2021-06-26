@@ -9,10 +9,10 @@ plugins {
 }
 
 dependencies {
-    commonMainApi(project(":units"))
+    commonMainApi(projects.units)
 
-    androidMainImplementation(Deps.Libs.Android.appCompat)
+    androidMainImplementation(libs.appCompat)
 
-    commonMainApi(Deps.Libs.MultiPlatform.mokoGraphics.common)
-    commonMainApi(Deps.Libs.MultiPlatform.mokoResources.common)
+    commonMainApi(libs.mokoGraphics)
+    commonMainApi(libs.mokoResources)
 }

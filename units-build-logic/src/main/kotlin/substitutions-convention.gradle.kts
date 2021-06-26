@@ -5,10 +5,10 @@
 subprojects {
     configurations.all {
         resolutionStrategy.dependencySubstitution {
-            substitute(module(Deps.Libs.MultiPlatform.mokoUnits.common))
-                .with(project(":units"))
-            substitute(module(Deps.Libs.MultiPlatform.mokoUnitsBasic.common))
-                .with(project(":units-basic"))
+            substitute(module(libs.mokoUnits))
+                .with(projects.units)
+            substitute(module(libs.mokoUnitsBasic))
+                .with(projects.unitsBasic)
         }
     }
 }

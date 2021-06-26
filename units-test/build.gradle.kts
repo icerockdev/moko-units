@@ -9,8 +9,8 @@ plugins {
 }
 
 dependencies {
-    commonMainApi(project(":units"))
+    commonMainApi(projects.units)
 
-    androidMainImplementation(Deps.Libs.Android.appCompat)
-    androidMainImplementation(Deps.Libs.Android.recyclerView)
+    androidMainImplementation(libs.appCompat)
+    androidMainImplementation(libs.recyclerView)
 }

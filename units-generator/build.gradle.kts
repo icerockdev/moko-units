@@ -10,8 +10,8 @@ plugins {
 dependencies {
     implementation(gradleKotlinDsl())
 
-    compileOnly(Deps.Libs.Jvm.androidGradlePlugin)
-    implementation(Deps.Libs.Jvm.kotlinPoet)
+    compileOnly(libs.androidGradlePlugin)
+    implementation(libs.kotlinPoet)
 }
 
 java {
