@@ -8,9 +8,12 @@ plugins {
     id("publication-convention")
 }
 
-dependencies {
-    commonMainApi(project(":units"))
+group = "dev.icerock.moko"
+version = libs.versions.mokoUnitsVersion.get()
 
-    androidMainImplementation(Deps.Libs.Android.appCompat)
-    androidMainImplementation(Deps.Libs.Android.recyclerView)
+dependencies {
+    commonMainApi(projects.units)
+
+    androidMainImplementation(libs.appCompat)
+    androidMainImplementation(libs.recyclerView)
 }

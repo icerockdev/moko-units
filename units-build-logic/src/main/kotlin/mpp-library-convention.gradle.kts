@@ -5,5 +5,12 @@
 plugins {
     id("android-library-convention")
     id("org.jetbrains.kotlin.multiplatform")
-    id("dev.icerock.mobile.multiplatform")
+    id("dev.icerock.mobile.multiplatform.android-manifest")
+}
+
+kotlin {
+    android {
+        publishLibraryVariants("release", "debug")
+    }
+    ios()
 }
