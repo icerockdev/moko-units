@@ -1,5 +1,5 @@
 ![moko-units](img/logo.png)  
-[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://img.shields.io/maven-central/v/dev.icerock.moko/units) ](https://repo1.maven.org/maven2/dev/icerock/moko/units) ![kotlin-version](https://img.shields.io/badge/kotlin-1.4.31-orange)
+[![GitHub license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0) [![Download](https://img.shields.io/maven-central/v/dev.icerock.moko/units) ](https://repo1.maven.org/maven2/dev/icerock/moko/units) ![kotlin-version](https://kotlin-version.aws.icerock.dev/kotlin-version?group=dev.icerock.moko&name=units)
 
 # Mobile Kotlin units
 This is a Kotlin MultiPlatform library that provides RecyclerView/UITableView/UICollectionView filling from common code.
@@ -7,7 +7,6 @@ This is a Kotlin MultiPlatform library that provides RecyclerView/UITableView/UI
 ## Table of Contents
 - [Features](#features)
 - [Requirements](#requirements)
-- [Versions](#versions)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Samples](#samples)
@@ -20,32 +19,9 @@ This is a Kotlin MultiPlatform library that provides RecyclerView/UITableView/UI
  creating from common kotlin code.
 
 ## Requirements
-- Gradle version 6.0+
+- Gradle version 6.8+
 - Android API 16+
-- iOS version 9.0+
-
-## Versions
-### Bintray
-- kotlin 1.3.50
-  - 0.1.0
-  - 0.1.1
-- kotlin 1.3.61
-  - 0.2.0
-  - 0.2.1
-  - 0.2.2
-- kotlin 1.3.70
-  - 0.3.0
-  - 0.3.1
-- kotlin 1.4.0
-  - 0.4.0
-- kotlin 1.4.10
-  - 0.4.1
-### mavenCentral
-- kotlin 1.4.31
-  - 0.4.2
-  - 0.5.0
-  - 0.5.1
-  - 0.5.2
+- iOS version 11.0+
 
 ## Installation
 root build.gradle  
@@ -56,7 +32,7 @@ buildscript {
     }
 
     dependencies {
-        classpath("dev.icerock.moko:units-generator:0.5.2")
+        classpath("dev.icerock.moko:units-generator:0.6.0")
     }
 }
 
@@ -73,10 +49,10 @@ project build.gradle
 apply plugin: "dev.icerock.mobile.multiplatform-units"
 
 dependencies {
-    commonMainApi("dev.icerock.moko:units:0.5.2")
-    commonMainImplementation("dev.icerock.moko:units-basic:0.5.2")
+    commonMainApi("dev.icerock.moko:units:0.6.0")
+    commonMainImplementation("dev.icerock.moko:units-basic:0.6.0")
 
-    commonTestImplementation("dev.icerock.moko:units-test:0.5.2")
+    commonTestImplementation("dev.icerock.moko:units-test:0.6.0")
 }
 
 multiplatformUnits {
@@ -88,7 +64,7 @@ multiplatformUnits {
 
 On iOS, in addition to the Kotlin library add Pod in the Podfile.
 ```ruby
-pod 'MultiPlatformLibraryUnits', :git => 'https://github.com/icerockdev/moko-units.git', :tag => 'release/0.5.0'
+pod 'MultiPlatformLibraryUnits', :git => 'https://github.com/icerockdev/moko-units.git', :tag => 'release/0.6.0'
 ```
 **`MultiPlatformLibraryUnits` CocoaPod requires that the framework compiled from Kotlin be named 
 `MultiPlatformLibrary` and be connected as a CocoaPod `MultiPlatformLibrary`. 

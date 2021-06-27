@@ -9,9 +9,6 @@ plugins {
     id("signing")
 }
 
-group = "dev.icerock.moko"
-version = libs.versions.mokoUnitsVersion.get()
-
 publishing {
     repositories.maven("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/") {
         name = "OSSRH"
@@ -30,6 +27,8 @@ publishing {
             url.set("https://github.com/icerockdev/moko-units")
             licenses {
                 license {
+                    name.set("Apache-2.0")
+                    distribution.set("repo")
                     url.set("https://github.com/icerockdev/moko-units/blob/master/LICENSE.md")
                 }
             }

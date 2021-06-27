@@ -7,6 +7,9 @@ plugins {
     id("publication-convention")
 }
 
+group = "dev.icerock.moko"
+version = libs.versions.mokoUnitsVersion.get()
+
 dependencies {
     implementation(gradleKotlinDsl())
 

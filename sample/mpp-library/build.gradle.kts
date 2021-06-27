@@ -12,15 +12,15 @@ plugins {
 android.buildFeatures.dataBinding = true
 
 dependencies {
-    commonMainApi(libs.mokoUnits)
+    commonMainApi(projects.units)
 
-    androidMainImplementation(libs.recyclerView)
+    "androidMainImplementation"(libs.recyclerView)
 
     // fix of package javax.annotation does not exist import javax.annotation.Generated in DataBinding code
-    androidMainCompileOnly("javax.annotation:jsr250-api:1.0")
+    "androidMainCompileOnly"(libs.javaxAnnotation)
 
     commonTestImplementation(libs.mokoTest)
-    commonTestImplementation(projects.ubitsTests)
+    commonTestImplementation(projects.unitsTest)
 }
 
 multiplatformUnits {
@@ -30,5 +30,5 @@ multiplatformUnits {
 }
 
 framework {
-    export(project(":units"))
+    export(projects.units)
 }

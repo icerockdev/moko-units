@@ -9,21 +9,15 @@ plugins {
     id("publication-convention")
 }
 
+group = "dev.icerock.moko"
+version = libs.versions.mokoUnitsVersion.get()
+
 android.buildFeatures.dataBinding = true
-
-kotlin {
-    sourceSets {
-        val iosArm64Main by getting
-        val iosX64Main by getting
-
-        iosArm64Main.dependsOn(iosX64Main)
-    }
-}
 
 dependencies {
     androidMainImplementation(libs.appCompat)
     androidMainApi(libs.recyclerView)
 
     // fix of package javax.annotation does not exist import javax.annotation.Generated in DataBinding code
-    androidMainCompileOnly("javax.annotation:jsr250-api:1.0")
+    androidMainCompileOnly(libs.javaxAnnotation)
 }
