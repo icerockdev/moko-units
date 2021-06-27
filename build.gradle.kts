@@ -15,10 +15,6 @@ buildscript {
     }
     dependencies {
         classpath("dev.icerock.moko:units-generator")
-        classpath("gradle:units-build-logic:1")
+        classpath(":units-build-logic")
     }
-}
-
-tasks.register("clean", Delete::class).configure {
-    delete(rootProject.buildDir)
 }

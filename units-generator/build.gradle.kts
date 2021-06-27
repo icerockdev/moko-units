@@ -7,11 +7,14 @@ plugins {
     id("publication-convention")
 }
 
+group = "dev.icerock.moko"
+version = libs.versions.mokoUnitsVersion.get()
+
 dependencies {
     implementation(gradleKotlinDsl())
 
-    compileOnly(Deps.Libs.Jvm.androidGradlePlugin)
-    implementation(Deps.Libs.Jvm.kotlinPoet)
+    compileOnly(libs.androidGradlePlugin)
+    implementation(libs.kotlinPoet)
 }
 
 java {
