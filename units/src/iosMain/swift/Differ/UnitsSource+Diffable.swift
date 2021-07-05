@@ -130,7 +130,7 @@ extension CollectionUnitsSourceKt {
 
 fileprivate extension Array {
     func getSafe(indexPath: IndexPath) -> Element? {
-        if indexPath.row <= self.endIndex {
+        if indexPath.row < self.count {
             return self[indexPath.row]
         } else {
             return nil
