@@ -81,7 +81,12 @@ extension CollectionUnitsSourceKt {
         return CollectionUnitsSourceKt.create(forCollectionView: collectionView) { (view, old, new) in
             
             if collectionView.window == nil {
-                print("Warning: - refresh cells without collectionView being in the view hierarchy may cause a crash")
+                /*
+                 * collectionView is not in view hierarchy here, therefore animation will not be performed and rows will not be reloaded,
+                 * but data source has already been updated.
+                 * reload data here prevent crash on next data source update, when calculated diff is empty, but is not actually empty.
+                 */
+                collectionView.reloadData()
                 return
             }
             
