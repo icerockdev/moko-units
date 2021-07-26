@@ -23,12 +23,6 @@ This is a Kotlin MultiPlatform library that provides RecyclerView/UITableView/UI
 - Android API 16+
 - iOS version 11.0+
 
-## Versions
-- kotlin 1.5.20
-  - 0.6.0
-  - 0.6.1
-  - 0.6.2
-
 ## Installation
 root build.gradle  
 ```groovy
