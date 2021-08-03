@@ -5,6 +5,10 @@
 plugins {
     id("jvm-convention")
     id("publication-convention")
+
+    id("com.gradle.plugin-publish") version ("0.15.0")
+    id("detekt-convention")
+    id("java-gradle-plugin")
 }
 
 group = "dev.icerock.moko"
@@ -29,5 +33,33 @@ publishing {
         register("mavenJava", MavenPublication::class) {
             from(components["java"])
         }
+    }
+}
+
+gradlePlugin {
+    plugins {
+        create("units-generator") {
+            id = "dev.icerock.mobile.units-generator"
+            implementationClass = "dev.icerock.moko.units.plugin.UnitsGeneratorPlugin"
+        }
+    }
+}
+
+pluginBundle {
+    website = "https://github.com/icerockdev/moko-units"
+    vcsUrl = "https://github.com/icerockdev/moko-units"
+    description = "Plugin to codegen for new Units"
+    tags = listOf("moko-units", "moko", "kotlin", "kotlin-multiplatform")
+
+    plugins {
+        getByName("units-generator") {
+            displayName = "MOKO Units generator plugin"
+        }
+    }
+
+    mavenCoordinates {
+        groupId = project.group as String
+        artifactId = project.name
+        version = project.version as String
     }
 }

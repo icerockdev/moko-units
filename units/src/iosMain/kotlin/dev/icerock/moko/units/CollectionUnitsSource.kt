@@ -5,7 +5,7 @@ package dev.icerock.moko.units
 
 import platform.UIKit.UICollectionView
 
-interface CollectionUnitsSource  {
+interface CollectionUnitsSource {
     var unitItems: List<CollectionUnitItem>?
 }
 
@@ -13,8 +13,9 @@ fun create(
     forCollectionView: UICollectionView,
     withReloadHandler: UICollectionViewReloadHandler = { collectionView, _, _ -> collectionView.reloadData() }
 ): CollectionUnitsSource {
-    return object: CollectionUnitsSource {
-        private val unitsSource = createUnitCollectionViewDataSource(forCollectionView, withReloadHandler)
+    return object : CollectionUnitsSource {
+        private val unitsSource =
+            createUnitCollectionViewDataSource(forCollectionView, withReloadHandler)
         override var unitItems: List<CollectionUnitItem>?
             get() {
                 return unitsSource.unitItems

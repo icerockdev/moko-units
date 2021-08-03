@@ -6,7 +6,6 @@ package dev.icerock.moko.units.databinding
 
 import android.content.Context
 import android.content.ContextWrapper
-import android.view.ContextThemeWrapper
 import android.widget.Adapter
 import android.widget.AdapterView
 import androidx.databinding.BindingAdapter
@@ -17,6 +16,7 @@ import dev.icerock.moko.units.UnitItem
 import dev.icerock.moko.units.adapter.Settable
 import dev.icerock.moko.units.adapter.UnitsRecyclerViewAdapter
 
+@Suppress("ReturnCount")
 @BindingAdapter(value = ["bindValue", "initFromLast"], requireAll = false)
 fun RecyclerView.setItems(units: List<UnitItem>?, initFromLast: Boolean?) {
     val oldCount = adapter?.itemCount
@@ -91,7 +91,7 @@ private fun Any.setList(list: List<UnitItem>) {
 }
 
 private fun getLifecycleOwnerFromContext(context: Context): LifecycleOwner {
-    if(context is LifecycleOwner) return context
-    if(context is ContextWrapper) return getLifecycleOwnerFromContext(context.baseContext)
+    if (context is LifecycleOwner) return context
+    if (context is ContextWrapper) return getLifecycleOwnerFromContext(context.baseContext)
     throw IllegalArgumentException("context $context not implement LifecycleOwner")
 }

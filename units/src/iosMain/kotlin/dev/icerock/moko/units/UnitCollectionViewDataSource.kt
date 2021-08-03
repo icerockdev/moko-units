@@ -9,7 +9,11 @@ import platform.UIKit.UICollectionView
 import platform.UIKit.UICollectionViewDataSourceProtocol
 import platform.darwin.NSObject
 
-typealias UICollectionViewReloadHandler = (UICollectionView, oldData: List<CollectionUnitItem>?, newData: List<CollectionUnitItem>?) -> Unit
+typealias UICollectionViewReloadHandler = (
+    UICollectionView,
+    oldData: List<CollectionUnitItem>?,
+    newData: List<CollectionUnitItem>?
+) -> Unit
 
 @ExportObjCClass
 expect class UnitCollectionViewDataSource internal constructor(
