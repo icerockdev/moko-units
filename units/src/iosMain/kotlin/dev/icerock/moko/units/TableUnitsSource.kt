@@ -14,7 +14,7 @@ fun create(
     forTableView: UITableView,
     withReloadHandler: UITableViewReloadHandler
 ): TableUnitsSource {
-    return object: TableUnitsSource {
+    return object : TableUnitsSource {
 
         private val unitsSource = createUnitTableViewDataSource(forTableView, withReloadHandler)
         override var unitItems: List<TableUnitItem>?

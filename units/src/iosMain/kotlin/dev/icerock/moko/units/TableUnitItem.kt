@@ -7,7 +7,7 @@ package dev.icerock.moko.units
 import platform.UIKit.UITableView
 import platform.UIKit.UITableViewCell
 
-actual interface TableUnitItem: RegistryUnit<UITableView> {
+actual interface TableUnitItem : RegistryUnit<UITableView> {
     val itemId: Long
 
     override val reusableIdentifier: String
