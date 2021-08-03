@@ -7,6 +7,7 @@ plugins {
     id("kotlin-kapt")
     id("dev.icerock.mobile.multiplatform-units")
     id("dev.icerock.mobile.multiplatform.ios-framework")
+    id("detekt-convention")
 }
 
 android.buildFeatures.dataBinding = true

@@ -26,7 +26,7 @@ jobs:
         with:
           java-version: 11
       - name: Publish plugin
-        run: ./gradlew -p units-generator publishMavenJavaPublicationToOSSRHRepository
+        run: ./gradlew -p units-generator publishPlugins -Pgradle.publish.key=${{ secrets.GRADLE_PLUGIN_PORTAL_KEY }} -Pgradle.publish.secret=${{ secrets.GRADLE_PLUGIN_PORTAL_SECRET }}
       - name: Publish runtime
         run: ./gradlew publish
   release:

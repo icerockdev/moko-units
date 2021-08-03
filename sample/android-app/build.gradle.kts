@@ -4,6 +4,7 @@
 
 plugins {
     id("android-app-convention")
+    id("detekt-convention")
 }
 
 android {
