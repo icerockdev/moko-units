@@ -6,6 +6,7 @@ plugins {
     id("mpp-library-convention")
     id("stub-javadoc-convention")
     id("publication-convention")
+    id("detekt-convention")
 }
 
 group = "dev.icerock.moko"
