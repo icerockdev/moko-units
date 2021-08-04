@@ -39,7 +39,7 @@ publishing {
 gradlePlugin {
     plugins {
         create("units-generator") {
-            id = "dev.icerock.mobile.units-generator"
+            id = "dev.icerock.mobile.multiplatform-units"
             implementationClass = "dev.icerock.moko.units.plugin.UnitsGeneratorPlugin"
         }
     }
