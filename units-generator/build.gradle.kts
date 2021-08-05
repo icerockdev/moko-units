@@ -38,7 +38,7 @@ publishing {
 
 gradlePlugin {
     plugins {
-        create("units-generator") {
+        create("multiplatform-units") {
             id = "dev.icerock.mobile.multiplatform-units"
             implementationClass = "dev.icerock.moko.units.plugin.UnitsGeneratorPlugin"
         }
@@ -52,7 +52,7 @@ pluginBundle {
     tags = listOf("moko-units", "moko", "kotlin", "kotlin-multiplatform")
 
     plugins {
-        getByName("units-generator") {
+        getByName("multiplatform-units") {
             displayName = "MOKO Units generator plugin"
         }
     }
