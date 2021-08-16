@@ -6,12 +6,16 @@ package dev.icerock.moko.units.databinding
 
 import android.content.Context
 import android.content.ContextWrapper
+import android.view.View
 import android.widget.Adapter
 import android.widget.AdapterView
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LifecycleOwner
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import dev.icerock.moko.mvvm.livedata.LiveData
+import dev.icerock.moko.units.TableUnitItem
 import dev.icerock.moko.units.UnitItem
 import dev.icerock.moko.units.adapter.Settable
 import dev.icerock.moko.units.adapter.UnitsRecyclerViewAdapter
@@ -94,4 +98,41 @@ private fun getLifecycleOwnerFromContext(context: Context): LifecycleOwner {
     if (context is LifecycleOwner) return context
     if (context is ContextWrapper) return getLifecycleOwnerFromContext(context.baseContext)
     throw IllegalArgumentException("context $context not implement LifecycleOwner")
+}
+
+fun RecyclerView.bindUnits(lifecycleOwner: LifecycleOwner, units: LiveData<List<UnitItem>>) {
+    val unitsAdapter = UnitsRecyclerViewAdapter(lifecycleOwner)
+    adapter = unitsAdapter
+
+    units.ld().observe(lifecycleOwner) {
+        if (units.value.isNotEmpty()) {
+            unitsAdapter.units = it.orEmpty()
+        }
+    }
+}
+
+fun RecyclerView.bindPagingUnits(
+    lifecycleOwner: LifecycleOwner,
+    units: LiveData<List<TableUnitItem>?>,
+    nextPageAction: () -> Unit
+) {
+    val unitsAdapter = UnitsRecyclerViewAdapter(lifecycleOwner)
+    layoutManager = LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
+    adapter = unitsAdapter
+
+    units.ld().observe(lifecycleOwner) {
+        unitsAdapter.units = it.orEmpty()
+    }
+
+    this.addOnChildAttachStateChangeListener(object : RecyclerView.OnChildAttachStateChangeListener {
+        override fun onChildViewAttachedToWindow(view: View) {
+            val count = unitsAdapter.itemCount
+            val position = getChildAdapterPosition(view)
+            if (position != count - 1) return
+            nextPageAction.invoke()
+        }
+
+        @Suppress("EmptyFunctionBlock")
+        override fun onChildViewDetachedFromWindow(view: View) {}
+    })
 }
