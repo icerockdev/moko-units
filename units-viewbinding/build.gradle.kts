@@ -17,7 +17,6 @@ dependencies {
     implementation(libs.coroutines)
 
     api(libs.mokoMvvmCore)
-    //api(libs.mokoResources)
 
     api(libs.appCompat)
     api(libs.lifecycle)
