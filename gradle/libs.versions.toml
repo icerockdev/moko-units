@@ -12,6 +12,7 @@ mokoResourcesVersion = "0.16.2"
 mokoTestVersion = "0.4.0"
 mokoUnitsVersion = "0.6.2"
 mokoMvvmVersion = "0.11.0"
+constraintLayoutVersion = "2.1.0"
 
 [libraries]
 appCompat = { module = "androidx.appcompat:appcompat", version.ref = "androidAppCompatVersion" }
@@ -22,9 +23,10 @@ mokoResources = { module = "dev.icerock.moko:resources", version.ref = "mokoReso
 kotlinTestJUnit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlinVersion" }
 androidCoreTesting = { module = "androidx.arch.core:core-testing", version.ref = "androidCoreTestingVersion" }
 mokoTest = { module = "dev.icerock.moko:test-core", version.ref = "mokoTestVersion" }
-mokoMvvmLiveData = { module = "dev.icerock.moko:mvvm-livedata", version.ref = "mokoMvvmVersion"}
-mokoMvvmCore = { module = "dev.icerock.moko:mvvm-core", version.ref = "mokoMvvmVersion"}
+mokoMvvmLiveData = { module = "dev.icerock.moko:mvvm-livedata", version.ref = "mokoMvvmVersion" }
+mokoMvvmCore = { module = "dev.icerock.moko:mvvm-core", version.ref = "mokoMvvmVersion" }
 kotlinPoet = { module = "com.squareup:kotlinpoet", version.ref = "kotlinPoetVersion" }
 androidGradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradleVersion" }
 javaxAnnotation = { module = "javax.annotation:jsr250-api", version = "1.0" }
 lifecycle = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "androidLifecycleVersion" }
+constraintLayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintLayoutVersion" }

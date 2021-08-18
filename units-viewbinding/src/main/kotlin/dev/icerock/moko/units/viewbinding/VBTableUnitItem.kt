@@ -8,6 +8,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.LayoutRes
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
@@ -19,7 +20,7 @@ abstract class VBTableUnitItem<VB : ViewBinding> : TableUnitItem {
     override fun bindViewHolder(viewHolder: RecyclerView.ViewHolder) {
         @Suppress("UNCHECKED_CAST")
         with(viewHolder as VBViewHolder<VB>) {
-            binding.bind(context, lifecycleOwner, this)
+            binding.bindData(context, lifecycleOwner, this)
         }
     }
 
@@ -28,13 +29,18 @@ abstract class VBTableUnitItem<VB : ViewBinding> : TableUnitItem {
         lifecycleOwner: LifecycleOwner
     ): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
-        val binding = inflate(view)
+        val binding = bindView(view)
         return VBViewHolder(binding, lifecycleOwner)
     }
+    
+    @get:LayoutRes
+    protected abstract val layoutId : Int
+    protected abstract fun bindView(view: View): VB
+    protected abstract fun VB.bindData(context: Context, lifecycleOwner: LifecycleOwner, viewHolder: VBViewHolder<VB>)
 
-    abstract fun inflate(view: View): VB
-    abstract fun VB.bind(context: Context, lifecycleOwner: LifecycleOwner, viewHolder: VBViewHolder<VB>)
-
+    override val viewType: Int
+        get() = layoutId
+    
     class VBViewHolder<VB : ViewBinding>(
         val binding: VB,
         val lifecycleOwner: LifecycleOwner
