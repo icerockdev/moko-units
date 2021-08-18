@@ -7,7 +7,11 @@ plugins {
     id("detekt-convention")
     id("kotlin-kapt")
     id("android-publication-convention")
+    id("kotlin-android")
 }
+
+group = "dev.icerock.moko"
+version = libs.versions.mokoUnitsVersion.get()
 
 android {
     buildFeatures.viewBinding = true
@@ -16,9 +20,7 @@ android {
 dependencies {
     implementation(libs.coroutines)
 
-    api(libs.mokoMvvmCore)
-
-    api(libs.appCompat)
+    api(projects.units)
+    api(libs.recyclerView)
     api(libs.lifecycle)
-    api(libs.coroutines)
 }

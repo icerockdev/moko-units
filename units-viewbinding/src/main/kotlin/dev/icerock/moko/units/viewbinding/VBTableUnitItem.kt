@@ -10,28 +10,37 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
+import androidx.viewbinding.ViewBinding
 import dev.icerock.moko.units.TableUnitItem
+import java.io.Closeable
 
-abstract class VBTableUnitItem<VB> : TableUnitItem {
-    @Suppress("UNCHECKED_CAST")
+abstract class VBTableUnitItem<VB : ViewBinding> : TableUnitItem {
+
     override fun bindViewHolder(viewHolder: RecyclerView.ViewHolder) {
-        bind(viewHolder.itemView.context, (viewHolder as VBViewHolder<VB>).binding)
+        @Suppress("UNCHECKED_CAST")
+        with(viewHolder as VBViewHolder<VB>) {
+            binding.bind(context, lifecycleOwner, this)
+        }
     }
 
     override fun createViewHolder(
         parent: ViewGroup,
         lifecycleOwner: LifecycleOwner
     ): RecyclerView.ViewHolder {
-        val binding = inflate(LayoutInflater.from(parent.context), parent)
-        return VBViewHolder(binding, binding.root())
+        val view = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
+        val binding = inflate(view)
+        return VBViewHolder(binding, lifecycleOwner)
     }
 
-    abstract fun inflate(inflater: LayoutInflater, parent: ViewGroup): VB
-    abstract fun VB.root(): View
-    abstract fun bind(context: Context, binding: VB)
+    abstract fun inflate(view: View): VB
+    abstract fun VB.bind(context: Context, lifecycleOwner: LifecycleOwner, viewHolder: VBViewHolder<VB>)
 
-    class VBViewHolder<VB>(
+    class VBViewHolder<VB : ViewBinding>(
         val binding: VB,
-        root: View
-    ) : RecyclerView.ViewHolder(root)
+        val lifecycleOwner: LifecycleOwner
+    ) : RecyclerView.ViewHolder(binding.root) {
+        val context: Context get() = itemView.context
+        // maybe change to `associatedObject: Any? = null` ?
+        var closeable: Closeable? = null
+    }
 }
