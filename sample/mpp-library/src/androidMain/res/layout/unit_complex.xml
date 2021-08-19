@@ -3,23 +3,11 @@
 
     <data>
 
-        <import type="com.icerockdev.library.ItemData"/>
+        <import type="com.icerockdev.library.ItemData" />
 
         <variable
             name="text"
             type="String" />
-
-        <variable
-            name="number"
-            type="int" />
-
-        <variable
-            name="obj1"
-            type="com.icerockdev.library.ItemData" />
-
-        <variable
-            name="obj2"
-            type="ItemData" />
     </data>
 
     <LinearLayout

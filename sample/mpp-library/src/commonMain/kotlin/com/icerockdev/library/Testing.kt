@@ -8,6 +8,19 @@ import dev.icerock.moko.units.TableUnitItem
 
 class Testing(val unitFactory: UnitFactory) {
 
+    fun getSimpleUnits() : List<TableUnitItem> {
+        return with(unitFactory) {
+            listOf(
+                createRedDividerUnit(id = TableUnitItem.NO_ID),
+                createSimpleUnit(id = 1, title = "hello"),
+                //createBlueDividerUnit(id = TableUnitItem.NO_ID),
+                createSimpleUnit(id = 2, title = "hello2"),
+                createSimpleUnit(id = 3, title = "hello3"),
+                createSimpleUnit(id = 4, title = "hello4")
+            )
+        }
+    }
+    
     fun getUnits(): List<TableUnitItem> {
         return with(unitFactory) {
             listOf(

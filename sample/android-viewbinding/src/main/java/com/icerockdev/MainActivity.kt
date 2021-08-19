@@ -1,8 +1,12 @@
+/*
+ * Copyright 2021 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
+ */
+
 package com.icerockdev
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Switch
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatSpinner
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -28,13 +32,10 @@ class MainActivity : AppCompatActivity() {
                     title: String,
                     itemData: ItemData?
                 ): UnitItem {
-                    return UnitSimpleDropdown().apply {
-                        itemId = id
+                    return UnitSimpleDropdown.Combined(
+                        itemId = id,
                         text = title
-                        number = 9
-                        obj1 = itemData
-                        obj2 = itemData
-                    }
+                    )
                 }
 
                 override fun createComplexUnit(
@@ -42,27 +43,22 @@ class MainActivity : AppCompatActivity() {
                     title: String,
                     itemData: ItemData?
                 ): UnitItem {
-                    return UnitComplex().apply {
-                        itemId = id
+                    return UnitComplex(
+                        itemId = id,
                         text = title
-                        number = 9
-                        obj1 = itemData
-                        obj2 = itemData
-                    }
+                    )
                 }
 
                 override fun createBlueDividerUnit(id: Long): TableUnitItem {
-                    return UnitBlueDivider().apply {
+                    return UnitBlueDivider(
                         itemId = id
-                        number = 9
-                    }
+                    )
                 }
 
                 override fun createRedDividerUnit(id: Long): TableUnitItem {
-                    return UnitRedDivider().apply {
+                    return UnitRedDivider(
                         itemId = id
-                        number = 9
-                    }
+                    )
                 }
             }
         )
@@ -79,12 +75,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
         recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-        recyclerView.adapter = UnitsRecyclerViewAdapter(this).apply {
-            units = test.getUnits()
-        }
+//        recyclerView.adapter = UnitsRecyclerViewAdapter(this).apply {
+//            units = test.getUnits()
+//        }
 
         spinner.adapter = UnitsAdapter(this).apply {
-            units = test.getUnits()
+            units = test.getSimpleUnits()
         }
     }
 }

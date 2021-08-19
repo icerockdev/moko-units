@@ -1,30 +1,38 @@
+/*
+ * Copyright 2021 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
+ */
+
 package com.icerockdev
 
+import android.content.Context
+import android.graphics.Color
+import android.view.View
 import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
+import com.icerockdev.databinding.UnitBlueDividerBinding
 import com.icerockdev.library.ItemData
 import dev.icerock.moko.units.databinding.DataBindingUnitItem
+import dev.icerock.moko.units.viewbinding.VBTableUnitItem
+import dev.icerock.moko.units.viewbinding.VBViewHolder
 import kotlin.Int
 import kotlin.Long
 import kotlin.String
 
-open class UnitBlueDivider : DataBindingUnitItem {
-  override var itemId: Long = RecyclerView.NO_ID
+class UnitBlueDivider(override val itemId: Long) :
+    VBTableUnitItem<UnitBlueDividerBinding>() {
 
-  override val layoutId: Int = R.layout.unit_blue_divider
+    override val layoutId: Int = R.layout.unit_blue_divider
 
-  var number: Int? = null
+    override fun bindView(view: View): UnitBlueDividerBinding {
+        return UnitBlueDividerBinding.bind(view)
+    }
 
-  var obj1: ItemData? = null
-
-  var obj2: ItemData? = null
-
-  var text: String? = null
-
-  override fun bind(viewDataBinding: ViewDataBinding) {
-    viewDataBinding.setVariable(BR.number, number)
-    viewDataBinding.setVariable(BR.obj1, obj1)
-    viewDataBinding.setVariable(BR.obj2, obj2)
-    viewDataBinding.setVariable(BR.text, text)
-  }
+    override fun UnitBlueDividerBinding.bindData(
+        context: Context,
+        lifecycleOwner: LifecycleOwner,
+        viewHolder: VBViewHolder<UnitBlueDividerBinding>
+    ) {
+        this.unitBlueDividerTextView.setBackgroundColor(Color.parseColor("#2196F3"))
+    }
 }

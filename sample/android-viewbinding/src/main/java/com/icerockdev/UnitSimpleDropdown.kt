@@ -1,16 +1,35 @@
+/*
+ * Copyright 2021 IceRock MAG Inc. Use of this source code is governed by the Apache 2.0 license.
+ */
+
 package com.icerockdev
 
-import androidx.databinding.ViewDataBinding
-import dev.icerock.moko.units.databinding.DataBindingDropDownUnitItem
-import kotlin.Int
+import android.content.Context
+import android.view.View
+import androidx.lifecycle.LifecycleOwner
+import com.icerockdev.databinding.UnitSimpleDropdownBinding
+import dev.icerock.moko.units.DropDownUnitItem
+import dev.icerock.moko.units.viewbinding.VBDropDownUnitItem
+import dev.icerock.moko.units.viewbinding.VBViewHolder
 
-class UnitSimpleDropdown : UnitSimple(), DataBindingDropDownUnitItem {
-  override val dropDownLayoutId: Int = R.layout.unit_simple_dropdown
+class UnitSimpleDropdown(
+    private val text: String
+) : VBDropDownUnitItem<UnitSimpleDropdownBinding>() {
+    override val layoutId: Int
+        get() = R.layout.unit_simple_dropdown
 
-  override fun bindDropDown(viewDataBinding: ViewDataBinding) {
-    viewDataBinding.setVariable(BR.number, number)
-    viewDataBinding.setVariable(BR.obj1, obj1)
-    viewDataBinding.setVariable(BR.obj2, obj2)
-    viewDataBinding.setVariable(BR.text, text)
-  }
+    override fun bindView(view: View): UnitSimpleDropdownBinding {
+        return UnitSimpleDropdownBinding.bind(view)
+    }
+
+    override fun UnitSimpleDropdownBinding.bindData(
+        context: Context,
+        lifecycleOwner: LifecycleOwner,
+        viewHolder: VBViewHolder<UnitSimpleDropdownBinding>
+    ) {
+        unitSimpleDropdownTextView.text = text
+    }
+
+    class Combined(itemId: Long, text: String) : UnitSimple(itemId, text),
+        DropDownUnitItem by UnitSimpleDropdown(text)
 }

@@ -12,10 +12,9 @@ import androidx.annotation.LayoutRes
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import dev.icerock.moko.units.TableUnitItem
+import dev.icerock.moko.units.DropDownUnitItem
 
-abstract class VBTableUnitItem<VB : ViewBinding> : TableUnitItem {
-
+abstract class VBDropDownUnitItem<VB : ViewBinding> : DropDownUnitItem {
     @get:LayoutRes
     protected abstract val layoutId: Int
     protected abstract fun bindView(view: View): VB
@@ -25,10 +24,7 @@ abstract class VBTableUnitItem<VB : ViewBinding> : TableUnitItem {
         viewHolder: VBViewHolder<VB>,
     )
 
-    override val viewType: Int
-        get() = layoutId
-
-    override fun createViewHolder(
+    override fun createDropDownViewHolder(
         parent: ViewGroup,
         lifecycleOwner: LifecycleOwner,
     ): RecyclerView.ViewHolder {
@@ -37,7 +33,7 @@ abstract class VBTableUnitItem<VB : ViewBinding> : TableUnitItem {
         return VBViewHolder(binding, lifecycleOwner)
     }
 
-    override fun bindViewHolder(viewHolder: RecyclerView.ViewHolder) {
+    override fun bindDropDownViewHolder(viewHolder: RecyclerView.ViewHolder) {
         @Suppress("UNCHECKED_CAST")
         with(viewHolder as VBViewHolder<VB>) {
             binding.bindData(context, lifecycleOwner, this)

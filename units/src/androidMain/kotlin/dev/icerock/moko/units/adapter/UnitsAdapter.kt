@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.icerock.moko.units.DropDownUnitItem
 import dev.icerock.moko.units.R
 import dev.icerock.moko.units.UnitItem
+import kotlin.reflect.KClass
 
 class UnitsAdapter(
     private val lifecycleOwner: LifecycleOwner
@@ -47,23 +48,32 @@ class UnitsAdapter(
         position: Int,
         convertView: View?,
         parent: ViewGroup,
-        lifecycleOwner: LifecycleOwner
+        lifecycleOwner: LifecycleOwner,
+        isDropDownView: Boolean
     ): RecyclerView.ViewHolder {
-        val existViewHolder = convertView?.getTag(R.id.viewHolderId) as? RecyclerView.ViewHolder
-        return if (existViewHolder != null) existViewHolder
-        else {
-            val unit = units[position]
-            val viewHolder =
-                if (unit is DropDownUnitItem) unit.createDropDownViewHolder(parent, lifecycleOwner)
-                else unit.createViewHolder(parent, lifecycleOwner)
+        val unit = units[position]
+        val viewHolderWrapper = convertView?.getTag(R.id.viewHolderId) as? ViewHolderWrapper
+        return if (viewHolderWrapper != null && viewHolderWrapper.unitType == unit::class
+            && viewHolderWrapper.isDropDownView == isDropDownView
+        ) {
+            viewHolderWrapper.viewHolder
+        } else {
+            val viewHolder = if (unit is DropDownUnitItem && isDropDownView) {
+                unit.createDropDownViewHolder(parent, lifecycleOwner)
+            } else {
+                unit.createViewHolder(parent, lifecycleOwner)
+            }
             val view = viewHolder.itemView
-            view.setTag(R.id.viewHolderId, viewHolder)
+            view.setTag(
+                R.id.viewHolderId,
+                ViewHolderWrapper(viewHolder, unit::class, isDropDownView)
+            )
             viewHolder
         }
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val viewHolder = getViewHolder(position, convertView, parent, lifecycleOwner)
+        val viewHolder = getViewHolder(position, convertView, parent, lifecycleOwner, false)
         units[position].bindViewHolder(viewHolder)
         return viewHolder.itemView
     }
@@ -71,11 +81,17 @@ class UnitsAdapter(
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
         val unit = units[position]
         return if (unit is DropDownUnitItem) {
-            val viewHolder = getViewHolder(position, convertView, parent, lifecycleOwner)
+            val viewHolder = getViewHolder(position, convertView, parent, lifecycleOwner, true)
             unit.bindDropDownViewHolder(viewHolder)
             viewHolder.itemView
         } else {
             getView(position, convertView, parent)
         }
     }
+
+    private class ViewHolderWrapper(
+        val viewHolder: RecyclerView.ViewHolder,
+        val unitType: KClass<out UnitItem>,
+        val isDropDownView: Boolean
+    )
 }

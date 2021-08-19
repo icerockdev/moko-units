@@ -36,9 +36,6 @@ class MainActivity : AppCompatActivity() {
                     return UnitSimpleDropdown().apply {
                         itemId = id
                         text = title
-                        number = 9
-                        obj1 = itemData
-                        obj2 = itemData
                     }
                 }
 
@@ -50,23 +47,18 @@ class MainActivity : AppCompatActivity() {
                     return UnitComplex().apply {
                         itemId = id
                         text = title
-                        number = 9
-                        obj1 = itemData
-                        obj2 = itemData
                     }
                 }
 
                 override fun createBlueDividerUnit(id: Long): TableUnitItem {
                     return UnitBlueDivider().apply {
                         itemId = id
-                        number = 9
                     }
                 }
 
                 override fun createRedDividerUnit(id: Long): TableUnitItem {
                     return UnitRedDivider().apply {
                         itemId = id
-                        number = 9
                     }
                 }
             }
