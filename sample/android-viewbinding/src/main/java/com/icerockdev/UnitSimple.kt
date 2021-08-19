@@ -21,9 +21,9 @@ open class UnitSimple(override val itemId: Long, val text: String) :
     }
 
     override fun UnitSimpleBinding.bindData(
-      context: Context,
-      lifecycleOwner: LifecycleOwner,
-      viewHolder: VBViewHolder<UnitSimpleBinding>,
+        context: Context,
+        lifecycleOwner: LifecycleOwner,
+        viewHolder: VBViewHolder<UnitSimpleBinding>
     ) {
         this.unitSimpleTextView.text = text
     }

@@ -17,7 +17,6 @@ import dev.icerock.moko.units.UnitItem
 import dev.icerock.moko.units.adapter.UnitsAdapter
 import dev.icerock.moko.units.adapter.UnitsRecyclerViewAdapter
 
-
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -75,12 +74,12 @@ class MainActivity : AppCompatActivity() {
             }
         }
         recyclerView.layoutManager = LinearLayoutManager(this, RecyclerView.VERTICAL, false)
-//        recyclerView.adapter = UnitsRecyclerViewAdapter(this).apply {
-//            units = test.getUnits()
-//        }
+        recyclerView.adapter = UnitsRecyclerViewAdapter(this).apply {
+            units = test.getUnits()
+        }
 
         spinner.adapter = UnitsAdapter(this).apply {
-            units = test.getSimpleUnits()
+            units = test.getUnits()
         }
     }
 }

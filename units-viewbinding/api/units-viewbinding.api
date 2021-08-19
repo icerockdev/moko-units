@@ -5,15 +5,26 @@ public final class dev/icerock/moko/units/viewbinding/BuildConfig {
 	public fun <init> ()V
 }
 
-public abstract class dev/icerock/moko/units/viewbinding/VBTableUnitItem : dev/icerock/moko/units/UnitItem {
+public abstract class dev/icerock/moko/units/viewbinding/VBDropDownUnitItem : dev/icerock/moko/units/DropDownUnitItem {
 	public fun <init> ()V
-	public abstract fun bind (Landroidx/viewbinding/ViewBinding;Landroid/content/Context;Landroidx/lifecycle/LifecycleOwner;Ldev/icerock/moko/units/viewbinding/VBTableUnitItem$VBViewHolder;)V
-	public fun bindViewHolder (Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V
-	public fun createViewHolder (Landroid/view/ViewGroup;Landroidx/lifecycle/LifecycleOwner;)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
-	public abstract fun inflate (Landroid/view/View;)Landroidx/viewbinding/ViewBinding;
+	protected abstract fun bindData (Landroidx/viewbinding/ViewBinding;Landroid/content/Context;Landroidx/lifecycle/LifecycleOwner;Ldev/icerock/moko/units/viewbinding/VBViewHolder;)V
+	public fun bindDropDownViewHolder (Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V
+	protected abstract fun bindView (Landroid/view/View;)Landroidx/viewbinding/ViewBinding;
+	public fun createDropDownViewHolder (Landroid/view/ViewGroup;Landroidx/lifecycle/LifecycleOwner;)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+	protected abstract fun getLayoutId ()I
 }
 
-public final class dev/icerock/moko/units/viewbinding/VBTableUnitItem$VBViewHolder : androidx/recyclerview/widget/RecyclerView$ViewHolder {
+public abstract class dev/icerock/moko/units/viewbinding/VBTableUnitItem : dev/icerock/moko/units/UnitItem {
+	public fun <init> ()V
+	protected abstract fun bindData (Landroidx/viewbinding/ViewBinding;Landroid/content/Context;Landroidx/lifecycle/LifecycleOwner;Ldev/icerock/moko/units/viewbinding/VBViewHolder;)V
+	protected abstract fun bindView (Landroid/view/View;)Landroidx/viewbinding/ViewBinding;
+	public fun bindViewHolder (Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V
+	public fun createViewHolder (Landroid/view/ViewGroup;Landroidx/lifecycle/LifecycleOwner;)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+	protected abstract fun getLayoutId ()I
+	public fun getViewType ()I
+}
+
+public final class dev/icerock/moko/units/viewbinding/VBViewHolder : androidx/recyclerview/widget/RecyclerView$ViewHolder {
 	public fun <init> (Landroidx/viewbinding/ViewBinding;Landroidx/lifecycle/LifecycleOwner;)V
 	public final fun getBinding ()Landroidx/viewbinding/ViewBinding;
 	public final fun getCloseable ()Ljava/io/Closeable;

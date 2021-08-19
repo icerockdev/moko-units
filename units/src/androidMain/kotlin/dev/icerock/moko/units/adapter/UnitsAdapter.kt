@@ -53,16 +53,19 @@ class UnitsAdapter(
     ): RecyclerView.ViewHolder {
         val unit = units[position]
         val viewHolderWrapper = convertView?.getTag(R.id.viewHolderId) as? ViewHolderWrapper
-        return if (viewHolderWrapper != null && viewHolderWrapper.unitType == unit::class
-            && viewHolderWrapper.isDropDownView == isDropDownView
+
+        return if (viewHolderWrapper != null &&
+            viewHolderWrapper.unitType == unit::class &&
+            viewHolderWrapper.isDropDownView == isDropDownView
         ) {
             viewHolderWrapper.viewHolder
         } else {
-            val viewHolder = if (unit is DropDownUnitItem && isDropDownView) {
-                unit.createDropDownViewHolder(parent, lifecycleOwner)
-            } else {
-                unit.createViewHolder(parent, lifecycleOwner)
-            }
+            val viewHolder =
+                if (unit is DropDownUnitItem && isDropDownView) {
+                    unit.createDropDownViewHolder(parent, lifecycleOwner)
+                } else {
+                    unit.createViewHolder(parent, lifecycleOwner)
+                }
             val view = viewHolder.itemView
             view.setTag(
                 R.id.viewHolderId,

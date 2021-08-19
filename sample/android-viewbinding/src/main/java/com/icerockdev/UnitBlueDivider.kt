@@ -7,17 +7,10 @@ package com.icerockdev
 import android.content.Context
 import android.graphics.Color
 import android.view.View
-import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.LifecycleOwner
-import androidx.recyclerview.widget.RecyclerView
 import com.icerockdev.databinding.UnitBlueDividerBinding
-import com.icerockdev.library.ItemData
-import dev.icerock.moko.units.databinding.DataBindingUnitItem
 import dev.icerock.moko.units.viewbinding.VBTableUnitItem
 import dev.icerock.moko.units.viewbinding.VBViewHolder
-import kotlin.Int
-import kotlin.Long
-import kotlin.String
 
 class UnitBlueDivider(override val itemId: Long) :
     VBTableUnitItem<UnitBlueDividerBinding>() {
