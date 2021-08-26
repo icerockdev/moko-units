@@ -27,9 +27,9 @@ public abstract class dev/icerock/moko/units/viewbinding/VBTableUnitItem : dev/i
 public final class dev/icerock/moko/units/viewbinding/VBViewHolder : androidx/recyclerview/widget/RecyclerView$ViewHolder {
 	public fun <init> (Landroidx/viewbinding/ViewBinding;Landroidx/lifecycle/LifecycleOwner;)V
 	public final fun getBinding ()Landroidx/viewbinding/ViewBinding;
-	public final fun getCloseable ()Ljava/io/Closeable;
 	public final fun getContext ()Landroid/content/Context;
 	public final fun getLifecycleOwner ()Landroidx/lifecycle/LifecycleOwner;
-	public final fun setCloseable (Ljava/io/Closeable;)V
+	public final fun getStoredRef ()Ljava/lang/Object;
+	public final fun setStoredRef (Ljava/lang/Object;)V
 }
 

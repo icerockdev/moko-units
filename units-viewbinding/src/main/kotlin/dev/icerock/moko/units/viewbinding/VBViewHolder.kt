@@ -8,14 +8,11 @@ import android.content.Context
 import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import java.io.Closeable
 
 class VBViewHolder<VB : ViewBinding>(
     val binding: VB,
     val lifecycleOwner: LifecycleOwner,
 ) : RecyclerView.ViewHolder(binding.root) {
     val context: Context get() = itemView.context
-
-    // maybe change to `associatedObject: Any? = null` ?
-    var closeable: Closeable? = null
+    var storedRef: Any? = null
 }

@@ -15,7 +15,6 @@ android.buildFeatures.dataBinding = true
 dependencies {
     androidMainImplementation(libs.appCompat)
     androidMainApi(libs.recyclerView)
-    androidMainApi(libs.mokoMvvmLiveData)
 
     // fix of package javax.annotation does not exist import javax.annotation.Generated in DataBinding code
     androidMainCompileOnly(libs.javaxAnnotation)
