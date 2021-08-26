@@ -11,10 +11,10 @@ import android.widget.Adapter
 import android.widget.AdapterView
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import dev.icerock.moko.mvvm.livedata.LiveData
 import dev.icerock.moko.units.TableUnitItem
 import dev.icerock.moko.units.UnitItem
 import dev.icerock.moko.units.adapter.Settable
@@ -104,8 +104,8 @@ fun RecyclerView.bindUnits(lifecycleOwner: LifecycleOwner, units: LiveData<List<
     val unitsAdapter = UnitsRecyclerViewAdapter(lifecycleOwner)
     adapter = unitsAdapter
 
-    units.ld().observe(lifecycleOwner) {
-        if (units.value.isNotEmpty()) {
+    units.observe(lifecycleOwner) {
+        if (units.value?.isNotEmpty() == true) {
             unitsAdapter.units = it.orEmpty()
         }
     }
@@ -120,7 +120,7 @@ fun RecyclerView.bindPagingUnits(
     layoutManager = LinearLayoutManager(this.context, RecyclerView.VERTICAL, false)
     adapter = unitsAdapter
 
-    units.ld().observe(lifecycleOwner) {
+    units.observe(lifecycleOwner) {
         unitsAdapter.units = it.orEmpty()
     }
 

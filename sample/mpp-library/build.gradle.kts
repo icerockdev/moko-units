@@ -16,6 +16,7 @@ dependencies {
     commonMainApi(projects.units)
 
     "androidMainImplementation"(libs.recyclerView)
+    "androidMainImplementation"(projects.unitsDatabinding)
 
     // fix of package javax.annotation does not exist import javax.annotation.Generated in DataBinding code
     "androidMainCompileOnly"(libs.javaxAnnotation)

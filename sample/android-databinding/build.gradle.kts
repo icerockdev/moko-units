@@ -27,4 +27,5 @@ dependencies {
     implementation(libs.recyclerView)
 
     implementation(projects.sample.mppLibrary)
+    implementation(projects.unitsDatabinding)
 }
