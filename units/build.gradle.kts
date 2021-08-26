@@ -10,9 +10,6 @@ plugins {
     id("detekt-convention")
 }
 
-group = "dev.icerock.moko"
-version = libs.versions.mokoUnitsVersion.get()
-
 android.buildFeatures.dataBinding = true
 
 dependencies {

@@ -23,6 +23,13 @@ buildscript {
     }
 }
 
+allprojects {
+    plugins.withId("org.gradle.maven-publish") {
+        group = "dev.icerock.moko"
+        version = libs.versions.mokoUnitsVersion.get()
+    }
+}
+
 val sampleProjects: Set<Project> = project(":sample").allprojects
 
 apiValidation {

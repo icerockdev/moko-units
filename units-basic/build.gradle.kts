@@ -9,9 +9,6 @@ plugins {
     id("detekt-convention")
 }
 
-group = "dev.icerock.moko"
-version = libs.versions.mokoUnitsVersion.get()
-
 dependencies {
     commonMainApi(projects.units)
 

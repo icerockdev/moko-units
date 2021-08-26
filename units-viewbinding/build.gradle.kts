@@ -10,9 +10,6 @@ plugins {
     id("kotlin-android")
 }
 
-group = "dev.icerock.moko"
-version = libs.versions.mokoUnitsVersion.get()
-
 android {
     buildFeatures.viewBinding = true
 }
