@@ -46,7 +46,7 @@ extension TableUnitsSourceKt {
                     return noId || notInsertOrDelete
                 }
                 let cellsForReload: Array<IndexPath> = cellsToUpdate.filter { indexPath in
-                    let oldItem: TableUnitItem? = old?.getSafe(indexPath: indexPath)
+                    let oldItem: TableUnitItem? = old?.getSafe(indexPath: indexPath.toOldIndexPath(diff: diff))
                     let newItem: TableUnitItem? = new?.getSafe(indexPath: indexPath)
                     
                     if let oldItem = oldItem, let newItem = newItem,
@@ -108,7 +108,7 @@ extension CollectionUnitsSourceKt {
                     return noId || notInsertOrDelete
                 }
                 let cellsForReload: Array<IndexPath> = cellsToUpdate.filter { indexPath in
-                    let oldItem: CollectionUnitItem? = old?.getSafe(indexPath: indexPath)
+                    let oldItem: CollectionUnitItem? = old?.getSafe(indexPath: indexPath.toOldIndexPath(diff: diff))
                     let newItem: CollectionUnitItem? = new?.getSafe(indexPath: indexPath)
                     
                     if let oldItem = oldItem, let newItem = newItem,
@@ -145,6 +145,33 @@ fileprivate extension Array {
         } else {
             return nil
         }
+    }
+}
+
+fileprivate extension IndexPath {
+    
+    // Calculate IndexPath of row before diff was applied
+    func toOldIndexPath(diff: ExtendedDiff) -> IndexPath {
+        var oldRow = self.row
+        diff.elements.reversed().forEach { element in
+            switch element {
+            case let .delete(at):
+                if at <= oldRow {
+                    oldRow += 1
+                }
+            case let .insert(at):
+                if at < oldRow {
+                    oldRow -= 1
+                }
+            case let .move(from, to):
+                if from > oldRow && to < oldRow {
+                    oldRow -= 1
+                } else if from < oldRow && to > oldRow {
+                    oldRow += 1
+                }
+            }
+        }
+        return IndexPath(row: oldRow, section: 0)
     }
 }
 
