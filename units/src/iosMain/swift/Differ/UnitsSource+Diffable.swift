@@ -28,6 +28,12 @@ extension TableUnitsSourceKt {
                 isEqual: { compareTabelUnitItems(first: $0, second: $1) }
             )
             
+            // traces for calculating previous indexPaths
+            let outputDiffPathTraces = (old ?? []).outputDiffPathTraces(
+                to: new ?? [],
+                isEqual: { compareTabelUnitItems(first: $0, second: $1) }
+            )
+            
             let update = BatchUpdate(diff: diff, indexPathTransform: { $0 })
 
             tableView.performBatchUpdates {
@@ -40,13 +46,13 @@ extension TableUnitsSourceKt {
             } completion: { _ in
                 let visibleIndexPaths: Array<IndexPath> = tableView.indexPathsForVisibleRows ?? []
                 let cellsToUpdate: Array<IndexPath> = visibleIndexPaths.filter { indexPath in
-                    let newItem: TableUnitItem? = new?.getSafe(indexPath: indexPath)
-                    let noId: Bool = newItem?.itemId == TableUnitItemCompanion().NO_ID
-                    let notInsertOrDelete: Bool = !update.contains(indexPath: indexPath)
-                    return noId || notInsertOrDelete
+                    return !update.insertions.contains(indexPath)
                 }
                 let cellsForReload: Array<IndexPath> = cellsToUpdate.filter { indexPath in
-                    let oldItem: TableUnitItem? = old?.getSafe(indexPath: indexPath.toOldIndexPath(diff: diff))
+                    guard let oldItemIndexPath = indexPath.toOldIndexPath(traces: outputDiffPathTraces) else {
+                        return true
+                    }
+                    let oldItem: TableUnitItem? = old?.getSafe(indexPath: oldItemIndexPath)
                     let newItem: TableUnitItem? = new?.getSafe(indexPath: indexPath)
                     
                     if let oldItem = oldItem, let newItem = newItem,
@@ -95,6 +101,12 @@ extension CollectionUnitsSourceKt {
                 isEqual: { compareCollectionUnitItems(first: $0, second: $1) }
             )
             
+            // traces for calculating previous indexPaths
+            let outputDiffPathTraces = (old ?? []).outputDiffPathTraces(
+                to: new ?? [],
+                isEqual: { compareCollectionUnitItems(first: $0, second: $1) }
+            )
+            
             let update = BatchUpdate(diff: diff, indexPathTransform: { $0 })
             
             collectionView.performBatchUpdates {
@@ -102,13 +114,13 @@ extension CollectionUnitsSourceKt {
             } completion: { _ in
                 let visibleIndexPaths: Array<IndexPath> = collectionView.indexPathsForVisibleItems ?? []
                 let cellsToUpdate: Array<IndexPath> = visibleIndexPaths.filter { indexPath in
-                    let newItem: CollectionUnitItem? = new?.getSafe(indexPath: indexPath)
-                    let noId: Bool = newItem?.itemId == TableUnitItemCompanion().NO_ID
-                    let notInsertOrDelete: Bool = !update.contains(indexPath: indexPath)
-                    return noId || notInsertOrDelete
+                    return !update.insertions.contains(indexPath)
                 }
                 let cellsForReload: Array<IndexPath> = cellsToUpdate.filter { indexPath in
-                    let oldItem: CollectionUnitItem? = old?.getSafe(indexPath: indexPath.toOldIndexPath(diff: diff))
+                    guard let oldItemIndexPath = indexPath.toOldIndexPath(traces: outputDiffPathTraces) else {
+                        return true
+                    }
+                    let oldItem: CollectionUnitItem? = old?.getSafe(indexPath: oldItemIndexPath)
                     let newItem: CollectionUnitItem? = new?.getSafe(indexPath: indexPath)
                     
                     if let oldItem = oldItem, let newItem = newItem,
@@ -151,33 +163,22 @@ fileprivate extension Array {
 fileprivate extension IndexPath {
     
     // Calculate IndexPath of row before diff was applied
-    func toOldIndexPath(diff: ExtendedDiff) -> IndexPath {
-        var oldRow = self.row
-        diff.elements.reversed().forEach { element in
-            switch element {
-            case let .delete(at):
-                if at <= oldRow {
-                    oldRow += 1
-                }
-            case let .insert(at):
-                if at < oldRow {
-                    oldRow -= 1
-                }
-            case let .move(from, to):
-                if from > oldRow && to < oldRow {
-                    oldRow -= 1
-                } else if from < oldRow && to > oldRow {
-                    oldRow += 1
-                }
-            }
+    func toOldIndexPath(traces: [Trace]) -> IndexPath? {
+        
+        // filter for only matchedTraces,
+        // can't use type() function from here https://github.com/wokalski/Diff.swift/blob/61edde253f8b74ab475dfc0dd40941efacdff71d/Sources/Diff.swift#L97
+        // because it is internal
+        let matchedTraces = traces.filter { trace in
+            trace.from.x + 1 == trace.to.x && trace.from.y + 1 == trace.to.y
         }
-        return IndexPath(row: oldRow, section: 0)
-    }
-}
-
-fileprivate extension BatchUpdate {
-    func contains(indexPath: IndexPath) -> Bool {
-        return self.deletions.contains(indexPath) ||
-            self.insertions.contains(indexPath)
+        
+        // trace.from.y - current row index
+        // trace.from.x - old row index
+        
+        guard let trace = (matchedTraces.first { $0.from.y == self.row }) else {
+            return nil
+        }
+        
+        return IndexPath(row: trace.from.x, section: 0)
     }
 }
