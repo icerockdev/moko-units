@@ -162,23 +162,26 @@ fileprivate extension Array {
 
 fileprivate extension IndexPath {
     
-    // Calculate IndexPath of row before diff was applied
+    // Using new indexPath and diff (traces array), calculate index of cell that was before applying the diff, for preventing reload cells once again.
     func toOldIndexPath(traces: [Trace]) -> IndexPath? {
         
         // filter for only matchedTraces,
         // can't use type() function from here https://github.com/wokalski/Diff.swift/blob/61edde253f8b74ab475dfc0dd40941efacdff71d/Sources/Diff.swift#L97
         // because it is internal
         let matchedTraces = traces.filter { trace in
+            // Trace is a vector with coords (from, to) that shows changes of cell position
+            // if trace is a horizontal vector, it means row is deleted
+            // if trace is vertical vector, it means row is inserted
+            // we only need diagonal vectors, it means that row wasn't deleted or inserted
             trace.from.x + 1 == trace.to.x && trace.from.y + 1 == trace.to.y
         }
         
         // trace.from.y - current row index
-        // trace.from.x - old row index
-        
         guard let trace = (matchedTraces.first { $0.from.y == self.row }) else {
             return nil
         }
         
+        // trace.from.x - old row index
         return IndexPath(row: trace.from.x, section: 0)
     }
 }
