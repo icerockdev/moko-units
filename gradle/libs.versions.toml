@@ -9,7 +9,7 @@ coroutinesVersion = "1.5.1-native-mt"
 mokoGraphicsVersion = "0.8.0"
 mokoResourcesVersion = "0.16.2"
 mokoTestVersion = "0.4.0"
-mokoUnitsVersion = "0.6.2"
+mokoUnitsVersion = "0.6.3"
 
 [libraries]
 appCompat = { module = "androidx.appcompat:appcompat", version.ref = "androidAppCompatVersion" }
