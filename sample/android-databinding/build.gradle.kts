@@ -5,6 +5,8 @@
 plugins {
     id("android-app-convention")
     id("detekt-convention")
+    id("kotlin-kapt")
+    id("dev.icerock.mobile.multiplatform-units")
 }
 
 android {
@@ -20,6 +22,12 @@ android {
     lintOptions {
         disable("Instantiatable") // bug Error: SimpleActivity must extend android.app.Activity [Instantiatable]
     }
+}
+
+multiplatformUnits {
+    classesPackage = "com.icerockdev"
+    dataBindingPackage = "com.icerockdev"
+    layoutsSourceSet = "main"
 }
 
 dependencies {

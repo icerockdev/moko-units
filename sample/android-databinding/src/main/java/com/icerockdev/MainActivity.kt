@@ -1,7 +1,6 @@
 package com.icerockdev
 
 import android.os.Bundle
-import android.widget.Spinner
 import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatSpinner
@@ -9,11 +8,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.icerockdev.library.ItemData
 import com.icerockdev.library.Testing
-import com.icerockdev.library.UnitBlueDivider
-import com.icerockdev.library.UnitComplex
-import com.icerockdev.library.UnitRedDivider
-import com.icerockdev.library.UnitSimple
-import com.icerockdev.library.UnitSimpleDropdown
 import dev.icerock.moko.units.TableUnitItem
 import dev.icerock.moko.units.UnitItem
 import dev.icerock.moko.units.adapter.UnitsAdapter
