@@ -1,6 +1,11 @@
 public abstract interface class androidx/databinding/DataBindingComponent {
 }
 
+public class androidx/databinding/library/baseAdapters/BR {
+	public static field _all I
+	public fun <init> ()V
+}
+
 public class dev/icerock/moko/units/databinding/BR {
 	public static field _all I
 	public fun <init> ()V
