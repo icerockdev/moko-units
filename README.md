@@ -149,6 +149,11 @@ tableDataSource.units = viewModel.items
 tableView.reloadTable()
 ```
 
+# Different units UI in dropdown list
+If you want to use units in dropdown list you should implement `DropDownUnitItem`. Abstract class `VBDropDownUnitItem` already implement it so you can use it. 
+If you want the units UI will be different when dropdown list is close or open, you need to implement another interface `TableUnitItem` which already implemented in `VBTableUnitItem`.
+The sample you can see [here](https://github.com/icerockdev/moko-units/tree/master/sample/android-viewbinding/src/main/java/com/icerockdev/UnitSimpleDropdown.kt)
+
 ## Samples
 Please see more examples in the [sample directory](sample).
 
