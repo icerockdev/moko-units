@@ -1,0 +1,74 @@
+public abstract interface class androidx/databinding/DataBindingComponent {
+}
+
+public class androidx/databinding/library/baseAdapters/BR {
+	public static field _all I
+	public fun <init> ()V
+}
+
+public class dev/icerock/moko/units/databinding/BR {
+	public static field _all I
+	public fun <init> ()V
+}
+
+public final class dev/icerock/moko/units/databinding/BindingAdaptersKt {
+	public static final fun setAdapter (Landroidx/recyclerview/widget/RecyclerView;Ljava/lang/String;)V
+	public static final fun setDecorator (Landroidx/recyclerview/widget/RecyclerView;Ljava/util/List;)V
+	public static final fun setItems (Landroid/widget/AdapterView;Ljava/util/List;)V
+	public static final fun setItems (Landroidx/recyclerview/widget/RecyclerView;Ljava/util/List;Ljava/lang/Boolean;)V
+	public static final fun setItems (Landroidx/recyclerview/widget/RecyclerView;Ljava/util/List;Ljava/util/List;)V
+	public static final fun setItemsWithAdapter (Landroid/widget/AdapterView;Ljava/lang/String;)V
+}
+
+public final class dev/icerock/moko/units/databinding/BuildConfig {
+	public static final field BUILD_TYPE Ljava/lang/String;
+	public static final field DEBUG Z
+	public static final field LIBRARY_PACKAGE_NAME Ljava/lang/String;
+	public fun <init> ()V
+}
+
+public class dev/icerock/moko/units/databinding/DataBinderMapperImpl : androidx/databinding/DataBinderMapper {
+	public fun <init> ()V
+	public fun collectDependencies ()Ljava/util/List;
+	public fun convertBrIdToString (I)Ljava/lang/String;
+	public fun getDataBinder (Landroidx/databinding/DataBindingComponent;Landroid/view/View;I)Landroidx/databinding/ViewDataBinding;
+	public fun getDataBinder (Landroidx/databinding/DataBindingComponent;[Landroid/view/View;I)Landroidx/databinding/ViewDataBinding;
+	public fun getLayoutId (Ljava/lang/String;)I
+}
+
+public abstract interface class dev/icerock/moko/units/databinding/DataBindingDropDownUnitItem : dev/icerock/moko/units/DropDownUnitItem {
+	public abstract fun bindDropDown (Landroidx/databinding/ViewDataBinding;)V
+	public abstract fun bindDropDownViewHolder (Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V
+	public abstract fun createDropDownViewHolder (Landroid/view/ViewGroup;Landroidx/lifecycle/LifecycleOwner;)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+	public abstract fun getDropDownLayoutId ()I
+}
+
+public final class dev/icerock/moko/units/databinding/DataBindingDropDownUnitItem$DefaultImpls {
+	public static fun bindDropDownViewHolder (Ldev/icerock/moko/units/databinding/DataBindingDropDownUnitItem;Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V
+	public static fun createDropDownViewHolder (Ldev/icerock/moko/units/databinding/DataBindingDropDownUnitItem;Landroid/view/ViewGroup;Landroidx/lifecycle/LifecycleOwner;)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+}
+
+public class dev/icerock/moko/units/databinding/DataBindingTriggerClass {
+	public fun <init> ()V
+}
+
+public abstract interface class dev/icerock/moko/units/databinding/DataBindingUnitItem : dev/icerock/moko/units/UnitItem {
+	public abstract fun bind (Landroidx/databinding/ViewDataBinding;)V
+	public abstract fun bindViewHolder (Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V
+	public abstract fun createViewHolder (Landroid/view/ViewGroup;Landroidx/lifecycle/LifecycleOwner;)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+	public abstract fun getLayoutId ()I
+	public abstract fun getViewType ()I
+}
+
+public final class dev/icerock/moko/units/databinding/DataBindingUnitItem$DefaultImpls {
+	public static fun bindViewHolder (Ldev/icerock/moko/units/databinding/DataBindingUnitItem;Landroidx/recyclerview/widget/RecyclerView$ViewHolder;)V
+	public static fun createViewHolder (Ldev/icerock/moko/units/databinding/DataBindingUnitItem;Landroid/view/ViewGroup;Landroidx/lifecycle/LifecycleOwner;)Landroidx/recyclerview/widget/RecyclerView$ViewHolder;
+	public static fun getViewType (Ldev/icerock/moko/units/databinding/DataBindingUnitItem;)I
+}
+
+public final class dev/icerock/moko/units/databinding/DataBindingUnitViewHolder : androidx/recyclerview/widget/RecyclerView$ViewHolder {
+	public fun <init> (Landroid/view/ViewGroup;I)V
+	public fun <init> (Landroidx/databinding/ViewDataBinding;)V
+	public final fun getBinding ()Landroidx/databinding/ViewDataBinding;
+}
+
