@@ -4,8 +4,8 @@
 
 package com.icerockdev.library
 
-import com.icerockdev.library.mock.TableFactory
 import com.icerockdev.library.mock.SimpleTableUnitMock
+import com.icerockdev.library.mock.TableFactory
 import dev.icerock.moko.units.TableUnitItem
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -16,7 +16,7 @@ class TableTests {
     fun `table units building`() {
         val testing = Testing(unitFactory = TableFactory())
         val units: List<TableUnitItem> = testing.getUnits()
-        
+
         assertEquals(
             expected = listOf(
                 SimpleTableUnitMock(
