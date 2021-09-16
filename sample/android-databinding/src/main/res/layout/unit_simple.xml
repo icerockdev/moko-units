@@ -3,7 +3,7 @@
 
     <data>
 
-        <import type="com.icerockdev.library.ItemData"/>
+        <import type="com.icerockdev.library.ItemData" />
 
         <variable
             name="text"

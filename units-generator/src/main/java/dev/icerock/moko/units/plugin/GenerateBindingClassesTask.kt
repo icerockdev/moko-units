@@ -13,7 +13,8 @@ import org.w3c.dom.Element
 import org.xml.sax.SAXException
 import java.io.File
 import java.io.IOException
-import java.util.*
+import java.util.ArrayList
+import java.util.HashMap
 import javax.xml.parsers.DocumentBuilder
 import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.parsers.ParserConfigurationException
@@ -21,6 +22,7 @@ import javax.xml.parsers.ParserConfigurationException
 open class GenerateBindingClassesTask : DefaultTask() {
     @get:Internal
     lateinit var configuration: Configuration
+
     @get:Internal
     val generationPath by lazy { File(project.buildDir, "generated/moko/units/src/") }
 

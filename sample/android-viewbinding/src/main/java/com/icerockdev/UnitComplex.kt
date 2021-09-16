@@ -14,7 +14,7 @@ import dev.icerock.moko.units.viewbinding.VBViewHolder
 
 class UnitComplex(override val itemId: Long, val text: String) :
     VBTableUnitItem<UnitComplexBinding>() {
-  
+
     override val layoutId: Int = R.layout.unit_complex
 
     override fun bindView(view: View): UnitComplexBinding {
@@ -22,9 +22,9 @@ class UnitComplex(override val itemId: Long, val text: String) :
     }
 
     override fun UnitComplexBinding.bindData(
-      context: Context,
-      lifecycleOwner: LifecycleOwner,
-      viewHolder: VBViewHolder<UnitComplexBinding>
+        context: Context,
+        lifecycleOwner: LifecycleOwner,
+        viewHolder: VBViewHolder<UnitComplexBinding>
     ) {
         this.unitComplexTextView.text = text
         this.unitComplexTextView.setBackgroundColor(Color.parseColor("#FFC107"))
