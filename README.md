@@ -52,12 +52,6 @@ dependencies {
 
     commonTestImplementation("dev.icerock.moko:units-test:0.7.0")
 }
-
-multiplatformUnits {
-    classesPackage = "org.example.library.units"
-    dataBindingPackage = "org.example.library"
-    layoutsSourceSet = "androidMain"
-}
 ```
 
 On iOS, in addition to the Kotlin library add Pod in the Podfile.
@@ -75,12 +69,18 @@ In android build.gradle
 databinding usage
 ```
 apply plugin: "dev.icerock.mobile.multiplatform-units"
-implementation(projects.unitsDatabinding)
+implementation("dev.icerock.moko:units-databinding:0.7.0)
+
+multiplatformUnits {
+    classesPackage = "org.example.library.units"
+    dataBindingPackage = "org.example.library"
+    layoutsSourceSet = "androidMain"
+}
 ```
 
 viewbinding usage 
 ```
-implementation(projects.unitsViewbinding)
+implementation("dev.icerock.moko:units-viewbinding:0.7.0")
 ```
 
 ## Usage
