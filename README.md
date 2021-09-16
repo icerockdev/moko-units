@@ -69,18 +69,23 @@ In android build.gradle
 databinding usage
 ```
 apply plugin: "dev.icerock.mobile.multiplatform-units"
-implementation("dev.icerock.moko:units-databinding:0.7.0)
+
+dependencies {
+    implementation("dev.icerock.moko:units-databinding:0.7.0")
+}
 
 multiplatformUnits {
     classesPackage = "org.example.library.units"
     dataBindingPackage = "org.example.library"
-    layoutsSourceSet = "androidMain"
+    layoutsSourceSet = "main"
 }
 ```
 
 viewbinding usage 
 ```
-implementation("dev.icerock.moko:units-viewbinding:0.7.0")
+dependencies {
+    implementation("dev.icerock.moko:units-viewbinding:0.7.0")
+}
 ```
 
 ## Usage
