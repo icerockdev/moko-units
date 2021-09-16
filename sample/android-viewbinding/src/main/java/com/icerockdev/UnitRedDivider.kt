@@ -13,7 +13,7 @@ import dev.icerock.moko.units.UnitItem
 import dev.icerock.moko.units.viewbinding.VBTableUnitItem
 import dev.icerock.moko.units.viewbinding.VBViewHolder
 
-open class UnitRedDivider(override val itemId: Long) :
+class UnitRedDivider(override val itemId: Long) :
     VBTableUnitItem<UnitRedDividerBinding>(), UnitItem {
 
     override val layoutId: Int = R.layout.unit_red_divider

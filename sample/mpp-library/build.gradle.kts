@@ -11,7 +11,7 @@ plugins {
 dependencies {
     commonMainApi(projects.units)
 
-    "androidMainImplementation"(libs.recyclerView)
+    androidMainImplementation(libs.recyclerView)
 
     commonTestImplementation(libs.mokoTest)
     commonTestImplementation(projects.unitsTest)

@@ -7,6 +7,6 @@ plugins {
     id("android-base-convention")
 }
 
-android{
-    sourceSets.all { java.srcDir("src/$name/kotlin") }
+android {
+    sourceSets.configureEach { java.srcDir("src/$name/kotlin") }
 }
