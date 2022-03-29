@@ -3,11 +3,10 @@
  */
 
 plugins {
-    id("jvm-convention")
+    id("org.jetbrains.kotlin.jvm") version "1.6.10"
     id("publication-convention")
-
-    id("com.gradle.plugin-publish") version ("0.15.0")
-    id("detekt-convention")
+    id("com.gradle.plugin-publish") version "0.15.0"
+    //id("dev.icerock.moko.gradle.detekt")
     id("java-gradle-plugin")
 }
 

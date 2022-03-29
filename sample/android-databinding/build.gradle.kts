@@ -4,8 +4,6 @@
 
 plugins {
     id("android-app-convention")
-    id("detekt-convention")
-    id("kotlin-kapt")
     id("dev.icerock.mobile.multiplatform-units")
 }
 

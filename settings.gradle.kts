@@ -5,10 +5,22 @@
 enableFeaturePreview("VERSION_CATALOGS")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
+pluginManagement {
+    repositories {
+        mavenCentral()
+        google()
+        gradlePluginPortal()
+    }
+
+    includeBuild("units-build-logic")
+    //includeBuild("units-generator")
+}
+
 dependencyResolutionManagement {
     repositories {
         mavenCentral()
         google()
+        gradlePluginPortal()
 
         jcenter {
             content {
@@ -17,9 +29,6 @@ dependencyResolutionManagement {
         }
     }
 }
-
-includeBuild("units-build-logic")
-includeBuild("units-generator")
 
 include(":units")
 include(":units-basic")

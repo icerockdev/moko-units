@@ -4,10 +4,6 @@
 
 plugins {
     id("android-library-convention")
-    id("detekt-convention")
-    id("kotlin-kapt")
-    id("android-publication-convention")
-    id("kotlin-android")
 }
 
 android {

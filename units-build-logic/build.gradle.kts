@@ -10,6 +10,8 @@ repositories {
     mavenCentral()
     google()
 
+    gradlePluginPortal()
+
     jcenter {
         content {
             includeGroup("org.jetbrains.trove4j")
@@ -18,8 +20,15 @@ repositories {
 }
 
 dependencies {
-    api("dev.icerock:mobile-multiplatform:0.12.0")
-    api("org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20")
-    api("com.android.tools.build:gradle:4.2.1")
-    api("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:1.15.0")
+    api(libs.kotlinGradlePlugin)
+    api(libs.androidGradlePlugin)
+    api(libs.googleServicesGradlePlugin)
+    api(libs.mokoGradlePlugin)
+    api(libs.mobileMultiplatformGradlePlugin)
+    api(libs.kotlinSerializationGradlePlugin)
+
+//    api(libs.kotlinGradlePlugin)
+//    api(libs.androidGradlePlugin)
+//    api(libs.mokoGradlePlugin)
+//    api(libs.mobileMultiplatformGradlePlugin)
 }
