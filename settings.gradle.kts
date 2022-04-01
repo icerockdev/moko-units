@@ -11,9 +11,6 @@ pluginManagement {
         google()
         gradlePluginPortal()
     }
-
-    includeBuild("units-build-logic")
-    //includeBuild("units-generator")
 }
 
 dependencyResolutionManagement {
@@ -21,14 +18,10 @@ dependencyResolutionManagement {
         mavenCentral()
         google()
         gradlePluginPortal()
-
-        jcenter {
-            content {
-                includeGroup("org.jetbrains.kotlinx")
-            }
-        }
     }
 }
+
+includeBuild("units-generator")
 
 include(":units")
 include(":units-basic")

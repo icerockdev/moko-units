@@ -3,9 +3,9 @@
  */
 
 plugins {
-    id("mpp-library-convention")
+    id("dev.icerock.moko.gradle.multiplatform.mobile")
     id("dev.icerock.mobile.multiplatform.ios-framework")
-    id("detekt-convention")
+    id("dev.icerock.moko.gradle.detekt")
 }
 
 dependencies {

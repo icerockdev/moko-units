@@ -145,7 +145,7 @@ open class UnitItemGenerator(
                     .map { getClassType(it) }
                     .toTypedArray()
 
-                this.parameterizedBy(*typeNames)
+                this.parameterizedBy(typeArguments = typeNames)
             } else {
                 this
             }

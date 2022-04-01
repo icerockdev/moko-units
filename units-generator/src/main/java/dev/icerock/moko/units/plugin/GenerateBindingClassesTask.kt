@@ -13,8 +13,6 @@ import org.w3c.dom.Element
 import org.xml.sax.SAXException
 import java.io.File
 import java.io.IOException
-import java.util.ArrayList
-import java.util.HashMap
 import javax.xml.parsers.DocumentBuilder
 import javax.xml.parsers.DocumentBuilderFactory
 import javax.xml.parsers.ParserConfigurationException
@@ -86,9 +84,9 @@ open class GenerateBindingClassesTask : DefaultTask() {
         val simpleFileList = mutableListOf<File>()
         val dropDownFileList = mutableListOf<File>()
 
+        @Suppress("LoopWithTooManyJumpStatements")
         for (layoutFolder in files) {
             if (!layoutFolder.name.startsWith(LAYOUT_RES_PACKAGE)) continue
-
             val xmlFiles = layoutFolder.listFiles() ?: continue
 
             for (xmlFile in xmlFiles) {
@@ -98,7 +96,6 @@ open class GenerateBindingClassesTask : DefaultTask() {
                     BindingClassType.SIMPLE -> simpleFileList.add(xmlFile)
                     BindingClassType.DROPDOWN -> dropDownFileList.add(xmlFile)
                 }
-
             }
         }
 
@@ -150,7 +147,7 @@ open class GenerateBindingClassesTask : DefaultTask() {
         val separatedLayoutName = getSeparatedLayoutName(xmlFile)
         val fileNameBuilder = StringBuilder()
         for (subName in separatedLayoutName) {
-            val partOfName = subName.substring(0, 1).toUpperCase() + subName.substring(1)
+            val partOfName = subName.substring(0, 1).uppercase() + subName.substring(1)
             fileNameBuilder.append(partOfName)
         }
         return fileNameBuilder.toString()
@@ -175,29 +172,27 @@ open class GenerateBindingClassesTask : DefaultTask() {
 
         if (firstChild is Element) {
             val elements = firstChild.getElementsByTagName(BINDING_DATA)
-            if (elements != null) {
-                for (i in 0 until elements.length) {
-                    val dataNode = elements.item(i)
+            for (i in 0 until elements.length) {
+                val dataNode = elements.item(i)
 
-                    if (dataNode !is Element) continue
+                if (dataNode !is Element) continue
 
-                    val variables = dataNode.getElementsByTagName(BINDING_VARIABLE)
-                    val imports = dataNode.getElementsByTagName(BINDING_IMPORT)
+                val variables = dataNode.getElementsByTagName(BINDING_VARIABLE)
+                val imports = dataNode.getElementsByTagName(BINDING_IMPORT)
 
-                    for (j in 0 until variables.length) {
-                        val variable = variables.item(j)
-                        val attributes = variable.attributes
+                for (j in 0 until variables.length) {
+                    val variable = variables.item(j)
+                    val attributes = variable.attributes
 
-                        mapVariables[attributes.getNamedItem("name").nodeValue] =
-                            attributes.getNamedItem(BINDING_TYPE).nodeValue
-                    }
+                    mapVariables[attributes.getNamedItem("name").nodeValue] =
+                        attributes.getNamedItem(BINDING_TYPE).nodeValue
+                }
 
-                    for (j in 0 until imports.length) {
-                        val importNode = imports.item(j)
-                        val attributes = importNode.attributes
+                for (j in 0 until imports.length) {
+                    val importNode = imports.item(j)
+                    val attributes = importNode.attributes
 
-                        importList.add(attributes.getNamedItem(BINDING_TYPE).nodeValue)
-                    }
+                    importList.add(attributes.getNamedItem(BINDING_TYPE).nodeValue)
                 }
             }
         }

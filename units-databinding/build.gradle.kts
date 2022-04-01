@@ -3,7 +3,9 @@
  */
 
 plugins {
-    id("android-library-convention")
+    id("dev.icerock.moko.gradle.android.library")
+    id("dev.icerock.moko.gradle.detekt")
+    id("dev.icerock.moko.gradle.android.publication")
 }
 
 android {

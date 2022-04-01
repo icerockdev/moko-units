@@ -6,7 +6,6 @@ package dev.icerock.moko.units.databinding
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
@@ -16,13 +15,15 @@ class DataBindingUnitViewHolder<T : ViewDataBinding>(
     val binding: T
 ) : RecyclerView.ViewHolder(binding.root) {
 
-    constructor(parent: ViewGroup, @LayoutRes mLayout: Int) :
-            this(
-                binding = DataBindingUtil.inflate<T>(
-                    LayoutInflater.from(parent.context),
-                    mLayout,
-                    parent,
-                    false
-                )
-            )
+    constructor(
+        parent: ViewGroup,
+        @LayoutRes mLayout: Int
+    ) : this(
+        binding = DataBindingUtil.inflate<T>(
+            LayoutInflater.from(parent.context),
+            mLayout,
+            parent,
+            false
+        )
+    )
 }

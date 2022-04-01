@@ -3,12 +3,27 @@
  */
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.6.10"
-    id("publication-convention")
-    id("com.gradle.plugin-publish") version "0.15.0"
-    //id("dev.icerock.moko.gradle.detekt")
+    id("com.gradle.plugin-publish") version ("0.15.0")
     id("java-gradle-plugin")
 }
+
+buildscript {
+    repositories {
+        mavenCentral()
+        google()
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath(libs.kotlinGradlePlugin)
+        classpath(libs.mokoGradlePlugin)
+        classpath(libs.kotlinSerializationGradlePlugin)
+    }
+}
+
+apply(plugin = "org.jetbrains.kotlin.jvm")
+apply(plugin = "dev.icerock.moko.gradle.detekt")
+apply(plugin = "dev.icerock.moko.gradle.publication")
+apply(plugin = "dev.icerock.moko.gradle.publication.nexus")
 
 group = "dev.icerock.moko"
 version = libs.versions.mokoUnitsVersion.get()
@@ -27,11 +42,9 @@ java {
     withSourcesJar()
 }
 
-publishing {
-    publications {
-        register("mavenJava", MavenPublication::class) {
-            from(components["java"])
-        }
+configure<PublishingExtension> {
+    publications.register("mavenJava", MavenPublication::class) {
+        from(components["java"])
     }
 }
 
