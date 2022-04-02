@@ -7,7 +7,6 @@ pluginManagement {
     repositories {
         mavenCentral()
         google()
-
         gradlePluginPortal()
     }
 }
@@ -16,13 +15,7 @@ dependencyResolutionManagement {
     repositories {
         mavenCentral()
         google()
-
-        jcenter {
-            content {
-                includeGroup("org.jetbrains.trove4j")
-                includeGroup("org.jetbrains.kotlinx")
-            }
-        }
+        gradlePluginPortal()
     }
 
     versionCatalogs {
@@ -31,5 +24,3 @@ dependencyResolutionManagement {
         }
     }
 }
-
-includeBuild("../units-build-logic")

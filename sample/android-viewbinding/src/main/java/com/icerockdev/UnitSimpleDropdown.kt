@@ -30,6 +30,8 @@ class UnitSimpleDropdown(
         unitSimpleDropdownTextView.text = text
     }
 
-    class Combined(itemId: Long, text: String) : UnitSimple(itemId, text),
-        DropDownUnitItem by UnitSimpleDropdown(text)
+    class Combined(
+        itemId: Long,
+        text: String
+    ) : UnitSimple(itemId, text), DropDownUnitItem by UnitSimpleDropdown(text)
 }
