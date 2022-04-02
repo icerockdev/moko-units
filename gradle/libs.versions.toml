@@ -1,17 +1,18 @@
 [versions]
-kotlinVersion = "1.5.20"
-androidGradleVersion = "4.2.1"
+kotlinVersion = "1.6.10"
+androidGradleVersion = "7.0.4"
 androidAppCompatVersion = "1.3.1"
 androidCoreTestingVersion = "2.1.0"
 androidLifecycleVersion = "2.2.0"
 recyclerViewVersion = "1.2.1"
 kotlinPoetVersion = "1.3.0"
-coroutinesVersion = "1.5.1-native-mt"
+coroutinesVersion = "1.6.0-native-mt"
 mokoGraphicsVersion = "0.8.0"
-mokoResourcesVersion = "0.16.2"
-mokoTestVersion = "0.4.0"
-mokoUnitsVersion = "0.7.0"
+mokoResourcesVersion = "0.18.0"
+mokoTestVersion = "0.6.1"
+mokoUnitsVersion = "0.8.0"
 constraintLayoutVersion = "2.1.0"
+nexusPublish = "1.1.0"
 
 [libraries]
 appCompat = { module = "androidx.appcompat:appcompat", version.ref = "androidAppCompatVersion" }
@@ -23,7 +24,16 @@ kotlinTestJUnit = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.r
 androidCoreTesting = { module = "androidx.arch.core:core-testing", version.ref = "androidCoreTestingVersion" }
 mokoTest = { module = "dev.icerock.moko:test-core", version.ref = "mokoTestVersion" }
 kotlinPoet = { module = "com.squareup:kotlinpoet", version.ref = "kotlinPoetVersion" }
-androidGradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradleVersion" }
 javaxAnnotation = { module = "javax.annotation:jsr250-api", version = "1.0" }
 lifecycle = { module = "androidx.lifecycle:lifecycle-extensions", version.ref = "androidLifecycleVersion" }
 constraintLayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintLayoutVersion" }
+
+kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinVersion" }
+androidGradlePlugin = { module = "com.android.tools.build:gradle", version = "7.0.4" }
+googleServicesGradlePlugin = { module = "com.google.gms:google-services", version = "4.3.8" }
+firebaseGradlePlugin = { module = "com.google.firebase:firebase-crashlytics-gradle", version = "2.2.0" }
+mokoGradlePlugin = { module = "dev.icerock.moko:moko-gradle-plugin", version = "0.1.1" }
+mobileMultiplatformGradlePlugin = { module = "dev.icerock:mobile-multiplatform", version = "0.14.1" }
+kotlinSerializationGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-serialization", version.ref = "kotlinVersion" }
+mokoUnitsGeneratorGradlePlugin = { module = "dev.icerock.moko:units-generator", version.ref = "mokoUnitsVersion" }
+nexusPublish = { module = "io.github.gradle-nexus:publish-plugin", version.ref= "nexusPublish" }

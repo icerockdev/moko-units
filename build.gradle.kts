@@ -6,24 +6,25 @@ buildscript {
     repositories {
         mavenCentral()
         google()
-
-        jcenter {
-            content {
-                includeGroup("org.jetbrains.trove4j")
-            }
-        }
+        gradlePluginPortal()
     }
     dependencies {
         classpath("dev.icerock.moko:units-generator")
-        classpath(":units-build-logic")
+        classpath(libs.kotlinGradlePlugin)
+        classpath(libs.androidGradlePlugin)
+        classpath(libs.googleServicesGradlePlugin)
+        classpath(libs.mokoGradlePlugin)
+        classpath(libs.mobileMultiplatformGradlePlugin)
+        classpath(libs.kotlinSerializationGradlePlugin)
     }
 }
 
+
+apply(plugin = "dev.icerock.moko.gradle.publication.nexus")
+val mokoVersion = libs.versions.mokoUnitsVersion.get()
 allprojects {
-    plugins.withId("org.gradle.maven-publish") {
-        group = "dev.icerock.moko"
-        version = libs.versions.mokoUnitsVersion.get()
-    }
+    group = "dev.icerock.moko"
+    version = mokoVersion
 }
 
 val sampleProjects: Set<Project> = project(":sample").allprojects

@@ -29,12 +29,14 @@ class DropDownUnitItemGenerator(
 ) {
     private val parentPackage: String = outBindingClass.classPackage
     private val parentName: String = outBindingClass.className
+    private val interfaceName =
+        ClassName.bestGuess("dev.icerock.moko.units.databinding.DataBindingDropDownUnitItem")
 
     override fun generate(generationDir: File) {
         val unitClass = TypeSpec.classBuilder(className)
 
         unitClass.superclass(ClassName(parentPackage, parentName))
-        unitClass.addSuperinterface(ClassName.bestGuess("dev.icerock.moko.units.databinding.DataBindingDropDownUnitItem"))
+        unitClass.addSuperinterface(interfaceName)
         unitClass.addProperty(
             PropertySpec.builder("dropDownLayoutId", Int::class, KModifier.OVERRIDE)
                 .initializer("R.layout.$layoutName")
